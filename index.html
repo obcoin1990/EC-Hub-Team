@@ -117,7 +117,8 @@ a.btn{text-decoration:none}
 .r2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 .out3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border-radius:12px;overflow:hidden}
 .out3>div{background:var(--field);padding:15px 16px;min-width:0}
-.out3 .pos{color:var(--good)} .out3 .neg{color:var(--red)}
+.out3 .pos{color:var(--good)} .out3 .neg{color:var(--red)} .out3 .warn{color:var(--warn)}
+.out3 .cbig{overflow-wrap:anywhere}
 .out3 .hl .cbig{color:var(--red)}
 .out3 .hl .cbig.pos{color:var(--good)}
 .mr.head{margin-bottom:0;max-width:none}
@@ -625,6 +626,7 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
             <option value="USDJPY">USD/JPY</option><option value="USDCHF">USD/CHF</option><option value="USDCAD">USD/CAD</option><option value="XAUUSD">XAU/USD (Gold)</option>
           </select></label>
           <label class="f" for="tc-dir">Direction<select id="tc-dir"><option value="1">Buy</option><option value="-1">Sell</option></select></label>
+          <label class="f" for="tc-bal" style="grid-column:1/-1">Account balance ($)<input id="tc-bal" type="number" min="0" step="any" value="10000" inputmode="decimal"></label>
           <label class="f" for="tc-lots">Lots<input id="tc-lots" type="number" min="0" step="0.01" value="1" inputmode="decimal"></label>
           <label class="f" for="tc-lev">Leverage<select id="tc-lev"><option>50</option><option selected>100</option><option>200</option><option>400</option><option>500</option><option>1000</option></select></label>
           <label class="f" for="tc-open">Open price<input id="tc-open" type="number" step="any" inputmode="decimal"></label>
@@ -635,6 +637,12 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
           <div><div class="cbig" id="tc-margin">$0</div><span class="clbl">Required margin</span></div>
           <div class="hl"><div class="cbig" id="tc-pl">$0</div><span class="clbl">Profit / loss</span></div>
         </div>
+        <div class="out3" aria-live="polite">
+          <div class="hl"><div class="cbig" id="tc-eq">$0</div><span class="clbl">Equity at close</span></div>
+          <div><div class="cbig" id="tc-free">$0</div><span class="clbl">Free margin</span></div>
+          <div><div class="cbig" id="tc-lvl">—</div><span class="clbl">Margin level</span></div>
+        </div>
+        <p class="hint" id="tc-status"></p>
         <p class="hint">Standard lot: 100,000 units for forex, 100 oz for gold. Results are estimates in USD before spreads, commission and swaps. Check contract specs on your platform.</p>
       </div>
 
@@ -752,11 +760,18 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
           <label class="f" for="ie-rate">Your rebate per lot ($)<input id="ie-rate" type="number" min="0" step="0.5" value="8" inputmode="decimal"></label>
           <label class="f" for="ie-sublots">Sub-IB lots / month<input id="ie-sublots" type="number" min="0" step="1" value="200" inputmode="decimal"></label>
           <label class="f" for="ie-subrate">Your share per sub-IB lot ($)<input id="ie-subrate" type="number" min="0" step="0.5" value="2" inputmode="decimal"></label>
+          <label class="f" for="ie-bal">Current balance ($)<input id="ie-bal" type="number" min="0" step="any" value="0" inputmode="decimal"></label>
+          <label class="f" for="ie-months">Project over<select id="ie-months"><option value="1">1 month</option><option value="3">3 months</option><option value="6">6 months</option><option value="12" selected>12 months</option><option value="24">24 months</option></select></label>
         </div>
         <div class="out3" aria-live="polite">
-          <div><div class="cbig" id="ie-direct">$0</div><span class="clbl">Direct / month</span></div>
-          <div><div class="cbig" id="ie-net">$0</div><span class="clbl">Network / month</span></div>
-          <div class="hl"><div class="cbig" id="ie-total">$0</div><span class="clbl">Total / month</span></div>
+          <div><div class="cbig" id="ie-direct">$0.00</div><span class="clbl">Direct / month</span></div>
+          <div><div class="cbig" id="ie-net">$0.00</div><span class="clbl">Network / month</span></div>
+          <div class="hl"><div class="cbig" id="ie-total">$0.00</div><span class="clbl">Total / month</span></div>
+        </div>
+        <div class="out3" aria-live="polite">
+          <div><div class="cbig" id="ie-start">$0.00</div><span class="clbl">Starting balance</span></div>
+          <div><div class="cbig" id="ie-earned">$0.00</div><span class="clbl" id="ie-earnedlbl">Earned in 12 months</span></div>
+          <div class="hl"><div class="cbig" id="ie-proj">$0.00</div><span class="clbl">Projected balance</span></div>
         </div>
         <p class="hint" id="ie-year"></p>
         <p class="hint">Illustration only. Actual earnings depend on your clients' trading activity and your partner agreement, and are not guaranteed.</p>
@@ -1383,9 +1398,19 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
     else{pipv=units*s.pip;margin=units*o/lev;pl=(c-o)*dir*units}
     $('tc-pip').textContent=money(pipv,2);$('tc-margin').textContent=money(margin,2);
     var el=$('tc-pl');el.textContent=(pl>0?'+':'')+money(pl,2);el.className='cbig '+(pl>0?'pos':pl<0?'neg':'');
+    // balance, equity and margin health
+    var bal=num('tc-bal'),eq=bal+pl,free=eq-margin,lvl=margin>0?eq/margin*100:null;
+    var eqEl=$('tc-eq');eqEl.textContent=money(eq,2);eqEl.className='cbig '+(pl>0?'pos':pl<0?'neg':'');
+    var frEl=$('tc-free');frEl.textContent=money(free,2);frEl.className='cbig '+(free<0?'neg':'');
+    var lvEl=$('tc-lvl');lvEl.textContent=lvl===null?'—':lvl.toLocaleString('en-US',{maximumFractionDigits:0})+'%';
+    lvEl.className='cbig '+(lvl===null?'':lvl<100?'neg':lvl<200?'warn':'pos');
+    var st=$('tc-status'),perLot=lots>0?margin/lots:0;
+    if(bal<=0)st.textContent='Enter your account balance to see equity and margin level.';
+    else if(lvl!==null&&lvl<100)st.textContent='Margin level is below 100%: free margin is negative, so this position could be closed automatically. Reduce the lot size or add funds.';
+    else st.textContent='With a '+money(bal,2)+' balance at 1:'+lev+' you could open up to '+(perLot>0?(Math.floor(bal/perLot*100)/100).toFixed(2):'0.00')+' lots. Using the full margin leaves no buffer, so size trades well below that.';
   }
   $('tc-sym').addEventListener('change',setSym);
-  ['tc-dir','tc-lots','tc-lev','tc-open','tc-close'].forEach(function(id){$(id).addEventListener('input',calcTrade)});
+  ['tc-dir','tc-bal','tc-lots','tc-lev','tc-open','tc-close'].forEach(function(id){$(id).addEventListener('input',calcTrade)});
   setSym();
 
   // ---------- client: checklist ----------
@@ -1398,10 +1423,13 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
   // ---------- IB: estimator ----------
   function calcIB(){
     var d=num('ie-clients')*num('ie-lots')*num('ie-rate'),n=num('ie-sublots')*num('ie-subrate'),t=d+n;
-    $('ie-direct').textContent=money(d);$('ie-net').textContent=money(n);$('ie-total').textContent=money(t);
-    $('ie-year').textContent='Over 12 months at the same activity: '+money(t*12)+'.';
+    var m=parseInt($('ie-months').value,10)||12,b=num('ie-bal'),e=t*m;
+    $('ie-direct').textContent=money(d,2);$('ie-net').textContent=money(n,2);$('ie-total').textContent=money(t,2);
+    $('ie-start').textContent=money(b,2);$('ie-earned').textContent=money(e,2);$('ie-proj').textContent=money(b+e,2);
+    $('ie-earnedlbl').textContent='Earned in '+m+(m===1?' month':' months');
+    $('ie-year').textContent='If activity stays the same, a '+money(b,2)+' balance grows to '+money(b+e,2)+' after '+m+(m===1?' month':' months')+'.';
   }
-  ['ie-clients','ie-lots','ie-rate','ie-sublots','ie-subrate'].forEach(function(id){$(id).addEventListener('input',calcIB)});
+  ['ie-clients','ie-lots','ie-rate','ie-sublots','ie-subrate','ie-bal','ie-months'].forEach(function(id){$(id).addEventListener('input',calcIB)});
   calcIB();
 
   // ---------- IB: share kit ----------
