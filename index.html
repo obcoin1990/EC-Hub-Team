@@ -477,20 +477,20 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
         <div class="space">
           <span class="ic"><svg class="i"><use href="#i-client"/></svg></span>
           <h3>Clients</h3>
-          <p>Why traders choose EC Markets, the accounts and platforms, and how to open an account. Tools: trading calculator and account checklist.</p>
+          <p>Why traders choose EC Markets, the accounts and platforms, and how to open an account. Tools: trading calculator with balance and equity, PAMM calculator and account checklist.</p>
           <div class="go"><a href="#client">Presentation</a><a href="#client-tools">Toolkit</a></div>
         </div>
         <div class="space">
           <span class="ic"><svg class="i"><use href="#i-ib"/></svg></span>
           <h3>IBs &amp; Partners</h3>
-          <p>How partners earn with EC Markets, the multi-level structure and how to join. Tools: earnings estimator and ready-to-share posts.</p>
+          <p>How partners earn with EC Markets, the multi-level structure and how to join. Tools: earnings estimator, IB levels and rebates, level calculator and ready-to-share posts.</p>
           <div class="go"><a href="#ib">Presentation</a><a href="#ib-tools">Toolkit</a></div>
         </div>
         <div class="space">
           <span class="team">Team only</span>
           <span class="ic"><svg class="i"><use href="#i-bdm"/></svg></span>
           <h3>BDM Team</h3>
-          <p>The full sales playbook, commission policy and rules. Tools: support requests, MIB setup, client messages in 4 languages and commission calculator.</p>
+          <p>The full sales playbook, commission policy and rules. Tools: support requests, MIB setup, client messages (including PAMM) in 4 languages, WhatsApp and email sending, and commission calculator.</p>
           <div class="go"><a href="#bdm">Presentation</a><a href="#bdm-tools">Toolkit</a></div>
         </div>
       </div>
@@ -592,6 +592,25 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
       </div>
     </div></section>
 
+    <section class="s" id="c-pamm"><div class="wrap">
+      <div class="head"><span class="eyebrow">PAMM</span><h2>Invest with a <em>money manager</em></h2><p>PAMM lets you put money behind a professional trader's strategy, or manage other people's money yourself. All trading happens in one manager account and results are shared out by each investor's stake.</p></div>
+      <div class="grid g2">
+        <div class="card"><span class="pill">Investor</span><h3>Invest, then stay in control</h3>
+          <ul class="tick"><li>Add an investment account, from the minimum the manager sets</li><li>See balance, open P/L and equity for each account in one place</li><li>Deposit, transfer, pause or unbind from your account page</li><li>The system allocates each trade by your share of the pool</li></ul></div>
+        <div class="card"><span class="pill">Money manager</span><h3>Trade other people's capital</h3>
+          <ul class="tick"><li>STD or ECN account, on MT5</li><li>You set the profit-sharing ratio (0 to 100%) and the cycle: weekly, monthly or quarterly</li><li>No capital of your own is required</li><li>Apply for a PAMM account separately; it needs approval</li></ul></div>
+      </div>
+      <div class="faq grid" style="gap:12px;max-width:900px;margin-top:28px">
+        <details><summary>When is profit shared out?</summary><p>By default at 23:59 (UTC+2) on the last day of each cycle. The manager chooses weekly, monthly or quarterly.</p></details>
+        <details><summary>What is the minimum investment?</summary><p>The default minimum is 100. The manager can set a higher minimum, which takes effect after backend approval.</p></details>
+        <details><summary>What happens if I pause my investment?</summary><p>Open positions linked to your stake are closed automatically, in proportion to your allocated amount. Termination is irreversible and the investment account is archived.</p></details>
+        <details><summary>Can I trade the investor account myself?</summary><p>No. Investor accounts cannot trade independently, so leverage and margin call or stop-out levels do not apply to them. The default leverage of a PAMM account is 1:500.</p></details>
+        <details><summary>What if the investor loses all their funds?</summary><p>The investor account is automatically disconnected from the PAMM account. If the PAMM account itself is liquidated, investor accounts stay connected.</p></details>
+        <details><summary>Can my existing account become a PAMM account?</summary><p>No. A PAMM account needs a separate application and approval. Accounts with trading history cannot be converted, and swap-free accounts cannot be registered as PAMM.</p></details>
+      </div>
+      <p class="note">Investing through a money manager carries risk. Past performance is not a guide to future results and you may lose some or all of your investment.</p>
+    </div></section>
+
     <section class="s"><div class="wrap">
       <div class="head"><span class="eyebrow">Recognition</span><h2>Award-winning <em>trading conditions</em></h2></div>
       <div class="award">
@@ -668,6 +687,27 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
           <label><input type="checkbox"><span>Account approved<small>You'll receive your MT login details by email</small></span></label>
           <label><input type="checkbox"><span>Install your platform<small>MT4, MT5 or the EC Markets app</small></span></label>
         </div>
+      </div>
+
+      <div class="panel full">
+        <h2>PAMM profit-share calculator</h2>
+        <p class="sub">See how a manager's result is split between the investor and the money manager for one profit-sharing cycle.</p>
+        <div class="row3">
+          <label class="f" for="pm-amt">Investment ($)<input id="pm-amt" type="number" min="0" step="any" value="1000" inputmode="decimal"></label>
+          <label class="f" for="pm-ret">Cycle result (%)<input id="pm-ret" type="number" step="any" value="10" inputmode="decimal"></label>
+          <label class="f" for="pm-share">Manager profit share (%)<input id="pm-share" type="number" min="0" max="100" step="any" value="20" inputmode="decimal"></label>
+        </div>
+        <div class="out3" aria-live="polite">
+          <div><div class="cbig" id="pm-gross">$0.00</div><span class="clbl">Gross result</span></div>
+          <div><div class="cbig" id="pm-fee">$0.00</div><span class="clbl">Manager's share</span></div>
+          <div class="hl"><div class="cbig" id="pm-net">$0.00</div><span class="clbl">Investor result</span></div>
+        </div>
+        <div class="out3" aria-live="polite">
+          <div><div class="cbig" id="pm-end">$0.00</div><span class="clbl">Investment after cycle</span></div>
+          <div><div class="cbig" id="pm-netpct">0.00%</div><span class="clbl">Net return</span></div>
+          <div><div class="cbig" id="pm-min">—</div><span class="clbl">Minimum check</span></div>
+        </div>
+        <p class="hint">The manager's share applies to profit only. On a losing cycle there is no manager share and the investor bears the loss. The default minimum investment is 100; the manager can set a higher one. Illustration only, not a forecast, and it ignores spreads, commission and swaps.</p>
       </div>
 
       <div class="panel full">
@@ -762,11 +802,17 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
     <div class="tools"><div class="wrap"><div class="tgrid">
       <div class="panel">
         <h2>Earnings estimator</h2>
-        <p class="sub">Enter your own numbers. Use the rebate per lot agreed with your BDM.</p>
+        <p class="sub">Enter your own numbers. Use the rebate per lot agreed with your BDM, or fill it in from your IB level.</p>
+        <div class="row3">
+          <label class="f" for="ie-level">IB level<select id="ie-level"><option value="">Custom</option><option value="0">General</option><option value="1">Platinum</option><option value="2">Diamond</option><option value="3">Business</option></select></label>
+          <label class="f" for="ie-acct">Account type<select id="ie-acct"><option value="ECN">ECN</option><option value="STD">STD</option></select></label>
+          <label class="f" for="ie-asset">Market<select id="ie-asset"><option value="0">Forex</option><option value="1">Metal</option><option value="2">Energy</option><option value="3">Index</option><option value="4">Crypto</option><option value="5">Stock</option></select></label>
+        </div>
+        <p class="hint" id="ie-ratehint"></p>
         <div class="r2">
           <label class="f" for="ie-clients">Active clients<input id="ie-clients" type="number" min="0" step="1" value="20" inputmode="numeric"></label>
           <label class="f" for="ie-lots">Lots per client / month<input id="ie-lots" type="number" min="0" step="0.5" value="5" inputmode="decimal"></label>
-          <label class="f" for="ie-rate">Your rebate per lot ($)<input id="ie-rate" type="number" min="0" step="0.5" value="8" inputmode="decimal"></label>
+          <label class="f" for="ie-rate">Your rebate per lot ($)<input id="ie-rate" type="number" min="0" step="any" value="8" inputmode="decimal"></label>
           <label class="f" for="ie-sublots">Sub-IB lots / month<input id="ie-sublots" type="number" min="0" step="1" value="200" inputmode="decimal"></label>
           <label class="f" for="ie-subrate">Your share per sub-IB lot ($)<input id="ie-subrate" type="number" min="0" step="0.5" value="2" inputmode="decimal"></label>
           <label class="f" for="ie-bal">Current balance ($)<input id="ie-bal" type="number" min="0" step="any" value="0" inputmode="decimal"></label>
@@ -793,6 +839,46 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
         <div id="sk-posts" style="display:grid;gap:10px"></div>
         <p class="hint">Keep the risk warning in every post. Check with your BDM before running paid ads.</p>
       </div>
+
+      <div class="panel full">
+        <h2>IB levels and rebates</h2>
+        <p class="sub">The 2026 cooperation terms for Normal STD and ECN accounts. Your BDM confirms the exact deal for your network.</p>
+        <div class="seg inline" id="lv-acct" role="group" aria-label="Account type">
+          <button type="button" data-acct="STD" aria-pressed="false">STD accounts</button>
+          <button type="button" data-acct="ECN" aria-pressed="true">ECN accounts</button>
+        </div>
+        <div class="tablewrap"><table id="lv-table"><thead></thead><tbody></tbody></table></div>
+        <p class="hint" id="lv-unit"></p>
+        <div class="tablewrap"><table id="lv-targets"><thead><tr><th>IB level</th><th>3-month deposit volume</th><th>or 3-month trading volume</th></tr></thead><tbody></tbody></table></div>
+        <p class="hint">Every 3 months your performance is reviewed. Meeting either the deposit or the trading target counts, not both. You can move up a level when you reach the targets. If targets are repeatedly missed, your level may be adjusted.</p>
+      </div>
+
+      <div class="panel">
+        <h2>Level calculator</h2>
+        <p class="sub">Enter your last 3 months to see your level and what the next one needs.</p>
+        <div class="r2">
+          <label class="f" for="lc-dep">Deposit volume ($)<input id="lc-dep" type="number" min="0" step="any" value="60000" inputmode="decimal"></label>
+          <label class="f" for="lc-lots">Trading volume (standard lots)<input id="lc-lots" type="number" min="0" step="any" value="400" inputmode="decimal"></label>
+        </div>
+        <div class="out3" aria-live="polite">
+          <div class="hl"><div class="cbig" id="lc-level">—</div><span class="clbl">Your level</span></div>
+          <div><div class="cbig" id="lc-next">—</div><span class="clbl">Next level</span></div>
+          <div><div class="cbig" id="lc-pct">0%</div><span class="clbl">Progress to next</span></div>
+        </div>
+        <div class="prog"><i id="lc-bar"></i></div>
+        <p class="hint" id="lc-txt" style="color:var(--fg)"></p>
+        <p class="hint">Either target is enough. The review runs every 3 months.</p>
+      </div>
+
+      <div class="panel">
+        <h2>Group code decoder</h2>
+        <p class="sub">Type a group code to see what extra it gives on top of the base account.</p>
+        <label class="f" for="gc-in">Group code<input id="gc-in" type="text" placeholder="e.g. STD-PX-UX" autocapitalize="characters" spellcheck="false" value="STD-PXX"></label>
+        <div class="seg inline" id="gc-chips"></div>
+        <div class="msg" id="gc-out" style="min-height:0;font-family:var(--body);font-size:15px" aria-live="polite"></div>
+        <p class="hint">P = points, U = commission. V = 5, X = 10, so XV = 15 and XX = 20. Add the letters up. Example: PXX = 10 + 10 = 20 points.</p>
+      </div>
+
     </div></div></div>
   </div>
 
@@ -1093,7 +1179,7 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
       <button role="tab" data-t="kyc" aria-selected="false"><b>KYC approval</b><span>One or more clients</span></button>
       <button role="tab" data-t="link" aria-selected="false"><b>Link client to IB</b><span>Client under an IB</span></button>
       <button role="tab" data-t="group" aria-selected="false"><b>Change account group</b><span>Move client to a group</span></button>
-      <button role="tab" data-t="client" aria-selected="false"><b>Client messages</b><span>7 messages · 4 languages</span></button>
+      <button role="tab" data-t="client" aria-selected="false"><b>Client messages</b><span>9 messages · 4 languages</span></button>
       <button role="tab" data-t="comm" aria-selected="false"><b>My commission</b><span>2026 tier calculator</span></button>
     </div>
 
@@ -1195,6 +1281,8 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
             <button type="button" data-tpl="follow" aria-pressed="false"><b>5</b> Follow-up, no reply</button>
             <button type="button" data-tpl="ib" aria-pressed="false"><b>6</b> IB introduction: how partners earn</button>
             <button type="button" data-tpl="withdraw" aria-pressed="false"><b>7</b> Withdrawal question</button>
+            <button type="button" data-tpl="pamm" aria-pressed="false"><b>8</b> PAMM: investing with a money manager</button>
+            <button type="button" data-tpl="pammmgr" aria-pressed="false"><b>9</b> PAMM: become a money manager</button>
           </div>
           <div class="f">Language
             <div class="seg inline" id="langs" role="group" aria-label="Language">
@@ -1453,6 +1541,89 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
   ['ie-clients','ie-lots','ie-rate','ie-sublots','ie-subrate','ie-bal','ie-months'].forEach(function(id){$(id).addEventListener('input',calcIB)});
   calcIB();
 
+  // ---------- IB: levels, rebates, level calculator, group codes (2026 terms) ----------
+  var LV=['General','Platinum','Diamond','Business'],MK=['Forex','Metal','Energy','Index','Crypto','Stock'];
+  var RB={
+    STD:[[0.7,1.8,0.7,0.7,0.7,0.5],[0.8,1.9,0.8,0.8,0.8,0.5],[0.9,2.0,0.9,0.9,0.9,0.5],[1,2.1,1,1,1,0.5]],
+    ECN:[[0.2,0.2,0.2,0.2,7,0.05],[1,1,1,1,8,0.05],[2,2,2,2,9,0.05],[3,3,3,3,10,0.05]]
+  };
+  var TG=[[5000,100],[50000,1000],[200000,5000],[600000,20000]];
+  var lvAcct='ECN';
+  function drawLevels(){
+    var rows=RB[lvAcct],fmt=function(v){return lvAcct==='STD'?v.toFixed(1)+' pips':'$'+v};
+    $('lv-table').querySelector('thead').innerHTML='<tr><th>IB level</th>'+MK.map(function(m){return '<th>'+m+'</th>'}).join('')+'</tr>';
+    $('lv-table').querySelector('tbody').innerHTML=rows.map(function(r,i){return '<tr><td>'+LV[i]+'</td>'+r.map(function(v){return '<td>'+fmt(v)+'</td>'}).join('')+'</tr>'}).join('');
+    $('lv-unit').textContent=lvAcct==='STD'?'STD rebates are paid in pips per lot.':'ECN rebates are paid in dollars per lot.';
+    document.querySelectorAll('#lv-acct button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.acct===lvAcct)});
+  }
+  document.querySelectorAll('#lv-acct button').forEach(function(b){b.onclick=function(){lvAcct=b.dataset.acct;drawLevels()}});
+  $('lv-targets').querySelector('tbody').innerHTML=TG.map(function(t,i){return '<tr><td>'+LV[i]+'</td><td>'+money(t[0])+'</td><td>'+t[1].toLocaleString('en-US')+' lots</td></tr>'}).join('');
+  drawLevels();
+
+  function calcLevel(){
+    var dep=num('lc-dep'),lots=num('lc-lots'),k=-1;
+    TG.forEach(function(t,i){if(dep>=t[0]||lots>=t[1])k=i});
+    var n=k+1,top=n>=LV.length;
+    $('lc-level').textContent=k<0?'Below General':LV[k];
+    $('lc-next').textContent=top?'Top level':LV[n];
+    var pct=top?100:Math.min(100,Math.floor(Math.max(dep/TG[n][0],lots/TG[n][1])*100));
+    $('lc-pct').textContent=pct+'%';$('lc-bar').style.width=pct+'%';
+    $('lc-txt').textContent=top?'You are at the top level. Keep meeting a target each quarter to stay there.':
+      'To reach '+LV[n]+' you need '+money(Math.max(0,TG[n][0]-dep))+' more deposit volume, or '+Math.max(0,TG[n][1]-lots).toLocaleString('en-US',{maximumFractionDigits:2})+' more lots. Either one is enough.';
+  }
+  ['lc-dep','lc-lots'].forEach(function(id){$(id).addEventListener('input',calcLevel)});
+  calcLevel();
+
+  var CODES=['STD-PV','STD-PX','STD-PXV','STD-PXX','STD-UX','STD-UXX','STD-PX-UX','ECN-UV','ECN-UX','ECN-UXV','ECN-UXX'];
+  function decode(raw){
+    var code=raw.toUpperCase().replace(/\s/g,''),p=code.split('-'),base=p[0];
+    if(!code)return {msg:'Type a code such as STD-PX or ECN-UV.'};
+    if(base!=='STD'&&base!=='ECN')return {msg:'A group code starts with STD or ECN.',bad:true};
+    if(p.length<2)return {msg:base+' is the base group with no extra.'};
+    var parts=[];
+    for(var i=1;i<p.length;i++){
+      var m=/^([PU])([VX]+)$/.exec(p[i]);
+      if(!m)return {msg:'"'+p[i]+'" is not valid. Use P or U followed by V (5) and X (10).',bad:true};
+      var v=0;m[2].split('').forEach(function(c){v+=c==='X'?10:5});
+      parts.push(v+(m[1]==='P'?' points':' commission'));
+    }
+    var s=base+' + '+parts.join(' + ');
+    return {msg:code+' = '+s+(CODES.indexOf(code)<0?'. This code is not in the 2026 list, so check it with your BDM.':'.')};
+  }
+  function drawCode(){var r=decode($('gc-in').value),o=$('gc-out');o.textContent=r.msg;o.style.color=r.bad?'var(--warn)':'var(--fg)'}
+  $('gc-in').addEventListener('input',drawCode);
+  $('gc-chips').innerHTML=CODES.map(function(c){return '<button type="button" data-code="'+c+'">'+c+'</button>'}).join('');
+  $('gc-chips').addEventListener('click',function(e){var b=e.target.closest('[data-code]');if(b){$('gc-in').value=b.dataset.code;drawCode()}});
+  drawCode();
+
+  // estimator: fill the rebate per lot from level, account and market
+  function fillRate(){
+    var l=$('ie-level').value,h=$('ie-ratehint');
+    if(l===''){h.textContent='';return}
+    var a=$('ie-acct').value,m=parseInt($('ie-asset').value,10),v=RB[a][parseInt(l,10)][m],nm=LV[l]+' '+a+' '+MK[m];
+    if(a==='ECN'){$('ie-rate').value=v;h.textContent=nm+': $'+v+' per lot (2026 terms).'}
+    else if(m===0){var d=Math.round(v*1000)/100;$('ie-rate').value=d;h.textContent=nm+': '+v+' pips per lot, about $'+d+' per lot at $10 per pip on USD-quoted pairs.'}
+    else h.textContent=nm+': '+v+' pips per lot. The dollar value of a pip depends on the instrument, so enter your rate per lot by hand.';
+    calcIB();
+  }
+  ['ie-level','ie-acct','ie-asset'].forEach(function(id){$(id).addEventListener('change',fillRate)});
+  $('ie-rate').addEventListener('input',function(){$('ie-level').value='';$('ie-ratehint').textContent=''});
+
+  // ---------- client: PAMM profit-share calculator ----------
+  function calcPamm(){
+    var amt=num('pm-amt'),ret=parseFloat($('pm-ret').value),sh=Math.min(100,Math.max(0,num('pm-share')));
+    if(!isFinite(ret))ret=0;
+    var gross=amt*ret/100,fee=gross>0?gross*sh/100:0,net=gross-fee;
+    $('pm-gross').textContent=(gross>0?'+':'')+money(gross,2);
+    $('pm-fee').textContent=money(fee,2);
+    var n=$('pm-net');n.textContent=(net>0?'+':'')+money(net,2);n.className='cbig '+(net>0?'pos':net<0?'neg':'');
+    $('pm-end').textContent=money(amt+net,2);
+    $('pm-netpct').textContent=(amt>0?(net/amt*100):0).toFixed(2)+'%';
+    var mn=$('pm-min');mn.textContent=amt<=0?'—':amt>=100?'Meets 100':'Below 100';mn.className='cbig '+(amt<=0?'':amt>=100?'pos':'neg');
+  }
+  ['pm-amt','pm-ret','pm-share'].forEach(function(id){$(id).addEventListener('input',calcPamm)});
+  calcPamm();
+
   // ---------- IB: share kit ----------
   var RISK='\n\nRisk warning: CFD trading is high risk and losses may exceed your deposit.';
   var POSTS=[
@@ -1648,10 +1819,10 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
     return w;
   }
   var SUBJ={
-    en:{intro:'EC Markets: thank you for your time today',open:'How to open your EC Markets account',kyc:'Documents needed to verify your EC Markets account',welcome:'Welcome to EC Markets: your account is verified',follow:'Following up: EC Markets',ib:'EC Markets Partner (IB) Programme',withdraw:'Your EC Markets withdrawal question'},
-    ar:{intro:'EC Markets: شكراً على وقتك اليوم',open:'كيف تفتح حسابك لدى EC Markets',kyc:'المستندات المطلوبة لتوثيق حسابك لدى EC Markets',welcome:'أهلاً بك في EC Markets: تم توثيق حسابك',follow:'متابعة: EC Markets',ib:'برنامج شركاء EC Markets (IB)',withdraw:'بخصوص استفسار السحب لدى EC Markets'},
-    hi:{intro:'EC Markets: आज समय देने के लिए धन्यवाद',open:'EC Markets में अकाउंट कैसे खोलें',kyc:'आपका EC Markets अकाउंट वेरिफ़ाई करने के लिए ज़रूरी दस्तावेज़',welcome:'EC Markets में स्वागत है: आपका अकाउंट वेरिफ़ाई हो गया है',follow:'फ़ॉलो-अप: EC Markets',ib:'EC Markets पार्टनर (IB) प्रोग्राम',withdraw:'आपका EC Markets निकासी संबंधी सवाल'},
-    zh:{intro:'EC Markets：感谢您今天抽空沟通',open:'如何开设 EC Markets 账户',kyc:'验证您的 EC Markets 账户所需文件',welcome:'欢迎加入 EC Markets：您的账户已通过验证',follow:'跟进：EC Markets',ib:'EC Markets 合作伙伴（IB）计划',withdraw:'关于您的 EC Markets 出金问题'}
+    en:{intro:'EC Markets: thank you for your time today',open:'How to open your EC Markets account',kyc:'Documents needed to verify your EC Markets account',welcome:'Welcome to EC Markets: your account is verified',follow:'Following up: EC Markets',ib:'EC Markets Partner (IB) Programme',withdraw:'Your EC Markets withdrawal question',pamm:'EC Markets PAMM: how investing with a money manager works',pammmgr:'Become an EC Markets PAMM money manager'},
+    ar:{intro:'EC Markets: شكراً على وقتك اليوم',open:'كيف تفتح حسابك لدى EC Markets',kyc:'المستندات المطلوبة لتوثيق حسابك لدى EC Markets',welcome:'أهلاً بك في EC Markets: تم توثيق حسابك',follow:'متابعة: EC Markets',ib:'برنامج شركاء EC Markets (IB)',withdraw:'بخصوص استفسار السحب لدى EC Markets',pamm:'EC Markets PAMM: كيف يعمل الاستثمار عبر مدير أموال',pammmgr:'كن مدير أموال PAMM لدى EC Markets'},
+    hi:{intro:'EC Markets: आज समय देने के लिए धन्यवाद',open:'EC Markets में अकाउंट कैसे खोलें',kyc:'आपका EC Markets अकाउंट वेरिफ़ाई करने के लिए ज़रूरी दस्तावेज़',welcome:'EC Markets में स्वागत है: आपका अकाउंट वेरिफ़ाई हो गया है',follow:'फ़ॉलो-अप: EC Markets',ib:'EC Markets पार्टनर (IB) प्रोग्राम',withdraw:'आपका EC Markets निकासी संबंधी सवाल',pamm:'EC Markets PAMM: मनी मैनेजर के ज़रिए निवेश कैसे काम करता है',pammmgr:'EC Markets के PAMM मनी मैनेजर बनें'},
+    zh:{intro:'EC Markets：感谢您今天抽空沟通',open:'如何开设 EC Markets 账户',kyc:'验证您的 EC Markets 账户所需文件',welcome:'欢迎加入 EC Markets：您的账户已通过验证',follow:'跟进：EC Markets',ib:'EC Markets 合作伙伴（IB）计划',withdraw:'关于您的 EC Markets 出金问题',pamm:'EC Markets PAMM：资金经理投资如何运作',pammmgr:'成为 EC Markets PAMM 资金经理'}
   };
   function cleanText(){return text.replace(/⁣/g,'')}
   function sendReady(){
@@ -1710,7 +1881,9 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
         welcome:'Good news: your EC Markets account has been verified. Welcome aboard!\n\nNext steps:\n• Log in to your client portal: '+link+'\n• Download MetaTrader 4, MetaTrader 5 or the EC Markets app (App Store / Google Play)\n• Your MT login details have been sent to your registered email\n\nOur support team is available 24/5 at support@ecmarkets.com, and I am here for any questions about the platform.',
         follow:'Just following up on our last conversation. Do you have any questions about EC Markets or about opening your account?\n\nI am happy to arrange a short call at a time that suits you.',
         ib:WHO.en+' I would like to introduce our Partner (IB) Programme, winner of Best IB / Affiliate Programme at the UF Awards 2025.\n\nHow you earn as an EC Markets partner:\n• Commission on every trade your referred clients place, for life\n• Commissions paid within 2 hours\n• Unlimited multi-level structure: you also earn from the sub-IBs you bring in\n• Zero-minute rule: rebates count with no minimum trade duration\n• Tailored deals and rebate plans built around your network\n\nWhat you get:\n• Real-time reporting on your clients and earnings\n• Marketing support: tracking links, landing pages and ads\n• 24/5 dedicated partner support\n• A broker regulated by 7 authorities and Official Global Partner of Liverpool FC\n\nJoin a network of 20,000+ active affiliates. Register as a partner here: '+link+'\n\nI would be happy to arrange a short call to build a rebate plan that fits your network.\n\nYour earnings depend on your clients\' trading activity and are not guaranteed.',
-        withdraw:'Thank you for your message about your withdrawal.\n\nWithdrawals are requested by you directly from your client portal: '+link+'\n\nFor any question about the status or processing of a withdrawal, our support team handles this directly and is available 24/5:\n• Email: support@ecmarkets.com\n• Phone: +248 422 4099\n\nFor your security, never share your password or verification codes with anyone, including me.\n\nI am here if you need anything else.'
+        withdraw:'Thank you for your message about your withdrawal.\n\nWithdrawals are requested by you directly from your client portal: '+link+'\n\nFor any question about the status or processing of a withdrawal, our support team handles this directly and is available 24/5:\n• Email: support@ecmarkets.com\n• Phone: +248 422 4099\n\nFor your security, never share your password or verification codes with anyone, including me.\n\nI am here if you need anything else.',
+        pamm:'Here is a quick overview of PAMM (money manager) investing with EC Markets:\n\n• You invest in a money manager\'s strategy instead of trading yourself\n• Add an investment account in your client portal. The amount must meet the manager\'s minimum (the default minimum is 100)\n• Trades are allocated by your share of the pool, and profit is shared with the manager at the end of each cycle (weekly, monthly or quarterly, settled at 23:59 UTC+2)\n• You can deposit, transfer, pause or unbind from your account page. Pausing closes your share of open positions\n• Investor accounts cannot trade on their own\n\nMore details: '+link+'\n\nInvesting through a money manager carries risk, and you may lose some or all of your investment. Past performance is not a guide to future results.',
+        pammmgr:'Here is how to become a PAMM money manager with EC Markets:\n\n• Apply for a separate PAMM account. It needs approval, and an existing account with trading history cannot be converted\n• Choose STD or ECN on MT5 (default leverage 1:500)\n• Set your minimum investment, your profit-sharing ratio (0 to 100%) and your cycle: weekly, monthly or quarterly\n• No capital of your own is required; the funds come from your investors\n• Profit sharing is settled at 23:59 UTC+2 on the last day of each cycle\n\nStart here: '+link+'\n\nI can walk you through the setup on a call. Managing other people\'s money carries risk, and results are not guaranteed.'
       },
       ar:{
         intro:WHO.ar+' شكراً على وقتك في مكالمتنا اليوم.\n\nكما تحدثنا، إليك نبذة مختصرة:\n• شركة مرخّصة من 7 جهات رقابية، منها هيئة سوق رأس المال في الإمارات (هيئة الأوراق المالية والسلع سابقاً)، وFCA في بريطانيا، وASIC في أستراليا\n• الشريك العالمي الرسمي لنادي ليفربول\n• تداول العملات والذهب والنفط والمؤشرات والعملات الرقمية والأسهم عبر MT4 وMT5 وتطبيق EC Markets\n• دعم متواصل 24/5\n\nلمزيد من المعلومات: '+link+'\n\nلا تتردد في مراسلتي هنا لأي استفسار.',
@@ -1719,7 +1892,9 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
         welcome:'خبر سار: تم توثيق حسابك لدى EC Markets. أهلاً وسهلاً بك!\n\nالخطوات التالية:\n• سجّل الدخول إلى بوابة العميل: '+link+'\n• حمّل MetaTrader 4 أو MetaTrader 5 أو تطبيق EC Markets من App Store أو Google Play\n• تم إرسال بيانات دخول MT إلى بريدك الإلكتروني المسجّل\n\nفريق الدعم متاح 24/5 على support@ecmarkets.com، وأنا في خدمتك لأي استفسار عن المنصة.',
         follow:'أتابع معك بخصوص حديثنا الأخير. هل لديك أي استفسار عن EC Markets أو عن فتح حسابك؟\n\nيسعدني ترتيب مكالمة قصيرة في الوقت الذي يناسبك.',
         ib:WHO.ar+' يسعدني أن أعرّفك على برنامج الشركاء (IB) لدينا، الحائز على جائزة أفضل برنامج IB / شراكة في UF Awards 2025.\n\nكيف تربح كشريك لدى EC Markets:\n• عمولة على كل صفقة ينفذها العملاء الذين تحيلهم، مدى الحياة\n• صرف العمولات خلال ساعتين\n• هيكل متعدد المستويات بلا حدود: تربح أيضاً من الوسطاء الفرعيين الذين تضمّهم\n• قاعدة الصفر دقيقة: تُحتسب العمولات دون حد أدنى لمدة الصفقة\n• عروض وخطط عمولات مصممة حسب شبكتك\n\nما تحصل عليه:\n• تقارير فورية عن عملائك وأرباحك\n• دعم تسويقي: روابط تتبع وصفحات هبوط وإعلانات\n• دعم مخصص للشركاء 24/5\n• وسيط مرخّص من 7 جهات رقابية والشريك العالمي الرسمي لنادي ليفربول\n\nانضم إلى شبكة تضم أكثر من 20,000 شريك نشط. سجّل كشريك من هنا: '+link+'\n\nيسعدني ترتيب مكالمة قصيرة لبناء خطة عمولات تناسب شبكتك.\n\nتعتمد أرباحك على نشاط تداول عملائك وهي غير مضمونة.',
-        withdraw:'شكراً على رسالتك بخصوص السحب.\n\nيتم طلب السحب من قبلك مباشرة عبر بوابة العميل: '+link+'\n\nلأي استفسار عن حالة السحب أو معالجته، يتولى فريق الدعم ذلك مباشرة وهو متاح 24/5:\n• البريد الإلكتروني: support@ecmarkets.com\n• الهاتف: +248 422 4099\n\nلحمايتك، لا تشارك كلمة المرور أو رموز التحقق مع أي شخص، بما في ذلك أنا.\n\nأنا في خدمتك لأي شيء آخر.'
+        withdraw:'شكراً على رسالتك بخصوص السحب.\n\nيتم طلب السحب من قبلك مباشرة عبر بوابة العميل: '+link+'\n\nلأي استفسار عن حالة السحب أو معالجته، يتولى فريق الدعم ذلك مباشرة وهو متاح 24/5:\n• البريد الإلكتروني: support@ecmarkets.com\n• الهاتف: +248 422 4099\n\nلحمايتك، لا تشارك كلمة المرور أو رموز التحقق مع أي شخص، بما في ذلك أنا.\n\nأنا في خدمتك لأي شيء آخر.',
+        pamm:'نظرة سريعة على الاستثمار عبر مدير أموال (PAMM) لدى EC Markets:\n\n• تستثمر في استراتيجية مدير أموال بدلاً من التداول بنفسك\n• أضف حساب استثمار من بوابة العميل، على أن يبلغ المبلغ الحد الأدنى الذي يحدده المدير (الحد الأدنى الافتراضي 100)\n• تُوزَّع الصفقات حسب حصتك في المجموعة، ويُقتسم الربح مع المدير في نهاية كل دورة (أسبوعية أو شهرية أو ربع سنوية، وتتم التسوية عند 23:59 بتوقيت UTC+2)\n• يمكنك الإيداع أو التحويل أو الإيقاف المؤقت أو فك الارتباط من صفحة حسابك. الإيقاف المؤقت يغلق حصتك من الصفقات المفتوحة\n• لا يمكن لحسابات المستثمرين التداول بشكل مستقل\n\nلمزيد من التفاصيل: '+link+'\n\nالاستثمار عبر مدير أموال ينطوي على مخاطر، وقد تخسر جزءاً من استثمارك أو كله. الأداء السابق ليس مؤشراً على النتائج المستقبلية.',
+        pammmgr:'كيف تصبح مدير أموال PAMM لدى EC Markets:\n\n• قدّم طلباً لحساب PAMM منفصل. يتطلب موافقة، ولا يمكن تحويل حساب قائم له سجل تداول\n• اختر STD أو ECN على MT5 (الرافعة الافتراضية 1:500)\n• حدّد الحد الأدنى للاستثمار ونسبة مشاركة الأرباح (من 0 إلى 100%) والدورة: أسبوعية أو شهرية أو ربع سنوية\n• لا تحتاج إلى رأس مال خاص بك، فالأموال تأتي من المستثمرين\n• تتم تسوية مشاركة الأرباح عند 23:59 بتوقيت UTC+2 في اليوم الأخير من كل دورة\n\nابدأ من هنا: '+link+'\n\nيسعدني شرح خطوات الإعداد في مكالمة. إدارة أموال الآخرين تنطوي على مخاطر، والنتائج غير مضمونة.'
       },
       hi:{
         intro:WHO.hi+' आज कॉल पर समय देने के लिए धन्यवाद।\n\nजैसा कि हमने बात की, यहाँ एक संक्षिप्त जानकारी है:\n• 7 नियामक संस्थाओं द्वारा विनियमित, जिनमें UAE कैपिटल मार्केट अथॉरिटी (पूर्व में SCA), FCA (UK) और ASIC (ऑस्ट्रेलिया) शामिल हैं\n• लिवरपूल FC के आधिकारिक ग्लोबल पार्टनर\n• MT4, MT5 और EC Markets ऐप पर फ़ॉरेक्स, गोल्ड, ऑयल, इंडेक्स, क्रिप्टो और शेयर ट्रेड करें\n• 24/5 सपोर्ट\n\nअधिक जानकारी के लिए: '+link+'\n\nकोई भी सवाल हो तो मुझे यहाँ मैसेज करें।',
@@ -1728,7 +1903,9 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
         welcome:'अच्छी ख़बर: EC Markets में आपका अकाउंट वेरिफ़ाई हो गया है। आपका स्वागत है!\n\nअगले स्टेप:\n• अपने क्लाइंट पोर्टल में लॉग इन करें: '+link+'\n• MetaTrader 4, MetaTrader 5 या EC Markets ऐप डाउनलोड करें (App Store / Google Play)\n• आपके MT लॉगिन विवरण आपके रजिस्टर्ड ईमेल पर भेज दिए गए हैं\n\nहमारी सपोर्ट टीम 24/5 support@ecmarkets.com पर उपलब्ध है, और प्लेटफ़ॉर्म से जुड़े किसी भी सवाल के लिए मैं भी यहाँ हूँ।',
         follow:'हमारी पिछली बातचीत के बारे में एक छोटा सा फ़ॉलो-अप। क्या आपके मन में EC Markets या अकाउंट खोलने के बारे में कोई सवाल है?\n\nआपकी सुविधा के समय पर एक छोटी कॉल रखने में मुझे ख़ुशी होगी।',
         ib:WHO.hi+' आपके लिए हमारे पार्टनर (IB) प्रोग्राम की जानकारी, जिसे UF Awards 2025 में बेस्ट IB / एफ़िलिएट प्रोग्राम चुना गया।\n\nEC Markets पार्टनर के रूप में आप कैसे कमाते हैं:\n• आपके द्वारा लाए गए क्लाइंट्स के हर ट्रेड पर आजीवन कमीशन\n• कमीशन का भुगतान 2 घंटे के भीतर\n• अनलिमिटेड मल्टी-लेवल स्ट्रक्चर: आपके द्वारा जोड़े गए सब-IB से भी कमाई\n• ज़ीरो-मिनट नियम: ट्रेड की न्यूनतम अवधि के बिना रिबेट\n• आपके नेटवर्क के अनुसार तैयार डील और रिबेट प्लान\n\nआपको क्या मिलता है:\n• आपके क्लाइंट्स और कमाई की रियल-टाइम रिपोर्टिंग\n• मार्केटिंग सपोर्ट: ट्रैकिंग लिंक, लैंडिंग पेज और विज्ञापन\n• 24/5 समर्पित पार्टनर सपोर्ट\n• 7 नियामकों द्वारा विनियमित ब्रोकर और लिवरपूल FC का आधिकारिक ग्लोबल पार्टनर\n\n20,000+ सक्रिय एफ़िलिएट्स के नेटवर्क से जुड़ें। पार्टनर के रूप में यहाँ रजिस्टर करें: '+link+'\n\nआपके नेटवर्क के अनुसार रिबेट प्लान बनाने के लिए एक छोटी कॉल रखने में मुझे ख़ुशी होगी।\n\nआपकी कमाई आपके क्लाइंट्स की ट्रेडिंग गतिविधि पर निर्भर करती है और इसकी कोई गारंटी नहीं है।',
-        withdraw:'निकासी (विदड्रॉल) के बारे में आपके संदेश के लिए धन्यवाद।\n\nनिकासी का अनुरोध आप स्वयं अपने क्लाइंट पोर्टल से करते हैं: '+link+'\n\nनिकासी की स्थिति या प्रोसेसिंग से जुड़े किसी भी सवाल के लिए हमारी सपोर्ट टीम सीधे मदद करती है और 24/5 उपलब्ध है:\n• ईमेल: support@ecmarkets.com\n• फ़ोन: +248 422 4099\n\nआपकी सुरक्षा के लिए, अपना पासवर्ड या वेरिफ़िकेशन कोड किसी के साथ साझा न करें, मेरे साथ भी नहीं।\n\nकिसी और चीज़ की ज़रूरत हो तो मैं यहाँ हूँ।'
+        withdraw:'निकासी (विदड्रॉल) के बारे में आपके संदेश के लिए धन्यवाद।\n\nनिकासी का अनुरोध आप स्वयं अपने क्लाइंट पोर्टल से करते हैं: '+link+'\n\nनिकासी की स्थिति या प्रोसेसिंग से जुड़े किसी भी सवाल के लिए हमारी सपोर्ट टीम सीधे मदद करती है और 24/5 उपलब्ध है:\n• ईमेल: support@ecmarkets.com\n• फ़ोन: +248 422 4099\n\nआपकी सुरक्षा के लिए, अपना पासवर्ड या वेरिफ़िकेशन कोड किसी के साथ साझा न करें, मेरे साथ भी नहीं।\n\nकिसी और चीज़ की ज़रूरत हो तो मैं यहाँ हूँ।',
+        pamm:'EC Markets के साथ PAMM (मनी मैनेजर) निवेश की संक्षिप्त जानकारी:\n\n• आप खुद ट्रेड करने की बजाय किसी मनी मैनेजर की स्ट्रैटेजी में निवेश करते हैं\n• क्लाइंट पोर्टल में इन्वेस्टमेंट अकाउंट जोड़ें। राशि मैनेजर की न्यूनतम सीमा के बराबर या उससे अधिक होनी चाहिए (डिफ़ॉल्ट न्यूनतम 100 है)\n• ट्रेड आपके हिस्से के अनुपात में बँटते हैं, और हर साइकिल (साप्ताहिक, मासिक या त्रैमासिक) के अंत में मुनाफ़ा मैनेजर के साथ बाँटा जाता है, जिसका निपटान UTC+2 के 23:59 बजे होता है\n• आप अपने अकाउंट पेज से डिपॉज़िट, ट्रांसफ़र, पॉज़ या अनबाइंड कर सकते हैं। पॉज़ करने पर खुली पोज़िशन में आपका हिस्सा बंद हो जाता है\n• इन्वेस्टर अकाउंट खुद ट्रेड नहीं कर सकते\n\nअधिक जानकारी: '+link+'\n\nमनी मैनेजर के ज़रिए निवेश में जोखिम है, और आप अपना कुछ या पूरा निवेश खो सकते हैं। पिछला प्रदर्शन भविष्य के नतीजों की गारंटी नहीं है।',
+        pammmgr:'EC Markets में PAMM मनी मैनेजर कैसे बनें:\n\n• अलग PAMM अकाउंट के लिए आवेदन करें। इसके लिए अप्रूवल चाहिए, और ट्रेडिंग इतिहास वाला मौजूदा अकाउंट बदला नहीं जा सकता\n• MT5 पर STD या ECN चुनें (डिफ़ॉल्ट लीवरेज 1:500)\n• न्यूनतम निवेश, प्रॉफ़िट-शेयरिंग अनुपात (0 से 100%) और साइकिल तय करें: साप्ताहिक, मासिक या त्रैमासिक\n• आपको अपनी पूँजी लगाने की ज़रूरत नहीं, फ़ंड आपके इन्वेस्टर्स से आता है\n• प्रॉफ़िट शेयरिंग का निपटान हर साइकिल के आख़िरी दिन UTC+2 के 23:59 बजे होता है\n\nयहाँ से शुरू करें: '+link+'\n\nकॉल पर सेटअप समझाने में मुझे ख़ुशी होगी। दूसरों के पैसे का प्रबंधन जोखिम भरा है, और नतीजों की कोई गारंटी नहीं है।'
       },
       zh:{
         intro:WHO.zh+'感谢您今天抽空与我通话。\n\n如我们所谈，以下是简要介绍：\n• 受7家监管机构监管，包括阿联酋资本市场管理局（原SCA）、英国FCA和澳大利亚ASIC\n• 利物浦足球俱乐部官方全球合作伙伴\n• 通过MT4、MT5及EC Markets应用交易外汇、黄金、原油、指数、加密货币和股票\n• 24/5 客户支持\n\n了解更多：'+link+'\n\n如有任何问题，欢迎随时在此联系我。',
@@ -1737,7 +1914,9 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
         welcome:'好消息：您的 EC Markets 账户已通过验证，欢迎加入！\n\n下一步：\n• 登录客户门户：'+link+'\n• 下载 MetaTrader 4、MetaTrader 5 或 EC Markets 应用（App Store / Google Play）\n• 您的 MT 登录信息已发送至您的注册邮箱\n\n我们的客服团队24/5在线：support@ecmarkets.com。如对平台有任何疑问，我也随时为您服务。',
         follow:'跟进一下我们上次的沟通。您对 EC Markets 或开户还有什么疑问吗？\n\n我很乐意在您方便的时间安排一次简短通话。',
         ib:WHO.zh+'在此向您介绍我们的合作伙伴（IB）计划，该计划荣获 UF Awards 2025 最佳IB/联盟计划奖。\n\n成为 EC Markets 合作伙伴，您的收益方式：\n• 您推荐的客户每笔交易均可为您带来终身佣金\n• 佣金2小时内发放\n• 无限多级结构：您发展的下级IB也能为您带来收益\n• 零分钟规则：返佣不设最短持仓时间\n• 根据您的网络定制合作方案和返佣计划\n\n您将获得：\n• 客户及收益实时报告\n• 营销支持：追踪链接、落地页和广告\n• 24/5 专属合作伙伴支持\n• 受7家机构监管、利物浦足球俱乐部官方全球合作伙伴的经纪商\n\n加入超过20,000名活跃合作伙伴的网络。点击此处注册成为合作伙伴：'+link+'\n\n我很乐意安排一次简短通话，为您制定适合您网络的返佣计划。\n\n您的收益取决于客户的交易活动，不作任何保证。',
-        withdraw:'感谢您关于出金的来信。\n\n出金需由您本人在客户门户中提交申请：'+link+'\n\n如对出金状态或处理有任何疑问，我们的客服团队将直接为您处理，24/5在线：\n• 邮箱：support@ecmarkets.com\n• 电话：+248 422 4099\n\n为保障您的安全，切勿向任何人透露您的密码或验证码，包括我。\n\n如有其他需要，我随时为您服务。'
+        withdraw:'感谢您关于出金的来信。\n\n出金需由您本人在客户门户中提交申请：'+link+'\n\n如对出金状态或处理有任何疑问，我们的客服团队将直接为您处理，24/5在线：\n• 邮箱：support@ecmarkets.com\n• 电话：+248 422 4099\n\n为保障您的安全，切勿向任何人透露您的密码或验证码，包括我。\n\n如有其他需要，我随时为您服务。',
+        pamm:'以下是通过 EC Markets 进行 PAMM（资金经理）投资的简要介绍：\n\n• 您投资于资金经理的策略，而无需自己交易\n• 在客户门户添加投资账户，金额须不低于经理设定的最低投资额（默认最低为100）\n• 交易按您在资金池中的占比分配，每个周期（每周、每月或每季度）结束时与经理分享盈利，于 UTC+2 23:59 结算\n• 您可以在账户页面入金、转账、暂停或解绑。暂停会平掉您对应份额的未平仓头寸\n• 投资者账户不能自行交易\n\n了解更多：'+link+'\n\n通过资金经理投资存在风险，您可能损失部分或全部投资。过往表现不代表未来结果。',
+        pammmgr:'如何成为 EC Markets 的 PAMM 资金经理：\n\n• 单独申请 PAMM 账户，需经审批；已有交易记录的账户无法转换\n• 在 MT5 上选择 STD 或 ECN（默认杠杆 1:500）\n• 设置最低投资额、分润比例（0 至 100%）和周期：每周、每月或每季度\n• 无需自有资金，资金来自您的投资者\n• 分润于每个周期最后一天 UTC+2 23:59 结算\n\n从这里开始：'+link+'\n\n我很乐意通过通话带您完成设置。管理他人资金存在风险，不保证任何结果。'
       }
     };
     return HI[lang]+'\n\n'+B[lang][tpl]+SIG[lang]+RISK[lang];
