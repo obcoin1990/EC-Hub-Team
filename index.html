@@ -1,0 +1,1769 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="EC Markets team app: presentations and toolkits for clients, IBs and the BDM team.">
+<meta name="theme-color" content="#121012">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icons/favicon.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="EC Team">
+<title>EC Team Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<style>
+/* Layout: app shell — fixed sidebar on laptop, top bar + bottom tab bar on phones; each space has a sticky Presentation/Toolkit switch. Brand dark, EC red as the only accent. */
+:root{
+  --ink:#121012; --band:#191619; --panel:#211D21; --field:#161316; --line:#3A3338; --fg:#F5F0F0; --muted:#B5AAAD;
+  --red:#E5392F; --red-soft:rgba(229,57,47,.14); --good:#3DBE73; --warn:#E9A23B;
+  --body:"Poppins",system-ui,-apple-system,"Segoe UI",sans-serif; --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--ink);color:var(--fg);font-family:var(--body);margin:0;line-height:1.55;-webkit-tap-highlight-color:transparent}
+a{color:inherit}
+h1,h2,h3{margin:0;text-wrap:balance;line-height:1.1}
+p{margin:0;color:var(--muted)}
+em{font-style:normal;color:var(--red)}
+svg.i{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+
+/* SHELL */
+.side{position:fixed;left:0;top:0;bottom:0;width:248px;padding:calc(22px + env(safe-area-inset-top,0px)) 14px calc(18px + env(safe-area-inset-bottom,0px));border-right:1px solid var(--line);background:var(--band);display:flex;flex-direction:column;gap:4px;z-index:30;overflow-y:auto}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none;padding:2px 8px 22px}
+.mark{width:40px;height:40px;border-radius:12px;background:var(--red);color:#fff;font-weight:800;display:grid;place-items:center;font-size:15px;letter-spacing:.02em;flex:none;box-shadow:0 6px 18px rgba(229,57,47,.35)}
+.brand b{display:block;font-size:16px;line-height:1.15}
+.brand small{display:block;font-size:10.5px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;font-weight:600}
+.navlbl{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600;padding:14px 12px 6px}
+.navi{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:10px;text-decoration:none;color:var(--muted);font-weight:500;font-size:14.5px;transition:background .2s,color .2s}
+.navi:hover{color:var(--fg);background:rgba(255,255,255,.04)}
+.navi[aria-current="page"]{color:var(--fg);background:var(--red-soft)}
+.navi[aria-current="page"] svg{color:var(--red)}
+.navi .tagx{margin-left:auto;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:2px 7px}
+.navi:focus-visible,.bottom a:focus-visible,.switch a:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.side .grow{flex:1}
+.credit{font-size:11.5px;color:var(--muted);padding:12px 10px 0;line-height:1.5}
+.credit b{color:var(--fg);font-weight:600}
+main{margin-left:248px;min-height:100vh}
+.appbar{display:none;position:sticky;top:0;z-index:25;align-items:center;gap:10px;padding:calc(10px + env(safe-area-inset-top,0px)) 16px 10px;background:rgba(18,16,18,.94);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.appbar .brand{padding:0}
+.appbar .mark{width:34px;height:34px;border-radius:10px;font-size:13px}
+.iconbtn{all:unset;cursor:pointer;margin-left:auto;display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--fg);border:1px solid var(--line);border-radius:99px;padding:7px 12px}
+.iconbtn:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.bottom{display:none;position:fixed;left:0;right:0;bottom:0;z-index:30;grid-auto-flow:column;grid-auto-columns:1fr;background:rgba(25,22,25,.97);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--line);padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px))}
+.bottom a{display:grid;justify-items:center;gap:2px;padding:6px 0;text-decoration:none;color:var(--muted);font-size:11px;font-weight:500;border-radius:10px}
+.bottom a svg{width:22px;height:22px}
+.bottom a[aria-current="page"]{color:var(--red)}
+.spacebar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:14px 28px;background:rgba(18,16,18,.94);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.spacebar[hidden]{display:none}
+.spacebar small{display:block;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--red);font-weight:600}
+.spacebar h1{font-size:19px;font-weight:700}
+.switch{margin-left:auto;display:inline-flex;background:var(--panel);border:1px solid var(--line);border-radius:99px;padding:4px;gap:2px}
+.switch a{padding:8px 18px;border-radius:99px;text-decoration:none;font-size:13.5px;font-weight:600;color:var(--muted);display:inline-flex;align-items:center;gap:7px}
+.switch a svg{width:17px;height:17px}
+.switch a[aria-current="page"]{background:var(--red);color:#fff}
+.wrap{max-width:1160px;margin:0 auto;padding-inline:28px}
+.view[hidden]{display:none}
+.view section.s{padding-block:56px}
+.view section.s:first-of-type{border-top:0}
+[id]{scroll-margin-top:150px}
+.footnote{padding-block:28px 40px;border-top:1px solid var(--line)}
+.footnote p{font-size:12.5px;max-width:95ch}
+.footnote .who{font-size:13px;color:var(--fg);margin-bottom:8px}
+
+/* PRESENTATION HERO */
+.phero{position:relative;overflow:hidden;padding-block:64px 52px;border-bottom:1px solid var(--line);background:radial-gradient(800px 420px at 90% 0%,rgba(229,57,47,.26),transparent 60%),radial-gradient(600px 360px at 0% 100%,rgba(142,27,22,.28),transparent 60%),var(--ink)}
+.phero .ring{position:absolute;border:3px solid var(--red);border-radius:50%;pointer-events:none;width:560px;height:560px;right:-180px;top:-240px;opacity:.7}
+.phero .ring.b{width:420px;height:420px;right:40px;top:90px;opacity:.28}
+.phero .wrap{position:relative;display:grid;gap:22px}
+.phero h2{font-size:clamp(36px,5.4vw,66px);font-weight:800;letter-spacing:-.025em;max-width:15ch}
+.phero .lead{font-size:clamp(16px,1.6vw,19px);max-width:60ch}
+.cta{display:flex;gap:10px;flex-wrap:wrap}
+a.btn{text-decoration:none}
+
+/* HOME */
+.home{padding-block:56px 40px}
+.home .wrap{display:grid;gap:34px}
+.hello{display:grid;gap:14px;max-width:760px}
+.hello h2{font-size:clamp(38px,6vw,72px);font-weight:800;letter-spacing:-.03em;line-height:1.02}
+.hello p{font-size:clamp(16px,1.6vw,19px)}
+.spaces{display:grid;grid-template-columns:repeat(var(--cols,3),minmax(0,1fr));gap:16px}
+.space{position:relative;display:flex;flex-direction:column;gap:12px;padding:26px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(160deg,rgba(229,57,47,.10),transparent 45%),var(--panel);transition:border-color .25s,transform .25s}
+.space:hover{border-color:rgba(229,57,47,.6);transform:translateY(-3px)}
+.space .ic{width:48px;height:48px;border-radius:14px;background:var(--red-soft);color:var(--red);display:grid;place-items:center}
+.space .ic svg{width:24px;height:24px}
+.space h3{font-size:22px;font-weight:700}
+.space p{font-size:14.5px;flex:1}
+.space .go{display:flex;gap:8px;flex-wrap:wrap;position:relative;z-index:2}
+.space .go a{font-size:13px;font-weight:600;text-decoration:none;padding:8px 14px;border-radius:99px;border:1px solid var(--line)}
+.space .go a:first-child{background:var(--red);border-color:var(--red);color:#fff}
+.space .go a:hover{border-color:var(--red)}
+.space .team{position:absolute;top:22px;right:22px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:3px 9px}
+.strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.strip div{background:var(--band);padding:18px 20px}
+.installcard{display:flex;align-items:center;gap:18px;flex-wrap:wrap;padding:22px 24px;border:1px dashed rgba(229,57,47,.55);border-radius:16px;background:var(--red-soft)}
+.installcard div{flex:1;min-width:220px}
+.installcard h3{font-size:17px}
+.installcard p{font-size:14px;margin-top:4px}
+
+/* TOOLS (client + IB) */
+.tools{padding-block:28px 60px}
+.tgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;align-items:start}
+.tgrid .full{grid-column:1/-1}
+.tools .panel{gap:16px}
+.r2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.out3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border-radius:12px;overflow:hidden}
+.out3>div{background:var(--field);padding:15px 16px;min-width:0}
+.out3 .pos{color:var(--good)} .out3 .neg{color:var(--red)}
+.out3 .hl .cbig{color:var(--red)}
+.out3 .hl .cbig.pos{color:var(--good)}
+.mr.head{margin-bottom:0;max-width:none}
+.prog{height:8px;background:var(--field);border-radius:99px;overflow:hidden;border:1px solid var(--line)}
+.prog i{display:block;height:100%;width:0;background:var(--red);border-radius:inherit;transition:width .3s}
+.checks{display:grid;gap:8px}
+.checks label{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--band);cursor:pointer;font-size:14.5px;line-height:1.45}
+.checks label small{display:block;color:var(--muted);font-size:12.5px}
+.checks input{width:18px;height:18px;margin:2px 0 0;accent-color:var(--red);flex:none}
+.checks label:has(input:checked){border-color:rgba(61,190,115,.5)}
+.checks label:has(input:checked) span{text-decoration:line-through;text-decoration-color:var(--muted);color:var(--muted)}
+.contact{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.contact div{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--band);min-width:0}
+.contact span{display:grid;min-width:0}
+.contact small{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.contact b{font:500 14px var(--mono);overflow-wrap:anywhere}
+.mini{all:unset;cursor:pointer;font-size:12px;font-weight:600;padding:6px 11px;border-radius:99px;border:1px solid var(--line);flex:none}
+.mini:hover{border-color:var(--red)}
+.mini:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.post{display:grid;gap:10px;padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--band)}
+.post .ph{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.post .ph b{font-size:14px}
+.post pre{margin:0;white-space:pre-wrap;word-break:break-word;font:400 13.5px/1.6 var(--body);color:var(--fg)}
+.tree{display:grid;gap:10px;justify-items:center;padding:8px 0}
+.trow{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.tnode{padding:10px 14px;border:1px solid var(--line);border-radius:12px;background:var(--band);text-align:center;font-size:12.5px;color:var(--muted);min-width:96px}
+.tnode b{display:block;font-size:14.5px;color:var(--fg)}
+.tnode.you{border-color:var(--red);background:var(--red-soft)}
+.tnode.you b{color:var(--red)}
+.tarrow{color:var(--red);font-size:18px;line-height:1}
+.acct .acct-name{font-size:40px;font-weight:800;letter-spacing:.02em;line-height:1}
+.ref table{min-width:0}
+
+/* SHEET + TOAST */
+.sheet{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.6);display:grid;place-items:center;padding:16px}
+.sheet[hidden]{display:none}
+.sheet .box{width:100%;max-width:460px;background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:24px;display:grid;gap:14px}
+.sheet h3{font-size:20px}
+.sheet ol{margin:0;padding-left:20px;display:grid;gap:8px;color:var(--fg);font-size:14.5px}
+.sheet .os{display:grid;gap:4px}
+.sheet .os b{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--red)}
+.sheet-top{display:flex;gap:14px;align-items:center}
+.sheet-top p{font-size:14px;margin-top:4px}
+.sheet .gsteps{margin:0;padding:0;list-style:none;counter-reset:g;display:grid;gap:10px}
+.gsteps li{counter-increment:g;display:flex;gap:12px;align-items:flex-start;font-size:15px;color:var(--fg);line-height:1.45;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--band)}
+.gsteps li::before{content:counter(g);flex:none;width:26px;height:26px;border-radius:50%;background:var(--red);color:#fff;font-weight:700;font-size:13px;display:grid;place-items:center}
+.kbd{display:inline-grid;place-items:center;min-width:24px;height:24px;padding:0 6px;border:1px solid var(--line);border-radius:7px;background:var(--panel);font-size:13px;color:var(--red);vertical-align:middle}
+.sheet.ios{place-items:end center;padding-bottom:calc(64px + env(safe-area-inset-bottom,0px))}
+.iarrow{position:fixed;left:50%;bottom:calc(6px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);font-size:40px;color:var(--red);font-weight:800;animation:bob 1s ease-in-out infinite;text-shadow:0 4px 18px rgba(229,57,47,.6)}
+.iarrow.top{bottom:auto;top:calc(6px + env(safe-area-inset-top,0px));left:auto;right:70px;transform:rotate(180deg);animation:none}
+@keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,8px)}}
+.ibar{position:fixed;z-index:45;right:24px;bottom:24px;width:min(440px,calc(100% - 32px));display:flex;align-items:center;gap:12px;padding:12px 12px 12px 14px;background:var(--panel);border:1px solid rgba(229,57,47,.6);border-radius:18px;box-shadow:0 16px 40px rgba(0,0,0,.55)}
+.ibar[hidden]{display:none}
+.ibar .mark{width:42px;height:42px}
+.ibar-t{flex:1;min-width:0;display:grid}
+.ibar-t b{font-size:14.5px}
+.ibar-t span{font-size:12.5px;color:var(--muted)}
+.sharecard{display:grid;grid-template-columns:auto minmax(0,1fr);gap:24px;align-items:center;padding:22px;border:1px solid var(--line);border-radius:18px;background:var(--panel)}
+.sharecard[hidden]{display:none}
+.qr{background:#fff;padding:12px;border-radius:14px;line-height:0}
+.qr img,.qr canvas{display:block;width:148px;height:148px}
+.share-t{display:grid;gap:10px;min-width:0}
+.share-t h3{font-size:20px}
+.share-t p{font-size:14.5px}
+.share-t code{font:500 13px var(--mono);color:var(--fg);background:var(--field);border:1px solid var(--line);border-radius:8px;padding:8px 10px;overflow-wrap:anywhere}
+.toast{position:fixed;left:50%;bottom:calc(96px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:70;background:var(--fg);color:var(--ink);font-weight:600;font-size:13.5px;padding:10px 18px;border-radius:99px;opacity:0;pointer-events:none;transition:opacity .2s}
+.toast.on{opacity:1}
+
+/* imported: presentation components */
+.eyebrow{font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--red);font-weight:600}
+.ticker{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:24px}
+.ticker div{background:var(--panel);padding:20px 22px}
+.big{font-weight:700;font-size:clamp(28px,3.4vw,40px);line-height:1;font-variant-numeric:tabular-nums;color:var(--fg)}
+.big small{font-size:.5em;color:var(--red);font-weight:600}
+.lbl{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:8px;display:block}
+/* SECTIONS */
+section.s{padding-block:88px;border-top:1px solid var(--line)}
+section.s:nth-of-type(even){background:var(--band)}
+.head{display:grid;gap:14px;margin-bottom:40px;max-width:760px}
+.head h2{font-size:clamp(30px,4vw,46px);font-weight:700}
+.head p{font-size:17.5px}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:repeat(3,minmax(0,1fr))}.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:10px;min-width:0;transition:border-color .25s,transform .25s}
+.card:hover{border-color:rgba(229,57,47,.55)}
+.card h3{font-size:18.5px;font-weight:600}
+.card p{font-size:15px}
+.card.hot{border-color:var(--red)}
+.pill{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:5px 11px;border-radius:99px;background:var(--red-soft);color:var(--red);border:1px solid rgba(229,57,47,.4);align-self:flex-start}
+.pill.g{background:rgba(61,190,115,.12);color:var(--good);border-color:rgba(61,190,115,.4)}
+.mono{font-family:var(--mono);font-size:13.5px;color:var(--fg)}
+ul.tick{list-style:none;margin:0;padding:0;display:grid;gap:11px}
+ul.tick li{position:relative;padding-left:28px;font-size:15.5px;line-height:1.5}
+ul.tick li::before{content:"";position:absolute;left:2px;top:7px;width:12px;height:7px;border-left:2.5px solid var(--good);border-bottom:2.5px solid var(--good);transform:rotate(-45deg)}
+ul.no li::before{content:"✕";border:0;transform:none;top:0;left:1px;width:auto;height:auto;color:var(--red);font-weight:700}
+.note{margin-top:28px;padding:18px 22px;border-left:3px solid var(--red);background:var(--red-soft);border-radius:0 10px 10px 0;color:var(--fg);font-size:15.5px;max-width:860px}
+
+/* specific */
+.partners{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:16px}
+.reg{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
+.reg .card{gap:4px;padding:20px}
+.reg .code{font-size:26px;font-weight:700}
+.quote{font-size:clamp(19px,2.2vw,24px);line-height:1.45;color:var(--fg);max-width:46ch}
+.quote cite{display:block;font-style:normal;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:14px}
+.split{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:center}
+.award{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.award .card{padding:18px 20px;gap:4px}
+.award .yr{font-family:var(--mono);font-size:12px;color:var(--red)}
+.award h3{font-size:16px}.award p{font-size:13.5px}
+.acct .acct-name{font-size:40px;font-weight:800;letter-spacing:.02em;line-height:1}
+.acct .price{font-size:15px;color:var(--fg);font-weight:500}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--panel)}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;min-width:640px}
+th,td{padding:16px 18px;text-align:center;border-bottom:1px solid var(--line);font-size:16px}
+tr:last-child td{border-bottom:0}
+th{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600;background:rgba(255,255,255,.02)}
+td:first-child,th:first-child{text-align:left;font-family:var(--mono);font-weight:600}
+tr.base td{background:var(--red-soft)}
+td.hi{color:var(--red);font-weight:700}
+tbody tr:hover td{background:rgba(255,255,255,.03)}
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;counter-reset:st}
+.steps .card{counter-increment:st}
+.steps .card::before{content:counter(st);font-weight:800;font-size:30px;color:var(--red);line-height:1}
+.faq details{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:4px 22px}
+.faq details[open]{border-color:rgba(229,57,47,.55)}
+.faq summary{cursor:pointer;list-style:none;padding:18px 0;font-weight:600;font-size:17px;display:flex;justify-content:space-between;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--red);font-size:24px;line-height:1;font-weight:400;flex:none}
+.faq details[open] summary::after{content:"−"}
+.faq details p{padding-bottom:18px;font-size:15.5px}
+.faq details.hot summary{color:var(--red)}
+/* commission */
+.tiers{display:grid;gap:8px}
+.tier{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:14px;padding:14px 18px;border:1px solid var(--line);border-radius:12px;background:var(--panel);position:relative;overflow:hidden;transition:border-color .25s,background .25s}
+.tier .bar{position:absolute;left:0;top:0;bottom:0;background:var(--red-soft);z-index:0}
+.tier>*{position:relative;z-index:1}
+.tier .range{font-variant-numeric:tabular-nums;font-size:15.5px;color:var(--fg)}
+.tier .rate{font-weight:700;font-size:22px;font-variant-numeric:tabular-nums}
+.tier.on{border-color:var(--red)}
+.tier.on .rate{color:var(--red)}
+/* subtle entrance from a visible state */
+@keyframes rise{from{transform:translateY(14px)}to{transform:none}}
+.reveal.in{animation:rise .6s ease both}
+
+@media (max-width:960px){
+  .g4,.partners,.steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .g3{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .split{grid-template-columns:minmax(0,1fr);gap:28px}
+  .ticker{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .logo small{display:none}
+}
+@media (max-width:620px){
+  .g2,.g3,.g4,.partners,.steps{grid-template-columns:minmax(0,1fr)}
+  .wrap{padding-inline:16px}
+  section.s{padding-block:60px}
+  .hero{padding-block:64px}
+  .hero .ring{display:none}
+  header .wrap{gap:10px}
+  .logo .sep,.logo .lfc{display:none}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal.in{animation:none}.btn,.card{transition:none}}
+
+/* imported: BDM toolkit components */
+.app{display:grid;grid-template-columns:230px minmax(0,1fr) minmax(0,1fr);gap:18px;padding-bottom:60px;align-items:start}
+.rail{display:grid;gap:8px;position:sticky;top:84px}
+.rail button{all:unset;cursor:pointer;display:grid;gap:2px;padding:13px 15px;border:1px solid var(--line);border-radius:12px;background:var(--panel);transition:border-color .2s,background .2s}
+.rail button b{font-size:14.5px;font-weight:600}
+.rail button span{font-size:12px;color:var(--muted)}
+.rail button:hover{border-color:rgba(229,57,47,.5)}
+.rail button[aria-selected="true"]{border-color:var(--red);background:var(--red-soft)}
+.rail button:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;display:grid;gap:16px;min-width:0}
+.panel h2{margin:0;font-size:19px}
+.panel .sub{margin:-8px 0 0;color:var(--muted);font-size:13.5px}
+label.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600}
+input,select,textarea{width:100%;background:var(--field);border:1px solid var(--line);color:var(--fg);border-radius:10px;padding:11px 13px;font:500 15px var(--mono);letter-spacing:.02em}
+select{font-family:var(--body)}
+textarea{min-height:92px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--red);outline-offset:1px;border-color:var(--red)}
+input.bad{border-color:var(--warn)}
+.row2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.lvl{display:grid;gap:10px;padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--band)}
+.lvl-head{display:flex;align-items:center;gap:10px}
+.tag{font:700 12px var(--mono);background:var(--red);color:#fff;border-radius:6px;padding:3px 8px;flex:none}
+.tag.s{background:var(--line);color:var(--fg)}
+.lvl-head input{flex:1;min-width:0}
+.rb{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.rb label{display:grid;gap:3px;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:center}
+.rb input{padding:8px 4px;text-align:center;font-size:14px}
+.rb input.over{border-color:var(--warn);color:var(--warn)}
+.x{all:unset;cursor:pointer;color:var(--muted);font-size:18px;padding:2px 8px;border-radius:6px}
+.x:hover{color:var(--red)}
+.btns{display:flex;gap:8px;flex-wrap:wrap}
+.btn{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:14px;padding:10px 16px;border-radius:99px;border:1px solid var(--line);color:var(--fg);background:transparent}
+.btn:hover{border-color:var(--red)}
+.btn.primary{background:var(--red);border-color:var(--red);color:#fff}
+.btn:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.hint{font-size:12.5px;color:var(--muted);margin:0}
+.warns{display:grid;gap:6px}
+.warns div{font-size:13px;color:var(--warn);background:rgba(233,162,59,.1);border:1px solid rgba(233,162,59,.35);border-radius:8px;padding:8px 12px}
+.preview{position:sticky;top:84px}
+.msg{background:var(--field);border:1px solid var(--line);border-radius:12px;padding:18px;white-space:pre-wrap;word-break:break-word;font:400 14px/1.6 var(--mono);color:var(--fg);min-height:240px;max-height:60vh;overflow:auto}
+.msg .ph{color:#8E8387}
+.copied{font-size:13px;color:var(--good);min-height:20px}
+.recent{display:grid;gap:6px}
+.recent button{all:unset;cursor:pointer;font-size:12.5px;color:var(--muted);padding:8px 10px;border:1px solid var(--line);border-radius:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.recent button:hover{color:var(--fg);border-color:rgba(229,57,47,.5)}
+.ref{margin-top:4px;border-top:1px solid var(--line);padding-top:14px}
+.ref table{width:100%;border-collapse:collapse;font:500 12.5px var(--mono);font-variant-numeric:tabular-nums}
+.ref th,.ref td{padding:6px 4px;text-align:center;border-bottom:1px solid var(--line)}
+.ref th{color:var(--muted);font-family:var(--body);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase}
+.ref td:first-child,.ref th:first-child{text-align:left}
+.ref tr.on td{color:var(--red)}
+.seg{display:grid;gap:6px}
+.seg button{all:unset;cursor:pointer;display:flex;gap:10px;align-items:center;padding:10px 13px;border:1px solid var(--line);border-radius:10px;background:var(--band);font:500 14px var(--body);color:var(--fg);text-transform:none;letter-spacing:normal}
+.seg button b{color:var(--red);font-family:var(--mono)}
+.seg button:hover{border-color:rgba(229,57,47,.5)}
+.seg button[aria-pressed="true"]{border-color:var(--red);background:var(--red-soft)}
+.seg button:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.seg.inline{display:flex}
+.seg.inline button{flex:1;justify-content:center}
+div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.docs{display:grid;gap:8px;padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--band)}
+.docs label{display:flex;gap:10px;align-items:center;font-size:14px;cursor:pointer}
+.docs input{width:auto;accent-color:var(--red)}
+.msg[dir="rtl"]{text-align:right}
+.msg.intl{font-family:var(--body),"Noto Sans Devanagari","Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif}
+.seg.inline{flex-wrap:wrap}
+.seg.inline button{min-width:90px}
+.mtx{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--band)}
+.mtx[hidden]{display:none}
+.mh{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:11px 14px;border-bottom:1px solid var(--line);font-weight:600;font-size:14px;background:var(--panel)}
+.mh span{font-size:10.5px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;font-weight:600}
+.mr{display:grid;grid-template-columns:minmax(118px,1.4fr) repeat(5,minmax(0,1fr));gap:6px;align-items:center;padding:7px 12px;border-bottom:1px solid var(--line);transition:opacity .2s}
+#m-std .mr:last-child,#m-centrows .mr:last-child{border-bottom:0}
+.mr.head{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:center;padding-block:7px;font-weight:600}
+.mr .g{display:flex;align-items:center;gap:8px;font:600 13px var(--mono);cursor:pointer}
+.mr .g input{width:auto;accent-color:var(--red);margin:0}
+.mr input[type=number]{padding:7px 2px;text-align:center;font-size:13.5px}
+.mr input[type=number]:disabled{opacity:.7;cursor:not-allowed}
+.mr.off{opacity:.38}
+.mr .na{text-align:center;color:var(--muted);font-family:var(--mono)}
+.mr input.over{border-color:var(--warn);color:var(--warn)}
+.switches{display:flex;gap:18px;flex-wrap:wrap}
+.switches label{display:flex;gap:8px;align-items:center;font-size:14px;cursor:pointer}
+.switches input{width:auto;accent-color:var(--red);margin:0}
+@media (max-width:460px){.mr{grid-template-columns:repeat(5,minmax(0,1fr))}.mr .g,.mr.head span:first-child{grid-column:1/-1}.mr.head span:first-child{display:none}}
+.app.comm .preview{display:none}
+.app.comm #forms{grid-column:2/-1}
+.cgrid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:20px}
+.row3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.cout{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border-radius:12px;overflow:hidden}
+.cout>div{background:var(--field);padding:16px}
+.cbig{font-weight:700;font-size:clamp(20px,2.4vw,28px);line-height:1.1;font-variant-numeric:tabular-nums}
+.cout .pay .cbig{color:var(--red)}
+.clbl{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:6px}
+.ctiers{display:grid;gap:6px;align-content:start}
+.ct{display:flex;justify-content:space-between;gap:10px;padding:11px 14px;border:1px solid var(--line);border-radius:10px;background:var(--band);font-size:14px;font-variant-numeric:tabular-nums}
+.ct b{font-size:16px}
+.ct.on{border-color:var(--red);background:var(--red-soft)}
+.ct.on b{color:var(--red)}
+@media (max-width:1320px){.app.comm #forms{grid-column:1/-1}}
+@media (max-width:720px){.cgrid,.row3,.cout{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:1320px){.app{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.rail{grid-column:1/-1;position:static;grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}}
+@media (max-width:720px){.app{grid-template-columns:minmax(0,1fr)}.preview{position:static}.me input{width:120px}.logo small{display:none}.row2{grid-template-columns:minmax(0,1fr)}.wrap{padding-inline:16px}}
+@media (max-width:420px){.rb{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.rail,.preview{top:86px}
+
+@media (max-width:1100px){.spaces{grid-template-columns:repeat(2,minmax(0,1fr))}.contact{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:899px){
+  .side{display:none}
+  main{margin-left:0;padding-bottom:calc(78px + env(safe-area-inset-bottom,0px))}
+  .appbar{display:flex}
+  .bottom{display:grid}
+  .spacebar{top:calc(55px + env(safe-area-inset-top,0px));padding:10px 16px}
+  .switch{margin-left:0;width:100%}
+  .switch a{flex:1;justify-content:center}
+  .rail,.preview{top:170px}
+  .toast{bottom:calc(92px + env(safe-area-inset-bottom,0px))}
+  .ibar{right:16px;bottom:calc(84px + env(safe-area-inset-bottom,0px))}
+}
+@media (max-width:560px){.sharecard{grid-template-columns:minmax(0,1fr);justify-items:center;text-align:center}.share-t .btns{justify-content:center}}
+@media (prefers-reduced-motion:reduce){.iarrow{animation:none}}
+@media (min-width:900px){.toast{bottom:28px}}
+@media (max-width:720px){
+  .wrap{padding-inline:16px}
+  .tgrid,.spaces,.r2{grid-template-columns:minmax(0,1fr)}
+  .strip{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .out3{grid-template-columns:minmax(0,1fr)}
+  .phero{padding-block:40px 36px}
+  .phero .ring{display:none}
+  .view section.s{padding-block:40px}
+  .home{padding-block:32px 28px}
+}
+@media (prefers-reduced-motion:reduce){.space,.prog i,.toast{transition:none}.space:hover{transform:none}}
+</style>
+</head>
+<body>
+
+
+<!-- ICON SPRITE -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></symbol>
+  <symbol id="i-client" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6.5 8-6.5s8 2.5 8 6.5"/></symbol>
+  <symbol id="i-ib" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2.5"/><circle cx="5" cy="19" r="2.5"/><circle cx="19" cy="19" r="2.5"/><path d="M12 7.5v4M12 11.5l-6 5.3M12 11.5l6 5.3"/></symbol>
+  <symbol id="i-bdm" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></symbol>
+  <symbol id="i-dl" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></symbol>
+  <symbol id="i-pres" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M12 16v4M8 20h8"/></symbol>
+  <symbol id="i-tool" viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.5-.5-.5-2.5z"/></symbol>
+</svg>
+
+<aside class="side" aria-label="Main">
+  <a class="brand" href="#home"><span class="mark">EC</span><span><b>EC Team Hub</b><small>EC Markets</small></span></a>
+  <a class="navi" href="#home" data-space="home"><svg class="i"><use href="#i-home"/></svg>Home</a>
+  <div class="navlbl">Spaces</div>
+  <a class="navi" href="#client" data-space="client"><svg class="i"><use href="#i-client"/></svg>Clients</a>
+  <a class="navi" href="#ib" data-space="ib"><svg class="i"><use href="#i-ib"/></svg>IBs &amp; Partners</a>
+  <a class="navi" href="#bdm" data-space="bdm"><svg class="i"><use href="#i-bdm"/></svg>BDM Team<span class="tagx">Team</span></a>
+  <div class="grow"></div>
+  <button class="btn primary installbtn" type="button" data-install style="justify-content:center"><svg class="i"><use href="#i-dl"/></svg>Install app</button>
+  <p class="credit">Created by <b>Omar Benaissa</b><br>EC Markets Business Development</p>
+</aside>
+
+<main>
+  <div class="appbar">
+    <a class="brand" href="#home"><span class="mark">EC</span><span><b>EC Team Hub</b></span></a>
+    <button class="iconbtn" type="button" data-install><svg class="i" style="width:16px;height:16px"><use href="#i-dl"/></svg>Install</button>
+  </div>
+
+  <div class="spacebar" id="spacebar" hidden>
+    <div><small id="sb-eyebrow">For clients</small><h1 id="sb-title">Clients</h1></div>
+    <nav class="switch" aria-label="View">
+      <a id="sb-pres" href="#client"><svg class="i"><use href="#i-pres"/></svg>Presentation</a>
+      <a id="sb-tools" href="#client-tools"><svg class="i"><use href="#i-tool"/></svg>Toolkit</a>
+    </nav>
+  </div>
+
+  <!-- ================= HOME ================= -->
+  <div class="view" id="v-home">
+    <div class="home"><div class="wrap">
+      <div class="hello">
+        <span class="eyebrow">EC Markets · Official Global Partner of Liverpool FC</span>
+        <h2>Everything you need, <em>one app.</em></h2>
+        <p>Choose your space. Each one has a presentation to learn from and a toolkit to work with.</p>
+      </div>
+      <div class="spaces" style="--cols:3">
+        <div class="space">
+          <span class="ic"><svg class="i"><use href="#i-client"/></svg></span>
+          <h3>Clients</h3>
+          <p>Why traders choose EC Markets, the accounts and platforms, and how to open an account. Tools: trading calculator and account checklist.</p>
+          <div class="go"><a href="#client">Presentation</a><a href="#client-tools">Toolkit</a></div>
+        </div>
+        <div class="space">
+          <span class="ic"><svg class="i"><use href="#i-ib"/></svg></span>
+          <h3>IBs &amp; Partners</h3>
+          <p>How partners earn with EC Markets, the multi-level structure and how to join. Tools: earnings estimator and ready-to-share posts.</p>
+          <div class="go"><a href="#ib">Presentation</a><a href="#ib-tools">Toolkit</a></div>
+        </div>
+        <div class="space">
+          <span class="team">Team only</span>
+          <span class="ic"><svg class="i"><use href="#i-bdm"/></svg></span>
+          <h3>BDM Team</h3>
+          <p>The full sales playbook, commission policy and rules. Tools: support requests, MIB setup, client messages in 4 languages and commission calculator.</p>
+          <div class="go"><a href="#bdm">Presentation</a><a href="#bdm-tools">Toolkit</a></div>
+        </div>
+      </div>
+      <div class="strip">
+        <div><div class="big">$4.476<small>T</small></div><span class="lbl">Q4 2025 volume</span></div>
+        <div><div class="big">Top 3</div><span class="lbl">Global broker</span></div>
+        <div><div class="big">7</div><span class="lbl">Regulators</span></div>
+        <div><div class="big">20<small>+</small></div><span class="lbl">Countries</span></div>
+      </div>
+      <div class="installcard" id="installcard">
+        <svg class="i" style="width:30px;height:30px;color:var(--red)"><use href="#i-dl"/></svg>
+        <div><h3>Install EC Team Hub on your phone or laptop</h3><p>Works on Android, iPhone, iPad, Windows and Mac. Opens like an app and works offline.</p></div>
+        <button class="btn primary" type="button" data-install>Install app</button>
+      </div>
+      <div class="sharecard" id="sharecard" hidden>
+        <div id="qr" class="qr" aria-label="QR code for this app"></div>
+        <div class="share-t">
+          <span class="eyebrow">Share the app</span>
+          <h3>Scan to open, tap to install</h3>
+          <p>Show this QR code in a meeting, or send the link on WhatsApp. People open it, tap <b>Install</b>, and the app is on their phone.</p>
+          <code id="share-url"></code>
+          <div class="btns"><button class="btn primary" type="button" id="share-copy" data-copy="">Copy link</button><button class="btn" type="button" id="share-native" hidden>Share…</button></div>
+        </div>
+      </div>
+    </div></div>
+    <div class="footnote"><div class="wrap">
+      <p class="who">Created by <b>Omar Benaissa</b> · EC Markets Business Development</p>
+      <p>Risk warning: CFD trading is high risk and may not suit all investors. Losses may exceed deposits. EC Markets does not provide investment advice. Products may not be available in all jurisdictions.</p>
+    </div></div>
+  </div>
+
+  <!-- ================= CLIENTS · PRESENTATION ================= -->
+  <div class="view" id="v-client" hidden>
+    <div class="phero"><div class="ring"></div><div class="ring b"></div><div class="wrap">
+      <span class="eyebrow">For clients</span>
+      <h2>Trade like a <em>champion.</em></h2>
+      <p class="lead">A broker regulated by seven authorities, trusted in 20+ countries, and Official Global Partner of Liverpool FC. Forex, gold, oil, indices, crypto and shares in one account.</p>
+      <div class="cta"><button class="btn primary" type="button" data-jump="c-open">How to open an account</button><a class="btn" href="#client-tools">Open the toolkit</a></div>
+      <div class="ticker">
+        <div><div class="big">$4.476<small>T</small></div><span class="lbl">Q4 2025 volume</span></div>
+        <div><div class="big">Top 3</div><span class="lbl">Global broker</span></div>
+        <div><div class="big">7</div><span class="lbl">Regulators</span></div>
+        <div><div class="big">0.0</div><span class="lbl">Spreads from (pips)</span></div>
+      </div>
+    </div></div>
+
+    <section class="s" id="c-trust"><div class="wrap">
+      <div class="head"><span class="eyebrow">Safety first</span><h2>Regulated by <em>seven</em> authorities</h2><p>Every licence below is public. You can check each one with the regulator.</p></div>
+      <div class="reg">
+        <div class="card"><div class="code">SCA</div><span class="lbl">UAE</span><span class="mono">20200000281</span></div>
+        <div class="card"><div class="code">FCA</div><span class="lbl">United Kingdom</span><span class="mono">FRN 571881</span></div>
+        <div class="card"><div class="code">ASIC</div><span class="lbl">Australia</span><span class="mono">AFSL 414198</span></div>
+        <div class="card"><div class="code">FSCA</div><span class="lbl">South Africa</span><span class="mono">51886</span></div>
+        <div class="card"><div class="code">FMA</div><span class="lbl">New Zealand</span><span class="mono">FSP197465</span></div>
+        <div class="card"><div class="code">FSC</div><span class="lbl">Mauritius</span><span class="mono">GB21200130</span></div>
+        <div class="card"><div class="code">FSA</div><span class="lbl">Seychelles</span><span class="mono">SD009</span></div>
+      </div>
+      <div class="split" style="margin-top:40px">
+        <div class="grid" style="gap:14px">
+          <span class="eyebrow">Extra protection</span>
+          <h3 style="font-size:clamp(24px,3vw,32px)">Insurance up to <em>$1,000,000</em> per eligible claimant</h3>
+          <p>EC Markets Ltd holds an insolvency policy with ARCH 2012 at Lloyd's of London, at no cost to you. Cover is subject to the policy's terms, conditions and exclusions, with a $20,000 retention per claimant.</p>
+        </div>
+        <div class="grid g2">
+          <div class="card"><h3>London Stock Exchange</h3><p>EC Markets is an LSE member firm.</p></div>
+          <div class="card"><h3>Liverpool FC</h3><p>Official Global Partner. Judd Trump is our global ambassador.</p></div>
+        </div>
+      </div>
+    </div></section>
+
+    <section class="s"><div class="wrap">
+      <div class="head"><span class="eyebrow">Markets</span><h2>One account. <em>Six</em> asset classes.</h2></div>
+      <div class="grid g3">
+        <div class="card"><span class="pill">Forex</span><h3>Major and cross pairs</h3><p>The world's largest market, with high liquidity around the clock on weekdays.</p></div>
+        <div class="card"><span class="pill">Metals</span><h3>Gold and more</h3><p>Margin-based trading for capital efficiency.</p></div>
+        <div class="card"><span class="pill">Energy</span><h3>Crude oil</h3><p>One of the world's most traded commodities.</p></div>
+        <div class="card"><span class="pill">Indices</span><h3>Index CFDs</h3><p>Take a view on whole industries or economies.</p></div>
+        <div class="card"><span class="pill">Crypto</span><h3>Crypto CFDs</h3><p>Trade price moves without holding the coins.</p></div>
+        <div class="card"><span class="pill">Shares</span><h3>Share CFDs</h3><p>Global company shares from the same account.</p></div>
+      </div>
+    </div></section>
+
+    <section class="s acct"><div class="wrap">
+      <div class="head"><span class="eyebrow">Accounts</span><h2>Pick the pricing that <em>suits you</em></h2><p>All three accounts offer leverage up to 1:1000, depending on your entity and instrument.</p></div>
+      <div class="grid g3">
+        <div class="card"><span class="pill g">All-in pricing</span><div class="acct-name">STD</div><p class="price">Spread from 1.0 pip</p><ul class="tick"><li>No commission</li><li>All costs inside the spread</li></ul></div>
+        <div class="card hot"><span class="pill">Tightest pricing</span><div class="acct-name" style="color:var(--red)">ECN</div><p class="price">Spread from 0.0 pip</p><ul class="tick"><li>$3 commission</li><li>Built for active trading</li></ul></div>
+        <div class="card"><span class="pill g">Raw pricing</span><div class="acct-name">PRO</div><p class="price">Raw spread</p><ul class="tick"><li>No commission</li><li>For experienced traders</li></ul></div>
+      </div>
+    </div></section>
+
+    <section class="s"><div class="wrap">
+      <div class="head"><span class="eyebrow">Platforms</span><h2>Trade on <em>any device</em></h2></div>
+      <div class="grid g4">
+        <div class="card"><span class="pill">MT4</span><h3>Easy for everyone</h3><p>One-click trading and Trading Central signals.</p></div>
+        <div class="card"><span class="pill">MT5</span><h3>Built for pros</h3><p>21 timeframes, 80+ indicators and market depth.</p></div>
+        <div class="card"><span class="pill">EC App</span><h3>Trade anywhere</h3><p>Real-time data and one-tap trading on iOS and Android.</p></div>
+        <div class="card"><span class="pill">Copy trading</span><h3>Copy or be copied</h3><p>Browse strategies and choose how much to allocate.</p></div>
+      </div>
+    </div></section>
+
+    <section class="s"><div class="wrap">
+      <div class="head"><span class="eyebrow">Recognition</span><h2>Award-winning <em>trading conditions</em></h2></div>
+      <div class="award">
+        <div class="card"><span class="yr">2025</span><h3>FX Trust Score Awards</h3><p>Broker of the Year</p></div>
+        <div class="card"><span class="yr">2025</span><h3>IFX Expo Latam</h3><p>Most Trusted Broker</p></div>
+        <div class="card"><span class="yr">2025</span><h3>IFX Expo Asia</h3><p>Best Trading Conditions</p></div>
+        <div class="card"><span class="yr">2025</span><h3>Finance Magnates FAME</h3><p>Best Forex Spreads, Africa</p></div>
+        <div class="card"><span class="yr">2025</span><h3>Forex Expo Dubai</h3><p>Top Regulated Forex Broker</p></div>
+        <div class="card"><span class="yr">2025</span><h3>FMLS London</h3><p>Best Retail CFDs Broker</p></div>
+        <div class="card"><span class="yr">2025</span><h3>UF Awards</h3><p>Best CFD Broker</p></div>
+        <div class="card"><span class="yr">2024</span><h3>Forex Expo Dubai</h3><p>Best Customer Service</p></div>
+      </div>
+    </div></section>
+
+    <section class="s" id="c-open"><div class="wrap">
+      <div class="head"><span class="eyebrow">Get started</span><h2>Open your account in <em>four steps</em></h2></div>
+      <div class="steps">
+        <div class="card"><h3>Register</h3><p>Sign up at ecmarkets.com or through your account manager's link.</p></div>
+        <div class="card"><h3>Verify</h3><p>Confirm your email address.</p></div>
+        <div class="card"><h3>Upload documents</h3><p>ID and proof of address in your client portal.</p></div>
+        <div class="card"><h3>Download &amp; trade</h3><p>Choose your account and install MT4, MT5 or the EC app.</p></div>
+      </div>
+      <p class="note">Never share your password or verification codes with anyone, including EC Markets staff.</p>
+    </div></section>
+
+    <div class="footnote"><div class="wrap">
+      <p class="who">Support 24/5: <span class="mono">support@ecmarkets.com</span> · <span class="mono">+248 422 4099</span> · <span class="mono">www.ecmarkets.com</span></p>
+      <p>Risk warning: CFD trading is high risk and may not suit all investors. Losses may exceed deposits. You do not own the underlying assets. EC Markets does not provide investment advice. Products may not be available in all jurisdictions, including the United Kingdom.</p>
+    </div></div>
+  </div>
+
+  <!-- ================= CLIENTS · TOOLKIT ================= -->
+  <div class="view" id="v-client-tools" hidden>
+    <div class="tools"><div class="wrap"><div class="tgrid">
+      <div class="panel">
+        <h2>Trading calculator</h2>
+        <p class="sub">Pip value, required margin and profit or loss for one trade. Prices are examples; type the live price.</p>
+        <div class="r2">
+          <label class="f" for="tc-sym">Instrument<select id="tc-sym">
+            <option value="EURUSD">EUR/USD</option><option value="GBPUSD">GBP/USD</option><option value="AUDUSD">AUD/USD</option>
+            <option value="USDJPY">USD/JPY</option><option value="USDCHF">USD/CHF</option><option value="USDCAD">USD/CAD</option><option value="XAUUSD">XAU/USD (Gold)</option>
+          </select></label>
+          <label class="f" for="tc-dir">Direction<select id="tc-dir"><option value="1">Buy</option><option value="-1">Sell</option></select></label>
+          <label class="f" for="tc-lots">Lots<input id="tc-lots" type="number" min="0" step="0.01" value="1" inputmode="decimal"></label>
+          <label class="f" for="tc-lev">Leverage<select id="tc-lev"><option>50</option><option selected>100</option><option>200</option><option>400</option><option>500</option><option>1000</option></select></label>
+          <label class="f" for="tc-open">Open price<input id="tc-open" type="number" step="any" inputmode="decimal"></label>
+          <label class="f" for="tc-close">Close price<input id="tc-close" type="number" step="any" inputmode="decimal"></label>
+        </div>
+        <div class="out3" aria-live="polite">
+          <div><div class="cbig" id="tc-pip">$0</div><span class="clbl" id="tc-piplbl">Value of 1 pip</span></div>
+          <div><div class="cbig" id="tc-margin">$0</div><span class="clbl">Required margin</span></div>
+          <div class="hl"><div class="cbig" id="tc-pl">$0</div><span class="clbl">Profit / loss</span></div>
+        </div>
+        <p class="hint">Standard lot: 100,000 units for forex, 100 oz for gold. Results are estimates in USD before spreads, commission and swaps. Check contract specs on your platform.</p>
+      </div>
+
+      <div class="panel">
+        <h2>Account opening checklist</h2>
+        <p class="sub">Tick each step as you go. Your progress stays on this device.</p>
+        <div class="prog"><i id="ck-bar"></i></div>
+        <p class="hint" id="ck-txt">0 of 6 done</p>
+        <div class="checks" id="ck">
+          <label><input type="checkbox"><span>Register an account<small>At ecmarkets.com or through your account manager's link</small></span></label>
+          <label><input type="checkbox"><span>Verify your email address</span></label>
+          <label><input type="checkbox"><span>Upload your ID<small>Emirates ID or passport, front and back, clear colour photo</small></span></label>
+          <label><input type="checkbox"><span>Upload proof of address<small>Utility bill or bank statement showing your name and address</small></span></label>
+          <label><input type="checkbox"><span>Account approved<small>You'll receive your MT login details by email</small></span></label>
+          <label><input type="checkbox"><span>Install your platform<small>MT4, MT5 or the EC Markets app</small></span></label>
+        </div>
+      </div>
+
+      <div class="panel full">
+        <h2>Contact EC Markets</h2>
+        <p class="sub">Support is available 24 hours a day, 5 days a week. For withdrawals, use your client portal; support handles any questions.</p>
+        <div class="contact">
+          <div><span><small>Email</small><b>support@ecmarkets.com</b></span><button class="mini" type="button" data-copy="support@ecmarkets.com">Copy</button></div>
+          <div><span><small>Phone</small><b>+248 422 4099</b></span><button class="mini" type="button" data-copy="+248 422 4099">Copy</button></div>
+          <div><span><small>Website</small><b>www.ecmarkets.com</b></span><a class="mini" href="https://www.ecmarkets.com" target="_blank" rel="noopener">Open</a></div>
+        </div>
+      </div>
+    </div></div></div>
+  </div>
+
+  <!-- ================= IBs · PRESENTATION ================= -->
+  <div class="view" id="v-ib" hidden>
+    <div class="phero"><div class="ring"></div><div class="ring b"></div><div class="wrap">
+      <span class="eyebrow">For IBs &amp; partners</span>
+      <h2>Grow with <em>EC Markets.</em></h2>
+      <p class="lead">Lifetime commission on every trade your clients place, paid within 2 hours, with an unlimited multi-level structure and a team that builds your deal with you.</p>
+      <div class="cta"><button class="btn primary" type="button" data-jump="ib-join">How to join</button><a class="btn" href="#ib-tools">Estimate your earnings</a></div>
+      <div class="ticker">
+        <div><div class="big">2<small> hrs</small></div><span class="lbl">Commission payout</span></div>
+        <div><div class="big">20K<small>+</small></div><span class="lbl">Active affiliates</span></div>
+        <div><div class="big">55K</div><span class="lbl">Active clients</span></div>
+        <div><div class="big">275K</div><span class="lbl">Trading accounts</span></div>
+      </div>
+    </div></div>
+
+    <section class="s"><div class="wrap">
+      <div class="head"><span class="eyebrow">How you earn</span><h2>Three ways your network <em>pays you</em></h2></div>
+      <div class="split" style="align-items:start">
+        <div class="grid" style="gap:14px">
+          <div class="card"><span class="pill">01 · Direct</span><h3>Lifetime commission</h3><p>Earn a rebate on every trade your referred clients place, for as long as they trade.</p></div>
+          <div class="card"><span class="pill">02 · Network</span><h3>Unlimited multi-level</h3><p>Bring in sub-IBs and earn on their clients' trading too. No limit on levels.</p></div>
+          <div class="card"><span class="pill">03 · Every trade</span><h3>Zero-minute rule</h3><p>Rebates count with no minimum trade duration.</p></div>
+        </div>
+        <div class="card">
+          <h3>Your structure</h3>
+          <p>Rebates are agreed per account group with your BDM and split down your network.</p>
+          <div class="tree">
+            <div class="tnode you"><b>You · MIB</b>Master IB</div>
+            <div class="tarrow">↓</div>
+            <div class="trow"><div class="tnode"><b>Your clients</b>Direct rebate</div><div class="tnode"><b>SIB 1</b>Your sub-IB</div><div class="tnode"><b>SIB 2</b>Your sub-IB</div></div>
+            <div class="tarrow">↓</div>
+            <div class="trow"><div class="tnode"><b>Their clients</b>You earn your share</div><div class="tnode"><b>SIB 3 …</b>No level limit</div></div>
+          </div>
+        </div>
+      </div>
+    </div></section>
+
+    <section class="s"><div class="wrap">
+      <div class="head"><span class="eyebrow">What you get</span><h2>Built for <em>partners</em></h2></div>
+      <div class="grid g3">
+        <div class="card"><h3>Real-time reporting</h3><p>See your clients, volumes and earnings live.</p></div>
+        <div class="card"><h3>Marketing support</h3><p>Tracking links, high-converting landing pages and dynamic ads.</p></div>
+        <div class="card"><h3>Tailored deals</h3><p>Rebate plans built around your audience and volume.</p></div>
+        <div class="card"><h3>Dedicated support</h3><p>A BDM and a partner team available 24/5.</p></div>
+        <div class="card"><h3>A broker clients trust</h3><p>Seven regulators, Lloyd's insurance cover and an LSE member firm.</p></div>
+        <div class="card"><h3>Award-winning programme</h3><p>Best IB / Affiliate Programme (UF Awards 2025) and Best Partner Program (FX Trust Score 2025).</p></div>
+      </div>
+      <p class="note">"Our partnership programme combines regulatory precision with technology, giving partners tailored tools and unmatched support." <span style="color:var(--muted)">Sherwan Zebo, Head of Global Business Development</span></p>
+    </div></section>
+
+    <section class="s" id="ib-join"><div class="wrap">
+      <div class="head"><span class="eyebrow">How to join</span><h2>Start earning in <em>four steps</em></h2></div>
+      <div class="steps">
+        <div class="card"><h3>Talk to a BDM</h3><p>Agree your rebate plan and account groups.</p></div>
+        <div class="card"><h3>Register as partner</h3><p>Open your IB account and get your tracking link.</p></div>
+        <div class="card"><h3>Share your link</h3><p>Invite clients and sub-IBs with approved materials.</p></div>
+        <div class="card"><h3>Earn &amp; track</h3><p>Follow your earnings in real time. Paid within 2 hours.</p></div>
+      </div>
+    </div></section>
+
+    <section class="s"><div class="wrap">
+      <div class="head"><span class="eyebrow">Questions</span><h2>Partner <em>FAQ</em></h2></div>
+      <div class="faq grid" style="gap:12px;max-width:900px">
+        <details open><summary>How fast are commissions paid?</summary><p>Commissions are paid within 2 hours.</p></details>
+        <details><summary>Is there a limit on sub-IB levels?</summary><p>No. The multi-level structure is unlimited, and you earn your agreed share on your sub-IBs' clients.</p></details>
+        <details><summary>How is my rebate set?</summary><p>Your BDM agrees a rebate per lot for each account group (for example STD or STD-PX) and asset class. You can then split it with your sub-IBs.</p></details>
+        <details><summary>What can I use to promote EC Markets?</summary><p>Use the approved materials and posts your BDM provides, and always include the risk warning. Do not promise profits or returns.</p></details>
+      </div>
+    </div></section>
+
+    <div class="footnote"><div class="wrap">
+      <p>Earnings depend on your clients' trading activity and are not guaranteed. Partner terms are set in your partner agreement. CFD trading is high risk and losses may exceed deposits.</p>
+    </div></div>
+  </div>
+
+  <!-- ================= IBs · TOOLKIT ================= -->
+  <div class="view" id="v-ib-tools" hidden>
+    <div class="tools"><div class="wrap"><div class="tgrid">
+      <div class="panel">
+        <h2>Earnings estimator</h2>
+        <p class="sub">Enter your own numbers. Use the rebate per lot agreed with your BDM.</p>
+        <div class="r2">
+          <label class="f" for="ie-clients">Active clients<input id="ie-clients" type="number" min="0" step="1" value="20" inputmode="numeric"></label>
+          <label class="f" for="ie-lots">Lots per client / month<input id="ie-lots" type="number" min="0" step="0.5" value="5" inputmode="decimal"></label>
+          <label class="f" for="ie-rate">Your rebate per lot ($)<input id="ie-rate" type="number" min="0" step="0.5" value="8" inputmode="decimal"></label>
+          <label class="f" for="ie-sublots">Sub-IB lots / month<input id="ie-sublots" type="number" min="0" step="1" value="200" inputmode="decimal"></label>
+          <label class="f" for="ie-subrate">Your share per sub-IB lot ($)<input id="ie-subrate" type="number" min="0" step="0.5" value="2" inputmode="decimal"></label>
+        </div>
+        <div class="out3" aria-live="polite">
+          <div><div class="cbig" id="ie-direct">$0</div><span class="clbl">Direct / month</span></div>
+          <div><div class="cbig" id="ie-net">$0</div><span class="clbl">Network / month</span></div>
+          <div class="hl"><div class="cbig" id="ie-total">$0</div><span class="clbl">Total / month</span></div>
+        </div>
+        <p class="hint" id="ie-year"></p>
+        <p class="hint">Illustration only. Actual earnings depend on your clients' trading activity and your partner agreement, and are not guaranteed.</p>
+      </div>
+
+      <div class="panel">
+        <h2>Share kit</h2>
+        <p class="sub">Add your tracking link once, then copy a post for WhatsApp, Telegram or social media.</p>
+        <label class="f" for="sk-link">Your tracking link<input id="sk-link" type="url" placeholder="https://..."></label>
+        <div id="sk-posts" style="display:grid;gap:10px"></div>
+        <p class="hint">Keep the risk warning in every post. Check with your BDM before running paid ads.</p>
+      </div>
+    </div></div></div>
+  </div>
+
+
+  <!-- ================= BDM · PRESENTATION ================= -->
+  <div class="view" id="v-bdm" hidden>
+    <div class="phero"><div class="ring"></div><div class="ring b"></div><div class="wrap">
+      <span class="eyebrow">For the BDM team · Created by Omar Benaissa</span>
+      <h2>Know it. Pitch it. <em>Close it.</em></h2>
+      <p class="lead">The company story, the licences, the accounts and pricing, the IB programme, your commission and the rules we sell by.</p>
+      <div class="cta"><button class="btn primary" type="button" data-jump="pitch">Jump to the pitch</button><a class="btn" href="#bdm-tools">Open the toolkit</a></div>
+      <div class="ticker">
+        <div><div class="big">$4.476<small>T</small></div><span class="lbl">Q4 2025 volume</span></div>
+        <div><div class="big">Top 3</div><span class="lbl">Global broker</span></div>
+        <div><div class="big">7</div><span class="lbl">Regulators</span></div>
+        <div><div class="big">5%</div><span class="lbl">Top commission tier</span></div>
+      </div>
+    </div></div>
+<!-- COMPANY -->
+<section class="s" id="company"><div class="wrap">
+  <div class="head"><span class="eyebrow">The company</span><h2>A top-3 global broker with <em>10+ years</em> in the markets</h2><p>According to the Finance Magnates Q4 2025 Intelligence Report, EC Markets recorded $4.476 trillion in trading volume, kept its Top 3 global ranking and closed 2025 with its strongest quarter so far.</p></div>
+  <div class="grid g4">
+    <div class="card"><div class="big">10<small>+ yrs</small></div><span class="lbl">In the financial markets</span></div>
+    <div class="card"><div class="big">20<small>+</small></div><span class="lbl">Countries of operation</span></div>
+    <div class="card"><div class="big">9</div><span class="lbl">Offices worldwide</span><p>London (HQ), Dubai, Sydney, Limassol, Mexico City, Cape Town, Auckland, Seychelles, Mauritius</p></div>
+    <div class="card"><div class="big">4</div><span class="lbl">Core values</span><p>Commitment, open communication, respect, excellence</p></div>
+  </div>
+  <div class="partners">
+    <div class="card"><span class="pill">Partnership</span><h3>Liverpool FC</h3><p>Official Global Partner. Our line: "Trade Like a Champion."</p></div>
+    <div class="card"><span class="pill">Ambassador</span><h3>Judd Trump</h3><p>Snooker world champion and world no. 1. Global ambassador since 2024.</p></div>
+    <div class="card"><span class="pill">Membership</span><h3>London Stock Exchange</h3><p>EC Markets is a proud LSE member firm.</p></div>
+    <div class="card"><span class="pill">CSR</span><h3>UNICEF UK Business Network</h3><p>Supporting children affected by conflict and disaster.</p></div>
+  </div>
+</div></section>
+
+<!-- TRUST -->
+<section class="s" id="trust"><div class="wrap">
+  <div class="head"><span class="eyebrow">Trust & safety</span><h2>Regulated by <em>seven</em> authorities</h2><p>The first objection is always "is my money safe?". Lead with the licence numbers. They are public and the client can check them.</p></div>
+  <div class="reg">
+    <div class="card"><div class="code">SCA</div><span class="lbl">UAE</span><span class="mono">20200000281</span></div>
+    <div class="card"><div class="code">FCA</div><span class="lbl">United Kingdom</span><span class="mono">FRN 571881</span></div>
+    <div class="card"><div class="code">ASIC</div><span class="lbl">Australia</span><span class="mono">AFSL 414198</span></div>
+    <div class="card"><div class="code">FSCA</div><span class="lbl">South Africa</span><span class="mono">51886</span></div>
+    <div class="card"><div class="code">FMA</div><span class="lbl">New Zealand</span><span class="mono">FSP197465</span></div>
+    <div class="card"><div class="code">FSC</div><span class="lbl">Mauritius</span><span class="mono">GB21200130</span></div>
+    <div class="card"><div class="code">FSA</div><span class="lbl">Seychelles</span><span class="mono">SD009</span></div>
+  </div>
+
+  <div class="split" style="margin-top:56px">
+    <div class="grid" style="gap:18px">
+      <span class="eyebrow">Client protection</span>
+      <h3 style="font-size:clamp(26px,3vw,36px)">Insured up to <em>$1,000,000</em> per claimant</h3>
+      <p>EC Markets Ltd holds an insolvency policy issued by ARCH 2012 at Lloyd's of London, free for clients. If the company were ever insolvent, the insurer compensates each eligible claimant, subject to the policy's terms, conditions and exclusions.</p>
+      <div class="grid g3">
+        <div class="card"><div class="big">$1M</div><span class="lbl">Max per claimant</span></div>
+        <div class="card"><div class="big">$20K</div><span class="lbl">Retention</span></div>
+        <div class="card"><div class="big">$0</div><span class="lbl">Cost to client</span></div>
+      </div>
+    </div>
+    <div class="card">
+      <span class="pill g">How to say it</span>
+      <ul class="tick"><li>"Eligible clients are covered by an insolvency policy with ARCH 2012 at Lloyd's, up to $1M per claimant."</li><li>"Coverage is subject to the policy terms, and a $20,000 retention applies."</li></ul>
+      <ul class="tick no"><li>Never say money is "100% guaranteed" or that it covers trading losses.</li></ul>
+    </div>
+  </div>
+
+  <div class="split" style="margin-top:56px">
+    <blockquote class="quote" style="margin:0">"The regulations we proudly follow keep strict legal and ethical standards, giving our clients a safe and transparent trading environment."<cite>Matthew Smith · Chairman & Group CEO</cite></blockquote>
+    <div class="card"><h3>Our UAE entity</h3><p>EC Markets Securities & Financial Promotion L.L.C. is regulated by the UAE Capital Market Authority (formerly SCA), licence 20200000281, <b style="color:var(--fg)">Category 5: promotion and introduction</b>. This defines what we can and cannot say. See the rules section below.</p></div>
+  </div>
+
+  <div class="head" style="margin-top:72px"><span class="eyebrow">Recognition</span><h2>Awards you can <em>name-drop</em></h2><p>Match the award to the prospect. IBs hear "Best IB Programme" and "Best Partner Program". Traders hear "Best Trading Conditions" and "Best Spreads".</p></div>
+  <div class="award">
+    <div class="card"><span class="yr">2025</span><h3>FX Trust Score Awards</h3><p>Broker of the Year & Best Partner Program</p></div>
+    <div class="card"><span class="yr">2025 · Dubai</span><h3>UF Awards</h3><p>Best IB / Affiliate Programme</p></div>
+    <div class="card"><span class="yr">2025 · Cyprus</span><h3>UF Awards</h3><p>Best CFD Broker</p></div>
+    <div class="card"><span class="yr">2025</span><h3>IFX Expo Latam</h3><p>Most Trusted Broker</p></div>
+    <div class="card"><span class="yr">2025 · Africa</span><h3>Finance Magnates FAME</h3><p>Best Forex Spreads</p></div>
+    <div class="card"><span class="yr">2025 · Asia</span><h3>WikiFinance Expo</h3><p>Best Forex Trading Experience</p></div>
+    <div class="card"><span class="yr">2025</span><h3>Forex Expo Dubai</h3><p>Top Regulated Forex Broker</p></div>
+    <div class="card"><span class="yr">2025</span><h3>IFX Expo Asia</h3><p>Best Trading Conditions</p></div>
+    <div class="card"><span class="yr">2025</span><h3>FMLS London</h3><p>Best Retail CFDs Broker</p></div>
+    <div class="card"><span class="yr">2025 · Buenos Aires</span><h3>Rankia Awards</h3><p>Best Forex Broker</p></div>
+    <div class="card"><span class="yr">2024 · Dubai</span><h3>Forex Expo</h3><p>Best Customer Service</p></div>
+    <div class="card"><span class="yr">2024 · Vietnam</span><h3>Brokersview</h3><p>Best Trading Liquidity</p></div>
+  </div>
+</div></section>
+
+<!-- PRODUCTS -->
+<section class="s" id="products"><div class="wrap">
+  <div class="head"><span class="eyebrow">What clients can trade</span><h2>One account. <em>Six</em> asset classes.</h2><p>Spreads from 0.0 pips, leverage up to 1:1000 and minimal slippage, with 24/5 dedicated support.</p></div>
+  <div class="grid g3">
+    <div class="card"><span class="pill">Forex</span><h3>The world's largest market</h3><p>High liquidity and 24-hour trading on majors and crosses.</p></div>
+    <div class="card"><span class="pill">Metals</span><h3>Gold focus</h3><p>Margin-based trading for capital efficiency. Often used as an inflation hedge.</p></div>
+    <div class="card"><span class="pill">Energy</span><h3>Crude oil</h3><p>Access to one of the world's most important commodities.</p></div>
+    <div class="card"><span class="pill">Indices</span><h3>Index CFDs</h3><p>Take a view on whole industries or national economies.</p></div>
+    <div class="card"><span class="pill">Crypto</span><h3>Crypto CFDs</h3><p>Trade price moves without holding the coins.</p></div>
+    <div class="card"><span class="pill">Stocks</span><h3>Share CFDs</h3><p>No added spread on any STD account group.</p></div>
+  </div>
+</div></section>
+
+<!-- ACCOUNTS -->
+<section class="s acct" id="accounts"><div class="wrap">
+  <div class="head"><span class="eyebrow">Account types</span><h2>Three accounts. <em>Match</em> the client to the right one.</h2><p>Ask first: How often do you trade? What size? Do you prefer one all-in cost, or spread plus commission? Then present the fit.</p></div>
+  <div class="grid g3">
+    <div class="card"><span class="pill g">Beginners</span><div class="acct-name">STD</div><p class="price">Spread from 1.0 pip</p><ul class="tick"><li>No commission</li><li>Leverage up to 1:1000</li><li>All costs inside the spread</li></ul></div>
+    <div class="card hot"><span class="pill">Active traders</span><div class="acct-name" style="color:var(--red)">ECN</div><p class="price">Spread from 0.0 pip</p><ul class="tick"><li>$3 commission</li><li>Leverage up to 1:1000</li><li>Tightest pricing for high volume</li></ul></div>
+    <div class="card"><span class="pill g">Experienced</span><div class="acct-name">PRO</div><p class="price">Raw spread</p><ul class="tick"><li>No commission</li><li>Leverage up to 1:1000</li><li>Raw pricing, single cost line</li></ul></div>
+  </div>
+</div></section>
+
+<!-- PRICING -->
+<section class="s" id="pricing"><div class="wrap">
+  <div class="head"><span class="eyebrow">Pricing for partners</span><h2>STD account groups: <em>spread</em> by asset class</h2><p>Commission type: spreads. STD is the base group, and each higher group adds spread. Use this table when building an IB's offer.</p></div>
+  <div class="tablewrap"><table>
+    <thead><tr><th>MT account group</th><th>Forex</th><th>Metal</th><th>Energy</th><th>Index</th><th>Crypto</th><th>Stock</th></tr></thead>
+    <tbody>
+      <tr class="base"><td>STD</td><td>1</td><td>2.1</td><td>1</td><td>1</td><td>1</td><td>0</td></tr>
+      <tr><td>STD-PV</td><td>1.5</td><td>2.6</td><td>1.5</td><td>1.5</td><td>1</td><td>0</td></tr>
+      <tr><td>STD-PX</td><td>2</td><td>3.1</td><td>2</td><td>2</td><td>1</td><td>0</td></tr>
+      <tr><td>STD-PXV</td><td>2.5</td><td>3.6</td><td>2.5</td><td>2.5</td><td>1</td><td>0</td></tr>
+      <tr><td>STD-PXX</td><td class="hi">3</td><td class="hi">4.1</td><td class="hi">3</td><td class="hi">3</td><td>1</td><td>0</td></tr>
+    </tbody>
+  </table></div>
+  <div class="grid g3" style="margin-top:16px">
+    <div class="card"><h3>Steps of 0.5</h3><p>Forex, Energy and Index rise by 0.5 per group, from 1 to 3.</p></div>
+    <div class="card"><h3>Metal is +1.1</h3><p>Metal always sits 1.1 above Forex in the same group.</p></div>
+    <div class="card"><h3>Flat lines</h3><p>Crypto stays at 1 and Stock at 0 in every group.</p></div>
+  </div>
+</div></section>
+
+<!-- PLATFORMS -->
+<section class="s" id="platforms"><div class="wrap">
+  <div class="head"><span class="eyebrow">Platforms & tools</span><h2>MT4, MT5, the EC app and <em>copy trading</em></h2><p>Every platform works on every device: at home, in the office or on the move.</p></div>
+  <div class="grid g4">
+    <div class="card"><span class="pill">MT4</span><h3>Easy for everyone</h3><p>One-click trading, adaptive candlesticks and Trading Central ADC signals for entry and exit points.</p></div>
+    <div class="card"><span class="pill">MT5</span><h3>Built for pros</h3><p>21 timeframes, 80+ indicators, market depth, trading recommendations and copy trading.</p></div>
+    <div class="card"><span class="pill">EC App</span><h3>Trade anywhere</h3><p>Real-time data, advanced charting and one-tap trading. App Store and Google Play.</p></div>
+    <div class="card"><span class="pill">Copy trading</span><h3>Copy or be copied</h3><p>Follow top traders, or let others follow your strategy and earn from it.</p></div>
+  </div>
+  <h3 class="reveal" style="margin:44px 0 18px;font-size:22px">Copy trading in four steps</h3>
+  <div class="steps">
+    <div class="card"><p>Sign up and activate the account</p></div>
+    <div class="card"><p>Browse and choose strategies to copy</p></div>
+    <div class="card"><p>Choose the amount to invest</p></div>
+    <div class="card"><p>Click "Copy strategy"</p></div>
+  </div>
+</div></section>
+
+<!-- PARTNERS -->
+<section class="s" id="partners"><div class="wrap">
+  <div class="head"><span class="eyebrow">Partner / IB programme</span><h2>Why IBs <em>switch</em> to EC Markets</h2><p>Partners join a network of more than 20,000 active affiliates and earn lifetime commission on every trade their clients place.</p></div>
+  <div class="ticker" style="margin:0 0 16px">
+    <div><div class="big">2<small> hrs</small></div><span class="lbl">Commission payout</span></div>
+    <div><div class="big">20K<small>+</small></div><span class="lbl">Active affiliates</span></div>
+    <div><div class="big">55K</div><span class="lbl">Active clients</span></div>
+    <div><div class="big">275K</div><span class="lbl">Trading accounts</span></div>
+  </div>
+  <div class="grid g3">
+    <div class="card"><h3>Lifetime commissions</h3><p>Earned on every trade placed by referred clients.</p></div>
+    <div class="card"><h3>Unlimited multi-level IB</h3><p>Build sub-IB networks with no depth limit.</p></div>
+    <div class="card"><h3>Zero-minute rule</h3><p>Rebates are generated with no minimum trade duration.</p></div>
+    <div class="card"><h3>Tailored deals</h3><p>Custom partnership terms and rebate plans.</p></div>
+    <div class="card"><h3>Real-time reporting</h3><p>Partners see clients and earnings live.</p></div>
+    <div class="card"><h3>Marketing support</h3><p>Custom tracking links, high-converting landing pages and dynamic ads.</p></div>
+  </div>
+  <p class="note">"Our partnership programme combines regulatory precision with technology, giving partners tailored tools and unmatched support." <span style="color:var(--muted)">Sherwan Zebo, Head of Global Business Development</span></p>
+</div></section>
+
+<!-- COMMISSION -->
+<section class="s" id="commission"><div class="wrap">
+  <div class="head"><span class="eyebrow">Commission Tier Policy 2026 · Sales Department</span><h2>Bring more net deposit. <em>Earn up to 5%.</em></h2><p>Your commission rate is set by your <b style="color:var(--fg)">average net deposit over the last three months</b>, and that rate is paid on the same 3-month average.</p></div>
+  <div class="split" style="align-items:start">
+    <div class="tiers" id="tiers">
+      <div class="tier" data-min="0"><span class="bar" style="width:50%"></span><span class="range">Less than $20,000</span><span class="rate">2.5%</span></div>
+      <div class="tier" data-min="20000"><span class="bar" style="width:60%"></span><span class="range">$20,000 – $39,999</span><span class="rate">3.0%</span></div>
+      <div class="tier" data-min="40000"><span class="bar" style="width:70%"></span><span class="range">$40,000 – $59,999</span><span class="rate">3.5%</span></div>
+      <div class="tier" data-min="60000"><span class="bar" style="width:80%"></span><span class="range">$60,000 – $79,999</span><span class="rate">4.0%</span></div>
+      <div class="tier" data-min="80000"><span class="bar" style="width:90%"></span><span class="range">$80,000 – $99,999</span><span class="rate">4.5%</span></div>
+      <div class="tier" data-min="100000"><span class="bar" style="width:100%"></span><span class="range">$100,000 and above</span><span class="rate">5.0%</span></div>
+    </div>
+    <div class="card">
+      <span class="pill g">Calculator</span>
+      <h3>Work out your commission</h3>
+      <p>Enter your last three months of net deposit and see your average, tier, commission and what you need for the next tier.</p>
+      <a class="btn primary" href="#bdm-tools" data-tool="comm" style="align-self:flex-start">Open commission calculator</a>
+    </div>
+  </div>
+
+  <h3 class="reveal" style="margin:48px 0 16px;font-size:22px">Worked example from the policy</h3>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Month</th><th>Net deposit</th><th>3-month average</th><th>Rate</th><th>Commission</th></tr></thead>
+    <tbody>
+      <tr><td>September</td><td>$40,000</td><td>$13,333</td><td>2.5%</td><td>$333.33</td></tr>
+      <tr><td>October</td><td>$60,000</td><td>$33,333</td><td>3.0%</td><td>$1,000</td></tr>
+      <tr><td>November</td><td>$80,000</td><td>$60,000</td><td>4.0%</td><td class="hi">$2,400</td></tr>
+      <tr><td>December</td><td>$20,000</td><td>$53,333</td><td>3.5%</td><td>$1,866</td></tr>
+    </tbody>
+  </table></div>
+  <div class="grid g3" style="margin-top:16px">
+    <div class="card"><h3>Consistency pays</h3><p>December's deposit was only $20,000, but the strong October and November kept the average at $53,333 and the rate at 3.5%.</p></div>
+    <div class="card"><h3>One weak month costs</h3><p>November's rate dropped from 4.0% to 3.5% in December. Keep every month strong to protect your tier.</p></div>
+    <div class="card"><h3>Management discretion</h3><p>For special performance, management may adjust the commission rate.</p></div>
+  </div>
+  <p class="note">Client support for your prospects: <span class="mono">support@ecmarkets.com</span> · <span class="mono">+248 422 4099</span> · <span class="mono">www.ecmarkets.com</span></p>
+</div></section>
+
+<!-- PITCH -->
+<section class="s" id="pitch"><div class="wrap">
+  <div class="head"><span class="eyebrow">The pitch</span><h2>Answers to the questions you <em>hear most</em></h2><p>Tap a question to open the answer.</p></div>
+  <div class="faq grid" style="gap:12px;max-width:900px">
+    <details open class="reveal"><summary>"Is this broker safe?"</summary><p>Seven regulators including FCA and ASIC, a London Stock Exchange member firm, and a Lloyd's insolvency policy up to $1M per eligible claimant at no cost to the client.</p></details>
+    <details class="reveal"><summary>"How big are you?"</summary><p>$4.476 trillion in trading volume in Q4 2025 and a Top 3 global broker ranking, per the Finance Magnates Intelligence Report. Active in 20+ countries.</p></details>
+    <details class="reveal"><summary>"What does it cost to trade?"</summary><p>STD from 1.0 pip with no commission. ECN from 0.0 pips with a $3 commission. PRO on raw spread with no commission. Leverage up to 1:1000 on all three.</p></details>
+    <details class="reveal"><summary>"How fast do I get paid?" (IBs)</summary><p>Commissions within 2 hours, lifetime earnings on referred clients, an unlimited multi-level structure and real-time reporting.</p></details>
+    <details class="reveal"><summary>"Who else trusts you?"</summary><p>Official Global Partner of Liverpool FC, Judd Trump as global ambassador, and 12+ industry awards including Broker of the Year 2025 (FX Trust Score).</p></details>
+    <details class="reveal hot"><summary>"Will I make money?"</summary><p>Never promise. Say: "CFDs are high risk and you can lose more than your deposit. I can show you how the platform and accounts work, but I can't predict results or advise you on trades."</p></details>
+  </div>
+</div></section>
+
+<!-- RULES -->
+<section class="s" id="rules"><div class="wrap">
+  <div class="head"><span class="eyebrow">Compliance · Category 5 licence</span><h2>We <em>promote and introduce</em>. Nothing more.</h2><p>Every call, message and post must stay inside our licensed scope.</p></div>
+  <div class="grid g2">
+    <div class="card"><span class="pill g">You can</span>
+      <ul class="tick">
+        <li>Identify the company and your role clearly on every call</li>
+        <li>Explain products, accounts, platforms and the partner programme</li>
+        <li>Use only approved scripts, materials, disclosures and disclaimers</li>
+        <li>Get Compliance approval before any campaign, event or public post</li>
+        <li>Record every material interaction, introduction and escalation</li>
+        <li>Escalate requests for advice, trades, account access or funds to your manager and Compliance</li>
+      </ul>
+    </div>
+    <div class="card hot"><span class="pill">You must never</span>
+      <ul class="tick no">
+        <li>Give investment advice or recommend a trading strategy</li>
+        <li>Guarantee, promise or predict returns, or make unverified claims</li>
+        <li>Pressure a client to invest</li>
+        <li>Ask for or keep a client's password, OTP or portal login</li>
+        <li>Open a client's portal, place or manage trades</li>
+        <li>Give instructions on deposits, withdrawals or client funds</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="head" style="margin-top:64px"><span class="eyebrow">Calls & messaging</span><h2>Every client conversation goes through <em>company channels</em></h2></div>
+  <div class="grid g2">
+    <div class="grid" style="gap:16px">
+      <div class="card"><h3>Approved tools</h3><p>Company SIM, 3CX extension, company email, CRM and company WhatsApp. Access is granted after training and manager approval.</p></div>
+      <div class="card"><h3>UAE telemarketing rules</h3><p>Approved calling practices, consent and do-not-call controls, identification and a recording notice on every call.</p></div>
+      <div class="card"><h3>Security</h3><p>Keep 3CX logins, SIMs, passwords and OTPs private. Report loss, SIM-swap or phishing immediately to your manager, IT and Compliance.</p></div>
+    </div>
+    <div class="card hot"><span class="pill">Zero tolerance</span>
+      <ul class="tick no">
+        <li>Moving a client to your personal number or personal WhatsApp</li>
+        <li>Deleting, hiding or altering call logs, chats or recordings</li>
+        <li>Screenshotting, exporting or forwarding client data to personal accounts</li>
+        <li>Using company tools for side business or private commissions</li>
+      </ul>
+      <p>Bypassing communication monitoring is listed as gross misconduct in the Employee Handbook.</p>
+      <p>Report suspected fraud, money laundering, complaints or unusual client behaviour to Compliance / MLRO, and never tip off the client.</p>
+    </div>
+  </div>
+
+  <div class="head" style="margin-top:64px"><span class="eyebrow">How we work</span><h2>Team <em>standards</em></h2></div>
+  <div class="grid g3">
+    <div class="card"><div class="big">9–6</div><span class="lbl">Monday to Friday</span><p>40 hours a week with a 1-hour unpaid break. Ramadan days are 2 hours shorter.</p></div>
+    <div class="card"><div class="big">15<small> min</small></div><span class="lbl">Grace period</span><p>Discretionary. After it, a half-day deduction applies. Over 3 hours late counts as absent.</p></div>
+    <div class="card"><div class="big">30</div><span class="lbl">Days annual leave</span><p>Per completed year of service. Request at least 2 weeks ahead.</p></div>
+    <div class="card"><h3>Dress code</h3><p>Business attire Monday to Thursday, smart casual Friday, formal for client and regulator meetings.</p></div>
+    <div class="card"><h3>BD incentives</h3><p>Governed by the BD team's incentive scheme. Not guaranteed and subject to company approval.</p></div>
+    <div class="card"><h3>Who to ask</h3><p>HR questions go to Human Resources. Client communication, advice or AML questions go to Compliance.</p></div>
+  </div>
+</div></section>
+
+    <div class="footnote"><div class="wrap">
+      <p class="who">Created by <b>Omar Benaissa</b> · Internal use only</p>
+      <p>Risk disclosure: CFD trading is high risk and may not suit all investors. Losses may exceed deposits. EC Markets does not provide investment advice.</p>
+    </div></div>
+  </div>
+
+  <!-- ================= BDM · TOOLKIT ================= -->
+  <div class="view" id="v-bdm-tools" hidden>
+    <div class="tools"><div class="wrap">
+      <div class="r2" style="margin-bottom:18px;max-width:560px">
+        <label class="f" for="myname">Your name (signs every message)<input id="myname" type="text" placeholder="e.g. Omar" autocomplete="name" style="font-family:var(--body)"></label>
+      </div>
+  <div class="app">
+    <div class="rail" role="tablist" aria-label="Request type">
+      <button role="tab" data-t="rebate" aria-selected="true"><b>IB rebate setup</b><span>MIB + SIB levels</span></button>
+      <button role="tab" data-t="mib" aria-selected="false"><b>MIB link setup</b><span>Standard + Cent groups</span></button>
+      <button role="tab" data-t="kyc" aria-selected="false"><b>KYC approval</b><span>One or more clients</span></button>
+      <button role="tab" data-t="link" aria-selected="false"><b>Link client to IB</b><span>Client under an IB</span></button>
+      <button role="tab" data-t="group" aria-selected="false"><b>Change account group</b><span>Move client to a group</span></button>
+      <button role="tab" data-t="client" aria-selected="false"><b>Client messages</b><span>7 messages · 4 languages</span></button>
+      <button role="tab" data-t="comm" aria-selected="false"><b>My commission</b><span>2026 tier calculator</span></button>
+    </div>
+
+    <!-- FORMS -->
+    <div class="panel" id="forms">
+
+      <div data-form="rebate">
+        <div style="display:grid;gap:16px">
+          <h2>IB rebate setup</h2>
+          <p class="sub">Write the MIB UID and each SIB UID. Add or remove SIB levels as needed.</p>
+          <label class="f" for="r-group">Account group
+            <select id="r-group">
+              <option value="STDPXX">STDPXX</option>
+              <option value="STDPXV">STDPXV</option>
+              <option value="STDPX">STDPX</option>
+              <option value="STDPV">STDPV</option>
+              <option value="STD">STD</option>
+            </select>
+          </label>
+          <div id="levels" style="display:grid;gap:10px"></div>
+          <div class="btns">
+            <button class="btn" id="addsib" type="button">+ Add SIB level</button>
+            <button class="btn" id="resetrb" type="button">Reset rebates to default</button>
+          </div>
+          <div class="warns" id="r-warn"></div>
+          <div class="ref">
+            <p class="hint" style="margin-bottom:8px">Max MIB rebate by group (spread × 10). Order: FX / Index / Metal / Energy / Crypto.</p>
+            <table id="reftable"><thead><tr><th>Group</th><th>FX</th><th>Index</th><th>Metal</th><th>Energy</th><th>Crypto</th></tr></thead><tbody></tbody></table>
+          </div>
+        </div>
+      </div>
+
+      <div data-form="mib" hidden>
+        <div style="display:grid;gap:16px">
+          <h2>MIB link setup</h2>
+          <p class="sub">Write the client ID and tick the groups the IB needs. Rebates start at the maximum for each group; lower any number for a custom deal.</p>
+          <label class="f" for="m-id">Client ID<input id="m-id" type="text" placeholder="NP31725388"></label>
+          <div class="mtx">
+            <div class="mh">Standard accounts <span>FX / Index / Metal / Energy / Crypto</span></div>
+            <div class="mr head"><span></span><span>FX</span><span>Index</span><span>Metal</span><span>Energy</span><span>Crypto</span></div>
+            <div id="m-std"></div>
+          </div>
+          <div class="switches">
+            <label for="m-cent"><input id="m-cent" type="checkbox" checked> Include Cent accounts</label>
+            <label for="m-mirror"><input id="m-mirror" type="checkbox" checked> Cent same as Standard</label>
+          </div>
+          <div class="mtx" id="m-centbox">
+            <div class="mh">Cent accounts <span>FX / Index / Metal / Energy</span></div>
+            <div class="mr head"><span></span><span>FX</span><span>Index</span><span>Metal</span><span>Energy</span><span>Crypto</span></div>
+            <div id="m-centrows"></div>
+          </div>
+          <div class="btns"><button class="btn" id="m-reset" type="button">Reset to maximum</button></div>
+          <div class="warns" id="m-warn"></div>
+        </div>
+      </div>
+
+      <div data-form="kyc" hidden>
+        <div style="display:grid;gap:16px">
+          <h2>KYC approval</h2>
+          <p class="sub">One client UID per line. Add the client name if support needs it.</p>
+          <label class="f" for="k-uids">Client UID(s)<textarea id="k-uids" placeholder="IN28028494"></textarea></label>
+          <label class="f" for="k-name">Client name (optional)<input id="k-name" type="text" style="font-family:var(--body)"></label>
+          <label class="f" for="k-note">Note (optional)<input id="k-note" type="text" placeholder="e.g. documents uploaded today" style="font-family:var(--body)"></label>
+          <div class="warns" id="k-warn"></div>
+        </div>
+      </div>
+
+      <div data-form="link" hidden>
+        <div style="display:grid;gap:16px">
+          <h2>Link client to IB</h2>
+          <p class="sub">The IB the client should sit under, then one client UID per line.</p>
+          <label class="f" for="l-ib">IB UID<input id="l-ib" type="text" placeholder="IN28028494"></label>
+          <label class="f" for="l-uids">Client UID(s)<textarea id="l-uids" placeholder="IN31595662"></textarea></label>
+          <div class="warns" id="l-warn"></div>
+        </div>
+      </div>
+
+      <div data-form="group" hidden>
+        <div style="display:grid;gap:16px">
+          <h2>Change account group</h2>
+          <p class="sub">One client UID per line and the new group.</p>
+          <label class="f" for="g-uids">Client UID(s)<textarea id="g-uids" placeholder="IN28290268"></textarea></label>
+          <label class="f" for="g-group">New account group
+            <select id="g-group"><option>STD</option><option>STDPV</option><option>STDPX</option><option>STDPXV</option><option selected>STDPXX</option></select>
+          </label>
+          <div class="warns" id="g-warn"></div>
+        </div>
+      </div>
+
+      <div data-form="client" hidden>
+        <div style="display:grid;gap:16px">
+          <h2>Client messages</h2>
+          <p class="sub">Pick a message, add the client's name, then copy and send from your company WhatsApp or email.</p>
+          <div class="seg" id="tpls" role="group" aria-label="Message">
+            <button type="button" data-tpl="intro" aria-pressed="true"><b>1</b> Introduction after the call</button>
+            <button type="button" data-tpl="open" aria-pressed="false"><b>2</b> How to open an account</button>
+            <button type="button" data-tpl="kyc" aria-pressed="false"><b>3</b> Documents needed (KYC)</button>
+            <button type="button" data-tpl="welcome" aria-pressed="false"><b>4</b> Account approved, welcome</button>
+            <button type="button" data-tpl="follow" aria-pressed="false"><b>5</b> Follow-up, no reply</button>
+            <button type="button" data-tpl="ib" aria-pressed="false"><b>6</b> IB introduction: how partners earn</button>
+            <button type="button" data-tpl="withdraw" aria-pressed="false"><b>7</b> Withdrawal question</button>
+          </div>
+          <div class="f">Language
+            <div class="seg inline" id="langs" role="group" aria-label="Language">
+              <button type="button" data-lang="en" aria-pressed="true">English</button>
+              <button type="button" data-lang="ar" aria-pressed="false">العربية</button>
+              <button type="button" data-lang="hi" aria-pressed="false">हिन्दी</button>
+              <button type="button" data-lang="zh" aria-pressed="false">中文</button>
+            </div>
+          </div>
+          <label class="f" for="cl-name">Client name<input id="cl-name" type="text" placeholder="e.g. Ahmed" style="font-family:var(--body)"></label>
+          <label class="f" for="cl-link">Your registration / referral link<input id="cl-link" type="url" placeholder="https://www.ecmarkets.com"></label>
+          <div class="docs" id="cl-docs" hidden>
+            <span class="f">Documents the client still needs</span>
+            <label for="d1"><input id="d1" type="checkbox" checked data-en="Emirates ID or passport (front and back)" data-ar="الهوية الإماراتية أو جواز السفر (الوجهان)" data-hi="एमिरेट्स ID या पासपोर्ट (आगे और पीछे दोनों तरफ़)" data-zh="阿联酋身份证或护照（正反面）"> Emirates ID or passport</label>
+            <label for="d2"><input id="d2" type="checkbox" checked data-en="Proof of address (utility bill or bank statement)" data-ar="إثبات العنوان (فاتورة خدمات أو كشف حساب بنكي)" data-hi="पते का प्रमाण (यूटिलिटी बिल या बैंक स्टेटमेंट)" data-zh="地址证明（水电账单或银行对账单）"> Proof of address</label>
+            <label for="d3"><input id="d3" type="checkbox" data-en="A selfie holding your ID" data-ar="صورة سيلفي وأنت تحمل الهوية" data-hi="अपना ID पकड़े हुए एक सेल्फ़ी" data-zh="手持身份证件的自拍照"> Selfie with ID</label>
+          </div>
+          <p class="hint">Send only from company channels. Every message ends with the risk warning. Keep it in.</p>
+        </div>
+      </div>
+
+      <div data-form="comm" hidden>
+        <div style="display:grid;gap:18px">
+          <h2>My commission · Tier Policy 2026</h2>
+          <p class="sub">Enter your net deposit (USD) for the last three months. Your rate comes from the 3-month average, and is paid on that average.</p>
+          <div class="cgrid">
+            <div style="display:grid;gap:14px;align-content:start">
+              <div class="row3">
+                <label class="f" for="c1">Month 1 ($)<input id="c1" type="number" min="0" step="1000" inputmode="numeric" value="60000"></label>
+                <label class="f" for="c2">Month 2 ($)<input id="c2" type="number" min="0" step="1000" inputmode="numeric" value="80000"></label>
+                <label class="f" for="c3">Month 3 ($)<input id="c3" type="number" min="0" step="1000" inputmode="numeric" value="20000"></label>
+              </div>
+              <div class="cout" aria-live="polite">
+                <div><div class="cbig" id="c-avg">$0</div><span class="clbl">3-month average</span></div>
+                <div><div class="cbig" id="c-rate">0%</div><span class="clbl">Your rate</span></div>
+                <div class="pay"><div class="cbig" id="c-pay">$0</div><span class="clbl">Commission</span></div>
+              </div>
+              <p class="hint" id="c-next" style="font-size:14px;color:var(--fg)"></p>
+              <p class="hint" id="c-keep"></p>
+              <p class="hint">Example from the policy: Oct $60,000, Nov $80,000, Dec $20,000 gives a $53,333 average, 3.5% and about $1,866. Management may adjust the rate for special performance.</p>
+              <div class="btns"><button class="btn" id="c-clear" type="button">Clear</button></div>
+            </div>
+            <div class="ctiers" id="c-tiers">
+              <div class="ct"><span>Less than $20,000</span><b>2.5%</b></div>
+              <div class="ct"><span>$20,000 – $39,999</span><b>3.0%</b></div>
+              <div class="ct"><span>$40,000 – $59,999</span><b>3.5%</b></div>
+              <div class="ct"><span>$60,000 – $79,999</span><b>4.0%</b></div>
+              <div class="ct"><span>$80,000 – $99,999</span><b>4.5%</b></div>
+              <div class="ct"><span>$100,000 and above</span><b>5.0%</b></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PREVIEW -->
+    <div class="panel preview">
+      <h2>Teams message</h2>
+      <div class="msg" id="msg" tabindex="0" aria-live="polite"></div>
+      <div class="btns">
+        <button class="btn primary" id="copy" type="button">Copy message</button>
+        <button class="btn" id="clear" type="button">Clear form</button>
+      </div>
+      <div class="copied" id="copied"></div>
+      <div id="recentwrap" hidden>
+        <p class="hint" style="margin-bottom:6px">Recently copied (this browser only)</p>
+        <div class="recent" id="recent"></div>
+      </div>
+    </div>
+  </div>
+
+    </div></div>
+  </div>
+
+</main>
+
+<nav class="bottom" aria-label="Spaces">
+  <a href="#home" data-space="home"><svg class="i"><use href="#i-home"/></svg>Home</a>
+  <a href="#client" data-space="client"><svg class="i"><use href="#i-client"/></svg>Clients</a>
+  <a href="#ib" data-space="ib"><svg class="i"><use href="#i-ib"/></svg>IBs</a>
+  <a href="#bdm" data-space="bdm"><svg class="i"><use href="#i-bdm"/></svg>BDM</a>
+</nav>
+
+<div class="sheet" id="sheet" hidden role="dialog" aria-modal="true" aria-labelledby="sheet-t">
+  <div class="box">
+    <div class="sheet-top"><span class="mark">EC</span><div><h3 id="sheet-t">Install EC Team Hub</h3><p id="sheet-sub"></p></div></div>
+    <ol class="gsteps" id="sheet-steps"></ol>
+    <div class="btns" id="sheet-actions"></div>
+    <button class="btn" type="button" id="sheet-close" style="justify-content:center">Close</button>
+  </div>
+  <div class="iarrow" id="iarrow" hidden aria-hidden="true">↓</div>
+</div>
+
+<div class="ibar" id="ibar" hidden role="region" aria-label="Install app">
+  <span class="mark">EC</span>
+  <div class="ibar-t"><b>Install EC Team Hub</b><span id="ibar-sub">One tap. Opens like an app, works offline.</span></div>
+  <button class="btn primary" type="button" data-install>Install</button>
+  <button class="x" type="button" id="ibar-x" aria-label="Not now">×</button>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id)};
+  var store={get:function(k){try{return localStorage.getItem(k)}catch(e){return null}},set:function(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+  function money(n,d){return (n<0?'-$':'$')+Math.abs(n).toLocaleString('en-US',{minimumFractionDigits:d||0,maximumFractionDigits:d||0})}
+  var toastT;
+  function toast(t){var el=$('toast');el.textContent=t;el.classList.add('on');clearTimeout(toastT);toastT=setTimeout(function(){el.classList.remove('on')},1800)}
+  function copyText(t){
+    function fb(){var ta=document.createElement('textarea');ta.value=t;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();var ok=false;try{ok=document.execCommand('copy')}catch(e){}document.body.removeChild(ta);toast(ok?'Copied':'Select the text and copy it')}
+    try{navigator.clipboard.writeText(t).then(function(){toast('Copied')},fb)}catch(e){fb()}
+  }
+  window.hubCopy=copyText;
+  document.addEventListener('click',function(e){var b=e.target.closest('[data-copy]');if(b)copyText(b.dataset.copy)});
+
+  // ---------- router ----------
+  var SP={client:{t:'Clients',e:'For clients'},ib:{t:'IBs & Partners',e:'For IBs & partners'},bdm:{t:'BDM Team',e:'Team only'}};
+  function route(){
+    var h=location.hash.slice(1)||'home';
+    if(!$('v-'+h)){h='home'}
+    document.querySelectorAll('.view').forEach(function(v){v.hidden=v.id!=='v-'+h});
+    var space=h.split('-')[0],tools=/-tools$/.test(h);
+    document.querySelectorAll('[data-space]').forEach(function(a){a.setAttribute('aria-current',a.dataset.space===space?'page':'false')});
+    var sb=$('spacebar');sb.hidden=space==='home';
+    if(SP[space]){
+      $('sb-title').textContent=SP[space].t;$('sb-eyebrow').textContent=SP[space].e;
+      $('sb-pres').href='#'+space;$('sb-tools').href='#'+space+'-tools';
+      $('sb-pres').setAttribute('aria-current',tools?'false':'page');$('sb-tools').setAttribute('aria-current',tools?'page':'false');
+    }
+    window.scrollTo(0,0);
+  }
+  window.addEventListener('hashchange',route);
+  document.addEventListener('click',function(e){
+    var j=e.target.closest('[data-jump]');if(j){var t=$(j.dataset.jump);if(t)t.scrollIntoView({behavior:'smooth'})}
+    var tl=e.target.closest('[data-tool]');if(tl){setTimeout(function(){if(window.hubSetTab)window.hubSetTab(tl.dataset.tool)},0)}
+  });
+
+  // ---------- install ----------
+  var APP='EC Team Hub',deferred=null,ua=navigator.userAgent;
+  var isIOS=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+  var isIPad=/iPad/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+  var isAnd=/Android/.test(ua);
+  var inApp=/FBAN|FBAV|Instagram|Line\/|WhatsApp|Snapchat|TikTok|LinkedInApp|Telegram|; wv\)/i.test(ua);
+  var isFirefox=/Firefox|FxiOS/.test(ua);
+  var hosted=/^https?:$/.test(location.protocol);
+  var standalone=(window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone===true;
+  function hideInstall(){document.querySelectorAll('[data-install]').forEach(function(b){b.hidden=true});['installcard','ibar'].forEach(function(id){if($(id))$(id).hidden=true})}
+  if(standalone)hideInstall();
+  window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();deferred=e;$('ibar-sub').textContent='One tap to install. Works offline.'});
+  window.addEventListener('appinstalled',function(){deferred=null;hideInstall();$('sheet').hidden=true;toast(APP+' installed')});
+
+  function linkBtn(){return '<button class="btn primary" type="button" data-copy="'+location.href.split('#')[0]+'">Copy link</button>'}
+  function guide(kind){
+    var G={
+      ios:['Add to your Home Screen','Three taps in Safari:',['Tap the <b>Share</b> button <span class="kbd">⬆</span> '+(isIPad?'at the top right.':'at the bottom of the screen.'),'Scroll down and tap <b>Add to Home Screen</b> <span class="kbd">⊞</span>','Tap <b>Add</b>. '+APP+' appears on your Home Screen.'],''],
+      inapp:['Open in your browser first','You opened this link inside another app (like WhatsApp). Apps can\'t install from there.',[isIOS?'Tap <b>⋯</b> or the compass icon and choose <b>Open in Safari</b>.':'Tap <b>⋮</b> and choose <b>Open in Chrome</b>.','Then tap <b>Install</b> again.'],linkBtn()],
+      file:['Open the web link to install','This copy was opened as a file from a computer. Phones and laptops install the app from its web link.',['Ask your manager for the '+APP+' link, or scan the QR code on the Home page.','Open it in Chrome (Android, Windows, Mac) or Safari (iPhone).','Tap <b>Install</b>.'],''],
+      android:['Install from Chrome','',['Tap the <b>⋮</b> menu at the top right.','Tap <b>Install app</b> (or <b>Add to Home screen</b>).','Tap <b>Install</b>.'],''],
+      desktop:['Install on this computer','',['Click the install icon <span class="kbd">⊕</span> at the right of the address bar.','Or open the browser menu <b>⋮</b> and choose <b>Install '+APP+'</b>.','The app opens in its own window and appears in your Start menu or Dock.'],''],
+      other:['Use Chrome, Edge or Safari','This browser can\'t install apps.',['Open this link in Chrome or Edge (Android, Windows, Mac) or Safari (iPhone, iPad).','Tap <b>Install</b>.'],linkBtn()]
+    }[kind];
+    $('sheet-t').textContent=G[0];$('sheet-sub').textContent=G[1];$('sheet-sub').hidden=!G[1];
+    $('sheet-steps').innerHTML=G[2].map(function(s){return '<li><span>'+s+'</span></li>'}).join('');
+    $('sheet-actions').innerHTML=G[3];
+    var ar=$('iarrow');ar.hidden=kind!=='ios';ar.className='iarrow'+(isIPad?' top':'');
+    $('sheet').classList.toggle('ios',kind==='ios'&&!isIPad);
+    $('sheet').hidden=false;$('sheet-close').focus();
+  }
+  function install(){
+    if(deferred){deferred.prompt();deferred.userChoice.then(function(c){if(c&&c.outcome==='accepted')hideInstall();deferred=null});return}
+    if(!hosted)return guide('file');
+    if(inApp)return guide('inapp');
+    if(isIOS)return guide('ios');
+    if(isFirefox)return guide('other');
+    if(isAnd)return guide('android');
+    guide('desktop');
+  }
+  document.addEventListener('click',function(e){if(e.target.closest('[data-install]'))install()});
+  $('sheet-close').onclick=function(){$('sheet').hidden=true};
+  $('sheet').addEventListener('click',function(e){if(e.target===$('sheet'))$('sheet').hidden=true});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')$('sheet').hidden=true});
+
+  // install banner: appears once on a hosted link, comes back after 3 days if dismissed
+  var snooze=parseInt(store.get('hub-ibar')||'0',10);
+  if(hosted&&!standalone&&Date.now()-snooze>3*864e5){setTimeout(function(){if(!standalone)$('ibar').hidden=false},1200)}
+  $('ibar-x').onclick=function(){$('ibar').hidden=true;store.set('hub-ibar',String(Date.now()))};
+
+  // share: QR code + link on the Home page
+  if(hosted&&!/claude|claudeusercontent/.test(location.hostname)){
+    var url=location.href.split('#')[0];
+    $('sharecard').hidden=false;$('share-url').textContent=url;$('share-copy').dataset.copy=url;
+    if(navigator.share){$('share-native').hidden=false;$('share-native').onclick=function(){navigator.share({title:APP,text:'Install '+APP,url:url}).catch(function(){})}}
+    function qr(){try{new QRCode($('qr'),{text:url,width:148,height:148,colorDark:'#121012',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M})}catch(e){$('qr').hidden=true}}
+    if(window.QRCode)qr();else window.addEventListener('load',function(){if(window.QRCode)qr();else $('qr').hidden=true});
+  }
+  if('serviceWorker' in navigator && hosted && !/claude|claudeusercontent/.test(location.hostname)){
+    window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){})});
+  }
+
+  // ---------- client: trading calculator ----------
+  var SYM={EURUSD:{p:1.085,c:1e5,pip:1e-4,usdBase:false},GBPUSD:{p:1.27,c:1e5,pip:1e-4,usdBase:false},AUDUSD:{p:0.66,c:1e5,pip:1e-4,usdBase:false},
+    USDJPY:{p:150,c:1e5,pip:0.01,usdBase:true},USDCHF:{p:0.88,c:1e5,pip:1e-4,usdBase:true},USDCAD:{p:1.36,c:1e5,pip:1e-4,usdBase:true},XAUUSD:{p:2400,c:100,pip:1,usdBase:false,gold:true}};
+  function setSym(){
+    var s=SYM[$('tc-sym').value],dp=s.pip<0.001?4:s.pip<0.1?2:2;
+    $('tc-open').value=s.p.toFixed(dp);
+    $('tc-close').value=(s.p+(s.gold?10:s.pip*50)).toFixed(dp);
+    $('tc-piplbl').textContent=s.gold?'Value of a $1 move':'Value of 1 pip';
+    calcTrade();
+  }
+  function num(id){var x=parseFloat($(id).value);return isFinite(x)?x:0}
+  function calcTrade(){
+    var s=SYM[$('tc-sym').value],lots=num('tc-lots'),lev=parseFloat($('tc-lev').value),o=num('tc-open'),c=num('tc-close'),dir=parseFloat($('tc-dir').value);
+    var units=lots*s.c,pipv,margin,pl;
+    if(s.usdBase){pipv=c>0?units*s.pip/c:0;margin=units/lev;pl=c>0?(c-o)*dir*units/c:0}
+    else{pipv=units*s.pip;margin=units*o/lev;pl=(c-o)*dir*units}
+    $('tc-pip').textContent=money(pipv,2);$('tc-margin').textContent=money(margin,2);
+    var el=$('tc-pl');el.textContent=(pl>0?'+':'')+money(pl,2);el.className='cbig '+(pl>0?'pos':pl<0?'neg':'');
+  }
+  $('tc-sym').addEventListener('change',setSym);
+  ['tc-dir','tc-lots','tc-lev','tc-open','tc-close'].forEach(function(id){$(id).addEventListener('input',calcTrade)});
+  setSym();
+
+  // ---------- client: checklist ----------
+  var cks=[].slice.call(document.querySelectorAll('#ck input'));
+  var saved=(store.get('hub-ck')||'').split('');
+  cks.forEach(function(c,i){c.checked=saved[i]==='1';c.addEventListener('change',ckDraw)});
+  function ckDraw(){var n=cks.filter(function(c){return c.checked}).length;$('ck-bar').style.width=(n/cks.length*100)+'%';$('ck-txt').textContent=n===cks.length?'All done. Welcome to EC Markets!':n+' of '+cks.length+' done';store.set('hub-ck',cks.map(function(c){return c.checked?'1':'0'}).join(''))}
+  ckDraw();
+
+  // ---------- IB: estimator ----------
+  function calcIB(){
+    var d=num('ie-clients')*num('ie-lots')*num('ie-rate'),n=num('ie-sublots')*num('ie-subrate'),t=d+n;
+    $('ie-direct').textContent=money(d);$('ie-net').textContent=money(n);$('ie-total').textContent=money(t);
+    $('ie-year').textContent='Over 12 months at the same activity: '+money(t*12)+'.';
+  }
+  ['ie-clients','ie-lots','ie-rate','ie-sublots','ie-subrate'].forEach(function(id){$(id).addEventListener('input',calcIB)});
+  calcIB();
+
+  // ---------- IB: share kit ----------
+  var RISK='\n\nRisk warning: CFD trading is high risk and losses may exceed your deposit.';
+  var POSTS=[
+    ['Regulated broker','Choosing a regulated broker matters. EC Markets is regulated by 7 authorities, including the FCA (UK) and ASIC (Australia), with trading on MT4, MT5 and its own app.\n\nOpen your account here: {L}'],
+    ['All markets, one account','Forex, gold, oil, indices, crypto and shares, all from one account with 24/5 support.\n\nRegister with EC Markets: {L}'],
+    ['Copy trading','Want to see how other traders trade? With EC Markets copy trading you can browse strategies and choose how much to allocate. Past performance is not a guide to future results.\n\nStart here: {L}']
+  ];
+  $('sk-link').value=store.get('hub-sk')||'';
+  function drawPosts(){
+    var L=$('sk-link').value.trim()||'[your link]';store.set('hub-sk',$('sk-link').value);
+    var box=$('sk-posts');box.innerHTML='';
+    POSTS.forEach(function(p){
+      var t=p[1].replace('{L}',L)+RISK,d=document.createElement('div');d.className='post';
+      d.innerHTML='<div class="ph"><b></b><button class="mini" type="button">Copy</button></div><pre></pre>';
+      d.querySelector('b').textContent=p[0];d.querySelector('pre').textContent=t;
+      d.querySelector('button').onclick=function(){copyText(t)};
+      box.appendChild(d);
+    });
+  }
+  $('sk-link').addEventListener('input',drawPosts);drawPosts();
+
+  route();
+})();
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
+
+<script>
+
+(function(){
+  var $=function(id){return document.getElementById(id)};
+  var store={get:function(k){try{return localStorage.getItem(k)}catch(e){return null}},set:function(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+
+  // Max MIB rebate per group = spread mark-up x 10. Order FX/Index/Metal/Energy/Crypto
+  var MAX={STD:[10,10,21,10,10],STDPV:[15,15,26,15,10],STDPX:[20,20,31,20,10],STDPXV:[25,25,36,25,10],STDPXX:[30,30,41,30,10]};
+  var ASSETS=['FX','Index','Metal','Energy','Crypto'];
+  var UIDRE=/^[A-Z]{2}\d{6,}$/;
+  var tab='rebate';
+
+  function defaults(group,n){
+    var mib=MAX[group].slice(), out=[mib];
+    var s1=mib.map(function(v){return Math.floor(v/2)});
+    for(var i=1;i<=n;i++){
+      var parent=out[i-1];
+      var d = i<=2 ? s1.slice() : [5,5,5,5,2];
+      out.push(d.map(function(v,j){return Math.min(v,parent[j])}));
+    }
+    return out;
+  }
+
+  // ----- rebate levels -----
+  var levels=$('levels');
+  function levelRow(i,uid,vals){
+    var el=document.createElement('div');el.className='lvl';
+    var name=i===0?'MIB':'SIB'+i;
+    el.innerHTML='<div class="lvl-head"><span class="tag'+(i?' s':'')+'">'+name+'</span><input class="uid" aria-label="'+name+' UID" placeholder="'+name+' UID e.g. IN28028494" value="'+(uid||'')+'">'+(i?'<button class="x" type="button" aria-label="Remove '+name+'">×</button>':'')+'</div>'+
+      '<div class="rb">'+ASSETS.map(function(a,j){return '<label>'+a+'<input type="number" min="0" step="1" inputmode="decimal" value="'+vals[j]+'" aria-label="'+name+' '+a+' rebate"></label>'}).join('')+'</div>';
+    return el;
+  }
+  function collect(){
+    return [].slice.call(levels.children).map(function(el){
+      return {uid:el.querySelector('.uid').value,vals:[].slice.call(el.querySelectorAll('.rb input')).map(function(x){return x.value})};
+    });
+  }
+  function build(keepUids,keepVals){
+    var prev=collect(), n=Math.max(prev.length-1, keepUids===undefined?3:0);
+    if(keepUids===undefined) n=3;
+    var d=defaults($('r-group').value,n);
+    levels.innerHTML='';
+    for(var i=0;i<=n;i++){
+      var uid=keepUids&&prev[i]?prev[i].uid:'';
+      var vals=keepVals&&prev[i]?prev[i].vals:d[i];
+      levels.appendChild(levelRow(i,uid,vals));
+    }
+    render();
+  }
+  levels.addEventListener('input',function(e){if(e.target.classList.contains('uid')){var p=e.target.selectionStart;e.target.value=e.target.value.toUpperCase().replace(/\s/g,'');try{e.target.setSelectionRange(p,p)}catch(_){}}render()});
+  levels.addEventListener('click',function(e){
+    if(!e.target.classList.contains('x'))return;
+    var keep=collect();var idx=[].indexOf.call(levels.children,e.target.closest('.lvl'));keep.splice(idx,1);
+    levels.innerHTML='';keep.forEach(function(l,i){levels.appendChild(levelRow(i,l.uid,l.vals))});render();
+  });
+  $('addsib').onclick=function(){
+    var keep=collect(),n=keep.length;var d=defaults($('r-group').value,n);
+    levels.appendChild(levelRow(n,'',d[n]));render();
+    levels.lastChild.querySelector('.uid').focus();
+  };
+  $('resetrb').onclick=function(){build(true,false)};
+  $('r-group').onchange=function(){build(true,false)};
+
+  // reference table
+  $('reftable').querySelector('tbody').innerHTML=Object.keys(MAX).reverse().map(function(g){return '<tr data-g="'+g+'"><td>'+g+'</td>'+MAX[g].map(function(v){return '<td>'+v+'</td>'}).join('')+'</tr>'}).join('');
+
+  // ----- helpers -----
+  function lines(id){return $(id).value.split(/[\n,;]+/).map(function(s){return s.trim().toUpperCase()}).filter(Boolean)}
+  function sign(){var n=$('myname').value.trim();return '\n\nThank you,'+(n?'\n'+n:'')}
+  function ph(t){return '⁣'+t+'⁣'}
+  function warnBox(id,arr){$(id).innerHTML=arr.map(function(w){return '<div>'+w+'</div>'}).join('')}
+  function badUids(arr){return arr.filter(function(u){return !UIDRE.test(u)})}
+
+  var text='';
+  var TIERS=[[0,2.5],[20000,3],[40000,3.5],[60000,4],[80000,4.5],[100000,5]];
+  function money(n){return '$'+n.toLocaleString('en-US',{maximumFractionDigits:0})}
+  function calcComm(){
+    var v=['c1','c2','c3'].map(function(id){var x=parseFloat($(id).value);return isFinite(x)&&x>0?x:0});
+    var avg=(v[0]+v[1]+v[2])/3,k=0;
+    TIERS.forEach(function(t,j){if(avg>=t[0])k=j});
+    var rate=TIERS[k][1];
+    $('c-avg').textContent=money(avg);
+    $('c-rate').textContent=rate.toFixed(1)+'%';
+    $('c-pay').textContent=money(avg*rate/100);
+    document.querySelectorAll('#c-tiers .ct').forEach(function(el,j){el.classList.toggle('on',j===k)});
+    if(k<TIERS.length-1){
+      var gap=TIERS[k+1][0]-avg;
+      $('c-next').textContent='Your average needs '+money(gap)+' more to reach '+TIERS[k+1][1].toFixed(1)+'%. That is about '+money(gap*3)+' extra net deposit next month.';
+    } else $('c-next').textContent='You are on the top tier: 5.0%.';
+    var drop=v[0];
+    $('c-keep').textContent=v[0]>0?'Next month, Month 1 ('+money(drop)+') drops out of the average. Bring at least '+money(Math.max(0,TIERS[k][0]*3-v[1]-v[2]))+' to keep '+rate.toFixed(1)+'%.':'';
+  }
+  ['c1','c2','c3'].forEach(function(id){$(id).addEventListener('input',calcComm)});
+  $('c-clear').onclick=function(){['c1','c2','c3'].forEach(function(id){$(id).value=''});calcComm()};
+  calcComm();
+
+  // ----- MIB link setup -----
+  var MG=['STD','STDPV','STDPX','STDPXV','STDPXX'];
+  function gname(g,cent){return (cent?'Cent ':'')+(g==='STD'?'STD':'STD-'+g.slice(3))}
+  function mibRows(box,cent){
+    box.innerHTML=MG.map(function(g){
+      var on=g!=='STDPXV';
+      return '<div class="mr'+(on?'':' off')+'" data-g="'+g+'"><label class="g"><input type="checkbox"'+(on?' checked':'')+' aria-label="Include '+gname(g,cent)+'">'+gname(g,cent)+'</label>'+
+        MAX[g].map(function(v,j){return cent&&j===4?'<span class="na">—</span>':'<input type="number" min="0" step="1" inputmode="decimal" value="'+v+'" aria-label="'+gname(g,cent)+' '+ASSETS[j]+'">'}).join('')+'</div>';
+    }).join('');
+  }
+  function mibRead(id){
+    return [].slice.call($(id).querySelectorAll('.mr')).map(function(r){
+      return {g:r.dataset.g,on:r.querySelector('.g input').checked,el:r,vals:[].slice.call(r.querySelectorAll('input[type=number]')).map(function(x){return x.value})};
+    });
+  }
+  function mibSync(){
+    var mirror=$('m-mirror').checked,std=mibRead('m-std');
+    $('m-centbox').hidden=!$('m-cent').checked;
+    $('m-mirror').parentNode.style.display=$('m-cent').checked?'':'none';
+    mibRead('m-centrows').forEach(function(r,i){
+      var nums=r.el.querySelectorAll('input[type=number]');
+      if(mirror){r.el.querySelector('.g input').checked=std[i].on;[].forEach.call(nums,function(x,j){x.value=std[i].vals[j]})}
+      [].forEach.call(nums,function(x){x.disabled=mirror});
+      r.el.querySelector('.g input').disabled=mirror;
+    });
+    ['m-std','m-centrows'].forEach(function(id){mibRead(id).forEach(function(r){r.el.classList.toggle('off',!r.on)})});
+  }
+  function mibReset(){mibRows($('m-std'),false);mibRows($('m-centrows'),true);mibSync()}
+  mibReset();
+  ['m-std','m-centrows'].forEach(function(id){$(id).addEventListener('input',function(){mibSync();render()});$(id).addEventListener('change',function(){mibSync();render()})});
+  ['m-cent','m-mirror'].forEach(function(id){$(id).addEventListener('change',function(){mibSync();render()})});
+  $('m-id').addEventListener('input',function(e){e.target.value=e.target.value.toUpperCase().replace(/\s/g,'');render()});
+  $('m-reset').onclick=function(){mibReset();render()};
+  function mibMsg(w){
+    var id=$('m-id').value.trim();
+    if(id&&!UIDRE.test(id))w.push('Client ID "'+id+'" does not look like an ID (e.g. NP31725388).');
+    function block(rows,cent){
+      return rows.filter(function(r){return r.on}).map(function(r){
+        var vals=cent?r.vals.slice(0,4):r.vals;
+        vals.forEach(function(v,j){
+          var num=parseFloat(v);
+          if(isFinite(num)&&num>MAX[r.g][j]){r.el.querySelectorAll('input[type=number]')[j].classList.add('over');w.push(gname(r.g,cent)+' '+ASSETS[j]+' ('+num+') is above the maximum ('+MAX[r.g][j]+').')}
+        });
+        return gname(r.g,cent)+': '+vals.map(function(v){return v===''?'0':v}).join('/');
+      }).join('\n');
+    }
+    document.querySelectorAll('#forms .mr input.over').forEach(function(x){x.classList.remove('over')});
+    var std=block(mibRead('m-std'),false),cent=$('m-cent').checked?block(mibRead('m-centrows'),true):'';
+    if(!std&&!cent)w.push('Tick at least one account group.');
+    var t='Hi Support Team,\n\nKindly create the MIB link for the client below.\n\nIB Setup Request\n\nClient ID - '+(id||ph('[Client ID]'));
+    if(std)t+='\n\nStandard accounts\nFX / Index / Metal / Energy / Crypto\n\n'+std;
+    if(cent)t+='\n\nCent accounts\nFX / Index / Metal / Energy\n\n'+cent;
+    return t+sign();
+  }
+
+  // ----- client messages -----
+  var tpl='intro',lang='en';
+  function clientMsg(){
+    var n=$('cl-name').value.trim(),me=$('myname').value.trim(),link=$('cl-link').value.trim()||'https://www.ecmarkets.com';
+    var PH={en:'[Select documents]',ar:'[اختر المستندات]',hi:'[दस्तावेज़ चुनें]',zh:'[请选择文件]'};
+    var docs=[].slice.call(document.querySelectorAll('#cl-docs input:checked')).map(function(x){return '• '+x.dataset[lang]}).join('\n')||ph(PH[lang]);
+    var HI={en:'Hello'+(n?' '+n:'')+',',ar:'مرحباً'+(n?' '+n:'')+'،',hi:'नमस्ते'+(n?' '+n:'')+',',zh:n?n+'，您好！':'您好！'};
+    var SIG={
+      en:'\n\nBest regards,\n'+(me||'EC Markets Team')+'\nBusiness Development | EC Markets',
+      ar:'\n\nمع أطيب التحيات،\n'+(me||'فريق EC Markets')+'\nتطوير الأعمال | EC Markets',
+      hi:'\n\nशुभकामनाओं सहित,\n'+(me||'EC Markets टीम')+'\nबिज़नेस डेवलपमेंट | EC Markets',
+      zh:'\n\n此致\n'+(me||'EC Markets 团队')+'\n业务发展部 | EC Markets'
+    };
+    var RISK={
+      en:'\n\nRisk warning: CFD trading is high risk and losses may exceed your deposit. This message is not investment advice.',
+      ar:'\n\nتحذير المخاطر: تداول عقود الفروقات عالي المخاطر وقد تتجاوز الخسائر قيمة الإيداع. هذه الرسالة ليست نصيحة استثمارية.',
+      hi:'\n\nजोखिम चेतावनी: CFD ट्रेडिंग में उच्च जोखिम है और नुकसान आपकी जमा राशि से अधिक हो सकता है। यह संदेश निवेश सलाह नहीं है।',
+      zh:'\n\n风险提示：差价合约（CFD）交易风险较高，亏损可能超过您的入金。本信息不构成投资建议。'
+    };
+    var WHO={
+      en:me?'This is '+me+' from EC Markets.':'Greetings from EC Markets.',
+      ar:me?'معك '+me+' من EC Markets.':'تحية طيبة من EC Markets.',
+      hi:me?'मैं EC Markets से '+me+' हूँ।':'EC Markets की ओर से शुभकामनाएँ।',
+      zh:me?'我是 EC Markets 的 '+me+'。':'EC Markets 向您问好。'
+    };
+    var B={
+      en:{
+        intro:WHO.en+' Thank you for your time on our call today.\n\nAs discussed, here is a short overview:\n• Regulated by 7 authorities, including the UAE Capital Market Authority (formerly SCA), the FCA (UK) and ASIC (Australia)\n• Official Global Partner of Liverpool FC\n• Trade forex, gold, oil, indices, crypto and shares on MT4, MT5 and the EC Markets app\n• 24/5 support\n\nYou can learn more here: '+link+'\n\nFeel free to message me here with any questions.',
+        open:'Opening your EC Markets account only takes a few minutes:\n\n1. Register here: '+link+'\n2. Verify your email address\n3. Upload your ID and proof of address\n4. Once approved, choose your account type and download MT4, MT5 or the EC Markets app\n\nIf you get stuck at any step, message me and I will guide you.\n\nImportant: never share your password or verification codes with anyone, including me.',
+        kyc:'Your EC Markets registration is almost complete. To verify your account, please upload the following in your client portal:\n\n'+docs+'\n\nTips: send clear colour photos with all four corners visible. Proof of address should be dated within the last 3 months and show your full name and address.\n\nOnce uploaded, let me know and I will follow up on your approval.',
+        welcome:'Good news: your EC Markets account has been verified. Welcome aboard!\n\nNext steps:\n• Log in to your client portal: '+link+'\n• Download MetaTrader 4, MetaTrader 5 or the EC Markets app (App Store / Google Play)\n• Your MT login details have been sent to your registered email\n\nOur support team is available 24/5 at support@ecmarkets.com, and I am here for any questions about the platform.',
+        follow:'Just following up on our last conversation. Do you have any questions about EC Markets or about opening your account?\n\nI am happy to arrange a short call at a time that suits you.',
+        ib:WHO.en+' I would like to introduce our Partner (IB) Programme, winner of Best IB / Affiliate Programme at the UF Awards 2025.\n\nHow you earn as an EC Markets partner:\n• Commission on every trade your referred clients place, for life\n• Commissions paid within 2 hours\n• Unlimited multi-level structure: you also earn from the sub-IBs you bring in\n• Zero-minute rule: rebates count with no minimum trade duration\n• Tailored deals and rebate plans built around your network\n\nWhat you get:\n• Real-time reporting on your clients and earnings\n• Marketing support: tracking links, landing pages and ads\n• 24/5 dedicated partner support\n• A broker regulated by 7 authorities and Official Global Partner of Liverpool FC\n\nJoin a network of 20,000+ active affiliates. Register as a partner here: '+link+'\n\nI would be happy to arrange a short call to build a rebate plan that fits your network.\n\nYour earnings depend on your clients\' trading activity and are not guaranteed.',
+        withdraw:'Thank you for your message about your withdrawal.\n\nWithdrawals are requested by you directly from your client portal: '+link+'\n\nFor any question about the status or processing of a withdrawal, our support team handles this directly and is available 24/5:\n• Email: support@ecmarkets.com\n• Phone: +248 422 4099\n\nFor your security, never share your password or verification codes with anyone, including me.\n\nI am here if you need anything else.'
+      },
+      ar:{
+        intro:WHO.ar+' شكراً على وقتك في مكالمتنا اليوم.\n\nكما تحدثنا، إليك نبذة مختصرة:\n• شركة مرخّصة من 7 جهات رقابية، منها هيئة سوق رأس المال في الإمارات (هيئة الأوراق المالية والسلع سابقاً)، وFCA في بريطانيا، وASIC في أستراليا\n• الشريك العالمي الرسمي لنادي ليفربول\n• تداول العملات والذهب والنفط والمؤشرات والعملات الرقمية والأسهم عبر MT4 وMT5 وتطبيق EC Markets\n• دعم متواصل 24/5\n\nلمزيد من المعلومات: '+link+'\n\nلا تتردد في مراسلتي هنا لأي استفسار.',
+        open:'فتح حسابك لدى EC Markets يستغرق دقائق فقط:\n\n1. سجّل من هنا: '+link+'\n2. فعّل بريدك الإلكتروني\n3. ارفع صورة الهوية وإثبات العنوان\n4. بعد الموافقة، اختر نوع الحساب وحمّل MT4 أو MT5 أو تطبيق EC Markets\n\nإذا واجهت أي صعوبة، راسلني وسأساعدك خطوة بخطوة.\n\nمهم: لا تشارك كلمة المرور أو رموز التحقق مع أي شخص، بما في ذلك أنا.',
+        kyc:'تسجيلك لدى EC Markets على وشك الاكتمال. لتوثيق حسابك، يرجى رفع المستندات التالية في بوابة العميل:\n\n'+docs+'\n\nنصائح: أرسل صوراً ملوّنة وواضحة تظهر فيها الزوايا الأربع. ويجب أن يكون إثبات العنوان بتاريخ لا يتجاوز 3 أشهر ويظهر فيه اسمك الكامل وعنوانك.\n\nبعد الرفع، أخبرني وسأتابع الموافقة على حسابك.',
+        welcome:'خبر سار: تم توثيق حسابك لدى EC Markets. أهلاً وسهلاً بك!\n\nالخطوات التالية:\n• سجّل الدخول إلى بوابة العميل: '+link+'\n• حمّل MetaTrader 4 أو MetaTrader 5 أو تطبيق EC Markets من App Store أو Google Play\n• تم إرسال بيانات دخول MT إلى بريدك الإلكتروني المسجّل\n\nفريق الدعم متاح 24/5 على support@ecmarkets.com، وأنا في خدمتك لأي استفسار عن المنصة.',
+        follow:'أتابع معك بخصوص حديثنا الأخير. هل لديك أي استفسار عن EC Markets أو عن فتح حسابك؟\n\nيسعدني ترتيب مكالمة قصيرة في الوقت الذي يناسبك.',
+        ib:WHO.ar+' يسعدني أن أعرّفك على برنامج الشركاء (IB) لدينا، الحائز على جائزة أفضل برنامج IB / شراكة في UF Awards 2025.\n\nكيف تربح كشريك لدى EC Markets:\n• عمولة على كل صفقة ينفذها العملاء الذين تحيلهم، مدى الحياة\n• صرف العمولات خلال ساعتين\n• هيكل متعدد المستويات بلا حدود: تربح أيضاً من الوسطاء الفرعيين الذين تضمّهم\n• قاعدة الصفر دقيقة: تُحتسب العمولات دون حد أدنى لمدة الصفقة\n• عروض وخطط عمولات مصممة حسب شبكتك\n\nما تحصل عليه:\n• تقارير فورية عن عملائك وأرباحك\n• دعم تسويقي: روابط تتبع وصفحات هبوط وإعلانات\n• دعم مخصص للشركاء 24/5\n• وسيط مرخّص من 7 جهات رقابية والشريك العالمي الرسمي لنادي ليفربول\n\nانضم إلى شبكة تضم أكثر من 20,000 شريك نشط. سجّل كشريك من هنا: '+link+'\n\nيسعدني ترتيب مكالمة قصيرة لبناء خطة عمولات تناسب شبكتك.\n\nتعتمد أرباحك على نشاط تداول عملائك وهي غير مضمونة.',
+        withdraw:'شكراً على رسالتك بخصوص السحب.\n\nيتم طلب السحب من قبلك مباشرة عبر بوابة العميل: '+link+'\n\nلأي استفسار عن حالة السحب أو معالجته، يتولى فريق الدعم ذلك مباشرة وهو متاح 24/5:\n• البريد الإلكتروني: support@ecmarkets.com\n• الهاتف: +248 422 4099\n\nلحمايتك، لا تشارك كلمة المرور أو رموز التحقق مع أي شخص، بما في ذلك أنا.\n\nأنا في خدمتك لأي شيء آخر.'
+      },
+      hi:{
+        intro:WHO.hi+' आज कॉल पर समय देने के लिए धन्यवाद।\n\nजैसा कि हमने बात की, यहाँ एक संक्षिप्त जानकारी है:\n• 7 नियामक संस्थाओं द्वारा विनियमित, जिनमें UAE कैपिटल मार्केट अथॉरिटी (पूर्व में SCA), FCA (UK) और ASIC (ऑस्ट्रेलिया) शामिल हैं\n• लिवरपूल FC के आधिकारिक ग्लोबल पार्टनर\n• MT4, MT5 और EC Markets ऐप पर फ़ॉरेक्स, गोल्ड, ऑयल, इंडेक्स, क्रिप्टो और शेयर ट्रेड करें\n• 24/5 सपोर्ट\n\nअधिक जानकारी के लिए: '+link+'\n\nकोई भी सवाल हो तो मुझे यहाँ मैसेज करें।',
+        open:'EC Markets में अकाउंट खोलने में बस कुछ मिनट लगते हैं:\n\n1. यहाँ रजिस्टर करें: '+link+'\n2. अपना ईमेल वेरिफ़ाई करें\n3. अपना ID और पते का प्रमाण अपलोड करें\n4. अप्रूवल के बाद, अकाउंट टाइप चुनें और MT4, MT5 या EC Markets ऐप डाउनलोड करें\n\nकिसी भी स्टेप पर दिक्कत हो तो मुझे मैसेज करें, मैं हर स्टेप में मदद के लिए यहाँ हूँ।\n\nज़रूरी: अपना पासवर्ड या वेरिफ़िकेशन कोड किसी के साथ साझा न करें, मेरे साथ भी नहीं।',
+        kyc:'EC Markets में आपका रजिस्ट्रेशन लगभग पूरा हो गया है। अपना अकाउंट वेरिफ़ाई करने के लिए, कृपया क्लाइंट पोर्टल में ये दस्तावेज़ अपलोड करें:\n\n'+docs+'\n\nसुझाव: साफ़ रंगीन फ़ोटो भेजें जिनमें चारों कोने दिखें। पते का प्रमाण पिछले 3 महीनों के भीतर का होना चाहिए और उसमें आपका पूरा नाम और पता दिखना चाहिए।\n\nअपलोड करने के बाद मुझे बताएँ, ताकि मैं आपके अप्रूवल पर फ़ॉलो-अप कर सकूँ।',
+        welcome:'अच्छी ख़बर: EC Markets में आपका अकाउंट वेरिफ़ाई हो गया है। आपका स्वागत है!\n\nअगले स्टेप:\n• अपने क्लाइंट पोर्टल में लॉग इन करें: '+link+'\n• MetaTrader 4, MetaTrader 5 या EC Markets ऐप डाउनलोड करें (App Store / Google Play)\n• आपके MT लॉगिन विवरण आपके रजिस्टर्ड ईमेल पर भेज दिए गए हैं\n\nहमारी सपोर्ट टीम 24/5 support@ecmarkets.com पर उपलब्ध है, और प्लेटफ़ॉर्म से जुड़े किसी भी सवाल के लिए मैं भी यहाँ हूँ।',
+        follow:'हमारी पिछली बातचीत के बारे में एक छोटा सा फ़ॉलो-अप। क्या आपके मन में EC Markets या अकाउंट खोलने के बारे में कोई सवाल है?\n\nआपकी सुविधा के समय पर एक छोटी कॉल रखने में मुझे ख़ुशी होगी।',
+        ib:WHO.hi+' आपके लिए हमारे पार्टनर (IB) प्रोग्राम की जानकारी, जिसे UF Awards 2025 में बेस्ट IB / एफ़िलिएट प्रोग्राम चुना गया।\n\nEC Markets पार्टनर के रूप में आप कैसे कमाते हैं:\n• आपके द्वारा लाए गए क्लाइंट्स के हर ट्रेड पर आजीवन कमीशन\n• कमीशन का भुगतान 2 घंटे के भीतर\n• अनलिमिटेड मल्टी-लेवल स्ट्रक्चर: आपके द्वारा जोड़े गए सब-IB से भी कमाई\n• ज़ीरो-मिनट नियम: ट्रेड की न्यूनतम अवधि के बिना रिबेट\n• आपके नेटवर्क के अनुसार तैयार डील और रिबेट प्लान\n\nआपको क्या मिलता है:\n• आपके क्लाइंट्स और कमाई की रियल-टाइम रिपोर्टिंग\n• मार्केटिंग सपोर्ट: ट्रैकिंग लिंक, लैंडिंग पेज और विज्ञापन\n• 24/5 समर्पित पार्टनर सपोर्ट\n• 7 नियामकों द्वारा विनियमित ब्रोकर और लिवरपूल FC का आधिकारिक ग्लोबल पार्टनर\n\n20,000+ सक्रिय एफ़िलिएट्स के नेटवर्क से जुड़ें। पार्टनर के रूप में यहाँ रजिस्टर करें: '+link+'\n\nआपके नेटवर्क के अनुसार रिबेट प्लान बनाने के लिए एक छोटी कॉल रखने में मुझे ख़ुशी होगी।\n\nआपकी कमाई आपके क्लाइंट्स की ट्रेडिंग गतिविधि पर निर्भर करती है और इसकी कोई गारंटी नहीं है।',
+        withdraw:'निकासी (विदड्रॉल) के बारे में आपके संदेश के लिए धन्यवाद।\n\nनिकासी का अनुरोध आप स्वयं अपने क्लाइंट पोर्टल से करते हैं: '+link+'\n\nनिकासी की स्थिति या प्रोसेसिंग से जुड़े किसी भी सवाल के लिए हमारी सपोर्ट टीम सीधे मदद करती है और 24/5 उपलब्ध है:\n• ईमेल: support@ecmarkets.com\n• फ़ोन: +248 422 4099\n\nआपकी सुरक्षा के लिए, अपना पासवर्ड या वेरिफ़िकेशन कोड किसी के साथ साझा न करें, मेरे साथ भी नहीं।\n\nकिसी और चीज़ की ज़रूरत हो तो मैं यहाँ हूँ।'
+      },
+      zh:{
+        intro:WHO.zh+'感谢您今天抽空与我通话。\n\n如我们所谈，以下是简要介绍：\n• 受7家监管机构监管，包括阿联酋资本市场管理局（原SCA）、英国FCA和澳大利亚ASIC\n• 利物浦足球俱乐部官方全球合作伙伴\n• 通过MT4、MT5及EC Markets应用交易外汇、黄金、原油、指数、加密货币和股票\n• 24/5 客户支持\n\n了解更多：'+link+'\n\n如有任何问题，欢迎随时在此联系我。',
+        open:'开设 EC Markets 账户只需几分钟：\n\n1. 点击此处注册：'+link+'\n2. 验证您的邮箱\n3. 上传身份证件和地址证明\n4. 审核通过后，选择账户类型并下载 MT4、MT5 或 EC Markets 应用\n\n如在任何步骤遇到问题，请联系我，我会一步步协助您。\n\n重要提示：切勿向任何人透露您的密码或验证码，包括我。',
+        kyc:'您在 EC Markets 的注册即将完成。为验证您的账户，请在客户门户上传以下文件：\n\n'+docs+'\n\n提示：请上传清晰的彩色照片，四个角完整可见。地址证明须为近3个月内的文件，并显示您的全名和地址。\n\n上传后请告知我，我会跟进您的审核。',
+        welcome:'好消息：您的 EC Markets 账户已通过验证，欢迎加入！\n\n下一步：\n• 登录客户门户：'+link+'\n• 下载 MetaTrader 4、MetaTrader 5 或 EC Markets 应用（App Store / Google Play）\n• 您的 MT 登录信息已发送至您的注册邮箱\n\n我们的客服团队24/5在线：support@ecmarkets.com。如对平台有任何疑问，我也随时为您服务。',
+        follow:'跟进一下我们上次的沟通。您对 EC Markets 或开户还有什么疑问吗？\n\n我很乐意在您方便的时间安排一次简短通话。',
+        ib:WHO.zh+'在此向您介绍我们的合作伙伴（IB）计划，该计划荣获 UF Awards 2025 最佳IB/联盟计划奖。\n\n成为 EC Markets 合作伙伴，您的收益方式：\n• 您推荐的客户每笔交易均可为您带来终身佣金\n• 佣金2小时内发放\n• 无限多级结构：您发展的下级IB也能为您带来收益\n• 零分钟规则：返佣不设最短持仓时间\n• 根据您的网络定制合作方案和返佣计划\n\n您将获得：\n• 客户及收益实时报告\n• 营销支持：追踪链接、落地页和广告\n• 24/5 专属合作伙伴支持\n• 受7家机构监管、利物浦足球俱乐部官方全球合作伙伴的经纪商\n\n加入超过20,000名活跃合作伙伴的网络。点击此处注册成为合作伙伴：'+link+'\n\n我很乐意安排一次简短通话，为您制定适合您网络的返佣计划。\n\n您的收益取决于客户的交易活动，不作任何保证。',
+        withdraw:'感谢您关于出金的来信。\n\n出金需由您本人在客户门户中提交申请：'+link+'\n\n如对出金状态或处理有任何疑问，我们的客服团队将直接为您处理，24/5在线：\n• 邮箱：support@ecmarkets.com\n• 电话：+248 422 4099\n\n为保障您的安全，切勿向任何人透露您的密码或验证码，包括我。\n\n如有其他需要，我随时为您服务。'
+      }
+    };
+    return HI[lang]+'\n\n'+B[lang][tpl]+SIG[lang]+RISK[lang];
+  }
+  function press(groupId,attr,val){document.querySelectorAll('#'+groupId+' button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset[attr]===val)})}
+  document.querySelectorAll('#tpls button').forEach(function(b){b.onclick=function(){tpl=b.dataset.tpl;press('tpls','tpl',tpl);$('cl-docs').hidden=tpl!=='kyc';render()}});
+  document.querySelectorAll('#langs button').forEach(function(b){b.onclick=function(){lang=b.dataset.lang;press('langs','lang',lang);store.set('bdm-lang',lang);render()}});
+  var savedLang=store.get('bdm-lang');
+  if(['ar','hi','zh'].indexOf(savedLang)>-1){lang=savedLang;press('langs','lang',lang)}
+  $('cl-link').value=store.get('bdm-link')||'';
+  $('cl-link').addEventListener('input',function(){store.set('bdm-link',$('cl-link').value)});
+  ['cl-name','cl-link'].forEach(function(id){$(id).addEventListener('input',function(){render()})});
+  $('cl-docs').addEventListener('change',function(){render()});
+
+  function render(){
+    var w=[],t='';
+    if(tab==='comm'){calcComm();return}
+    if(tab==='rebate'){
+      var L=collect(),g=$('r-group').value;
+      document.querySelectorAll('#reftable tr[data-g]').forEach(function(r){r.classList.toggle('on',r.dataset.g===g)});
+      var inputs=[].slice.call(levels.querySelectorAll('.rb input'));inputs.forEach(function(x){x.classList.remove('over')});
+      L.forEach(function(l,i){
+        var name=i?'SIB'+i:'MIB';
+        if(l.uid&&!UIDRE.test(l.uid))w.push(name+' UID "'+l.uid+'" does not look like a UID (e.g. IN28028494).');
+        l.vals.forEach(function(v,j){
+          var num=parseFloat(v),cap=i===0?MAX[g][j]:parseFloat(L[i-1].vals[j]);
+          if(isFinite(num)&&isFinite(cap)&&num>cap){
+            levels.children[i].querySelectorAll('.rb input')[j].classList.add('over');
+            w.push(name+' '+ASSETS[j]+' ('+num+') is higher than '+(i===0?'the '+g+' maximum':(i===1?'MIB':'SIB'+(i-1)))+' ('+cap+').');
+          }
+        });
+      });
+      var ids=L.map(function(l,i){return (i?'SIB'+i:'MIB')+':- '+(l.uid||ph('['+(i?'SIB'+i:'MIB')+' UID]'))}).join('\n\n');
+      var rb=L.map(function(l,i){return (i?'SIB'+i:'MIB')+' :- '+l.vals.map(function(v){return v===''?'0':v}).join('/')}).join('\n\n');
+      t='Hi Support Team,\n\nKindly update rebate settings according to this:\n\n'+ids+'\n\n'+g+'\n\nFX / Index / Metal / Energy / Crypto\n\n'+rb+sign();
+      warnBox('r-warn',w);
+    } else if(tab==='kyc'){
+      var u=lines('k-uids');badUids(u).forEach(function(x){w.push('"'+x+'" does not look like a UID.')});
+      t='Hi Support Team,\n\nKindly approve the KYC for the below client'+(u.length>1?'s':'')+':\n\n'+
+        (u.length?u.map(function(x){return 'Client UID:- '+x}).join('\n'):'Client UID:- '+ph('[Client UID]'))+
+        ($('k-name').value.trim()?'\nClient name:- '+$('k-name').value.trim():'')+
+        ($('k-note').value.trim()?'\n\nNote: '+$('k-note').value.trim():'')+sign();
+      warnBox('k-warn',w);
+    } else if(tab==='link'){
+      var ib=$('l-ib').value.trim().toUpperCase(),c=lines('l-uids');
+      if(ib&&!UIDRE.test(ib))w.push('IB UID "'+ib+'" does not look like a UID.');
+      badUids(c).forEach(function(x){w.push('"'+x+'" does not look like a UID.')});
+      t='Hi Support Team,\n\nKindly link the below client'+(c.length>1?'s':'')+' under this IB:\n\nIB UID:- '+(ib||ph('[IB UID]'))+'\n\n'+
+        (c.length?c.map(function(x){return 'Client UID:- '+x}).join('\n'):'Client UID:- '+ph('[Client UID]'))+sign();
+      warnBox('l-warn',w);
+    } else if(tab==='mib'){
+      t=mibMsg(w);warnBox('m-warn',w);
+    } else if(tab==='client'){
+      t=clientMsg();
+    } else {
+      var gu=lines('g-uids');badUids(gu).forEach(function(x){w.push('"'+x+'" does not look like a UID.')});
+      t='Hi Support Team,\n\nKindly change the account group for the below client'+(gu.length>1?'s':'')+':\n\n'+
+        (gu.length?gu.map(function(x){return 'Client UID:- '+x}).join('\n'):'Client UID:- '+ph('[Client UID]'))+
+        '\n\nNew account group:- '+$('g-group').value+sign();
+      warnBox('g-warn',w);
+    }
+    text=t;
+    $('msg').dir=(tab==='client'&&lang==='ar')?'rtl':'ltr';
+    $('msg').lang=tab==='client'?lang:'en';
+    $('msg').classList.toggle('intl',tab==='client'&&lang!=='en');
+    var esc=t.replace(/&/g,'&amp;').replace(/</g,'&lt;');
+    $('msg').innerHTML=esc.replace(/⁣([^⁣]*)⁣/g,'<span class="ph">$1</span>');
+    $('copied').textContent='';
+  }
+
+  // tabs
+  var tabs=[].slice.call(document.querySelectorAll('.rail button'));
+  function setTab(t){
+    tab=t;tabs.forEach(function(b){b.setAttribute('aria-selected',b.dataset.t===t)});
+    document.querySelectorAll('[data-form]').forEach(function(f){f.hidden=f.dataset.form!==t});
+    document.querySelector('.app').classList.toggle('comm',t==='comm');
+    store.set('bdm-tab',t);render();
+  }
+  tabs.forEach(function(b){b.onclick=function(){setTab(b.dataset.t)}});
+
+  ['k-uids','k-name','k-note','l-ib','l-uids','g-uids','g-group'].forEach(function(id){$(id).addEventListener('input',render)});
+  $('myname').value=store.get('bdm-name')||'';
+  $('myname').addEventListener('input',function(){store.set('bdm-name',$('myname').value);render()});
+
+  // copy
+  function recent(){var r=[];try{r=JSON.parse(store.get('bdm-recent')||'[]')}catch(e){}return r}
+  function drawRecent(){
+    var r=recent();$('recentwrap').hidden=!r.length;
+    $('recent').innerHTML='';
+    r.forEach(function(m){var b=document.createElement('button');b.type='button';b.textContent=m.label;b.title='Copy again';b.onclick=function(){doCopy(m.text,true)};$('recent').appendChild(b)});
+  }
+  function doCopy(t,again){
+    var done=function(){$('copied').textContent=again?'Copied again. Paste it in Teams.':'Copied. Paste it in Teams.'};
+    var fallback=function(){var r=document.createRange();r.selectNodeContents($('msg'));var s=getSelection();s.removeAllRanges();s.addRange(r);$('copied').textContent='Text selected. Press Ctrl+C (or Cmd+C) to copy.'};
+    try{navigator.clipboard.writeText(t).then(done,fallback)}catch(e){fallback()}
+    if(!again){
+      var label={rebate:'Rebate',mib:'MIB link',kyc:'KYC',link:'Link',group:'Group',client:'Client msg'}[tab]+' · '+(tab==='client'?($('cl-name').value.trim()||tpl):(t.match(/[A-Z]{2}\d{6,}/)||['no UID'])[0])+' · '+new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+      var r=recent();r.unshift({label:label,text:t});store.set('bdm-recent',JSON.stringify(r.slice(0,5)));drawRecent();
+    }
+  }
+  $('copy').onclick=function(){
+    if(/⁣/.test(text)){$('copied').textContent='Fill in the highlighted fields first.';$('copied').style.color='var(--warn)';return}
+    $('copied').style.color='';doCopy(text,false);
+  };
+  $('clear').onclick=function(){
+    if(tab==='rebate'){build(false,false)}
+    else if(tab==='mib'){$('m-id').value='';mibReset()}
+    else document.querySelectorAll('[data-form="'+tab+'"] input,[data-form="'+tab+'"] textarea').forEach(function(x){x.value=''});
+    render();
+  };
+
+  // init with the example so the tool opens in a working state
+  build();
+  var ex=['IN28028494','IN28290268','IN28633852','IN31595662'];
+  [].slice.call(levels.querySelectorAll('.uid')).forEach(function(x,i){x.value=ex[i]||''});
+  drawRecent();
+  var saved=store.get('bdm-tab');setTab(saved&&document.querySelector('[data-t="'+saved+'"]')?saved:'rebate');
+  window.hubSetTab=setTab;
+})();
+
+</script>
+
+
+</body>
+</html>

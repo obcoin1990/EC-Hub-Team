@@ -1,0 +1,87 @@
+{
+  "name": "EC Team Hub",
+  "short_name": "EC Team",
+  "description": "EC Markets team app: presentations and toolkits for clients, IBs and the BDM team.",
+  "id": "./",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#121012",
+  "theme_color": "#121012",
+  "categories": [
+    "business",
+    "finance"
+  ],
+  "prefer_related_applications": false,
+  "display_override": [
+    "standalone",
+    "minimal-ui"
+  ],
+  "screenshots": [
+    {
+      "src": "screenshots/wide.png",
+      "sizes": "1440x900",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "EC Team Hub home"
+    },
+    {
+      "src": "screenshots/narrow.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "EC Team Hub on mobile"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Client toolkit",
+      "url": "./index.html#client-tools",
+      "icons": [
+        {
+          "src": "icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "IB toolkit",
+      "url": "./index.html#ib-tools",
+      "icons": [
+        {
+          "src": "icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "BDM toolkit",
+      "url": "./index.html#bdm-tools",
+      "icons": [
+        {
+          "src": "icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ],
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
