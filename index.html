@@ -386,6 +386,15 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
 @media (max-width:720px){.app{grid-template-columns:minmax(0,1fr)}.preview{position:static}.me input{width:120px}.logo small{display:none}.row2{grid-template-columns:minmax(0,1fr)}.wrap{padding-inline:16px}}
 @media (max-width:420px){.rb{grid-template-columns:repeat(3,minmax(0,1fr))}}
 .rail,.preview{top:86px}
+.profile{margin-bottom:18px;padding:18px 20px;border:1px solid var(--line);border-radius:16px;background:var(--panel);display:grid;gap:14px}
+.profile-h{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px}
+.profile-h b{font-size:15px}
+.profile-h span{font-size:12.5px;color:var(--muted)}
+.profile-g{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:720px){.profile-g{grid-template-columns:minmax(0,1fr)}}
+.btn.wa{background:#1FAF5A;border-color:#1FAF5A;color:#fff}
+.btn.wa:hover{border-color:#fff}
+.btn[hidden]{display:none}
 
 @media (max-width:1100px){.spaces{grid-template-columns:repeat(2,minmax(0,1fr))}.contact{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:899px){
@@ -1069,8 +1078,13 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
   <!-- ================= BDM · TOOLKIT ================= -->
   <div class="view" id="v-bdm-tools" hidden>
     <div class="tools"><div class="wrap">
-      <div class="r2" style="margin-bottom:18px;max-width:560px">
-        <label class="f" for="myname">Your name (signs every message)<input id="myname" type="text" placeholder="e.g. Omar" autocomplete="name" style="font-family:var(--body)"></label>
+      <div class="profile">
+        <div class="profile-h"><b>Your profile</b><span>Saved on this device only. It signs your messages and fills in your contact details for clients.</span></div>
+        <div class="profile-g">
+          <label class="f" for="myname">Your name<input id="myname" type="text" placeholder="e.g. Omar" autocomplete="name" style="font-family:var(--body)"></label>
+          <label class="f" for="myphone">Your WhatsApp / phone<input id="myphone" type="tel" placeholder="+971 50 123 4567" autocomplete="tel"></label>
+          <label class="f" for="myemail">Your work email<input id="myemail" type="email" placeholder="name@ecmarkets.com" autocomplete="email"></label>
+        </div>
       </div>
   <div class="app">
     <div class="rail" role="tablist" aria-label="Request type">
@@ -1191,6 +1205,11 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
             </div>
           </div>
           <label class="f" for="cl-name">Client name<input id="cl-name" type="text" placeholder="e.g. Ahmed" style="font-family:var(--body)"></label>
+          <div class="row2">
+            <label class="f" for="cl-wa">Client WhatsApp (with country code)<input id="cl-wa" type="tel" placeholder="+971 50 765 4321" autocomplete="off"></label>
+            <label class="f" for="cl-email">Client email<input id="cl-email" type="email" placeholder="client@example.com" autocomplete="off"></label>
+          </div>
+          <div class="warns" id="cl-warn"></div>
           <label class="f" for="cl-link">Your registration / referral link<input id="cl-link" type="url" placeholder="https://www.ecmarkets.com"></label>
           <div class="docs" id="cl-docs" hidden>
             <span class="f">Documents the client still needs</span>
@@ -1242,6 +1261,8 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
       <div class="msg" id="msg" tabindex="0" aria-live="polite"></div>
       <div class="btns">
         <button class="btn primary" id="copy" type="button">Copy message</button>
+        <button class="btn wa" id="send-wa" type="button" hidden>Send on WhatsApp</button>
+        <button class="btn" id="send-mail" type="button" hidden>Send by email</button>
         <button class="btn" id="clear" type="button">Clear form</button>
       </div>
       <div class="copied" id="copied"></div>
@@ -1611,6 +1632,52 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
 
   // ----- client messages -----
   var tpl='intro',lang='en';
+  var EMAILRE=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  function digits(s){return s.replace(/\D/g,'').replace(/^00/,'')}
+  function contactLine(){
+    var p=$('myphone').value.trim(),e=$('myemail').value.trim(),a=[];
+    if(p)a.push('WhatsApp: '+p);if(e)a.push('Email: '+e);
+    return a.length?'\n'+a.join(' | '):'';
+  }
+  function clientWarn(){
+    var w=[],wa=$('cl-wa').value.trim(),em=$('cl-email').value.trim(),mp=$('myphone').value.trim(),me=$('myemail').value.trim();
+    if(wa&&digits(wa).length<8)w.push('Client WhatsApp looks too short. Include the country code, e.g. +971 50 765 4321.');
+    if(em&&!EMAILRE.test(em))w.push('Client email "'+em+'" does not look right.');
+    if(mp&&digits(mp).length<8)w.push('Your phone number looks too short. Include the country code.');
+    if(me&&!EMAILRE.test(me))w.push('Your email "'+me+'" does not look right.');
+    return w;
+  }
+  var SUBJ={
+    en:{intro:'EC Markets: thank you for your time today',open:'How to open your EC Markets account',kyc:'Documents needed to verify your EC Markets account',welcome:'Welcome to EC Markets: your account is verified',follow:'Following up: EC Markets',ib:'EC Markets Partner (IB) Programme',withdraw:'Your EC Markets withdrawal question'},
+    ar:{intro:'EC Markets: شكراً على وقتك اليوم',open:'كيف تفتح حسابك لدى EC Markets',kyc:'المستندات المطلوبة لتوثيق حسابك لدى EC Markets',welcome:'أهلاً بك في EC Markets: تم توثيق حسابك',follow:'متابعة: EC Markets',ib:'برنامج شركاء EC Markets (IB)',withdraw:'بخصوص استفسار السحب لدى EC Markets'},
+    hi:{intro:'EC Markets: आज समय देने के लिए धन्यवाद',open:'EC Markets में अकाउंट कैसे खोलें',kyc:'आपका EC Markets अकाउंट वेरिफ़ाई करने के लिए ज़रूरी दस्तावेज़',welcome:'EC Markets में स्वागत है: आपका अकाउंट वेरिफ़ाई हो गया है',follow:'फ़ॉलो-अप: EC Markets',ib:'EC Markets पार्टनर (IB) प्रोग्राम',withdraw:'आपका EC Markets निकासी संबंधी सवाल'},
+    zh:{intro:'EC Markets：感谢您今天抽空沟通',open:'如何开设 EC Markets 账户',kyc:'验证您的 EC Markets 账户所需文件',welcome:'欢迎加入 EC Markets：您的账户已通过验证',follow:'跟进：EC Markets',ib:'EC Markets 合作伙伴（IB）计划',withdraw:'关于您的 EC Markets 出金问题'}
+  };
+  function cleanText(){return text.replace(/⁣/g,'')}
+  function sendReady(){
+    if(/⁣/.test(text)){$('copied').textContent='Fill in the highlighted fields first.';$('copied').style.color='var(--warn)';return false}
+    $('copied').style.color='';return true;
+  }
+  $('send-wa').onclick=function(){
+    if(!sendReady())return;
+    var raw=$('cl-wa').value.trim(),n=digits(raw);
+    if(raw&&n.length<8){$('copied').textContent='Check the client WhatsApp number (country code needed).';$('copied').style.color='var(--warn)';return}
+    window.open('https://wa.me/'+n+'?text='+encodeURIComponent(cleanText()),'_blank','noopener');
+    $('copied').textContent=n?'Opening WhatsApp chat with +'+n+'.':'Opening WhatsApp. Pick the contact to send to.';
+  };
+  $('send-mail').onclick=function(){
+    if(!sendReady())return;
+    var to=$('cl-email').value.trim();
+    if(to&&!EMAILRE.test(to)){$('copied').textContent='Check the client email address.';$('copied').style.color='var(--warn)';return}
+    var subj=(SUBJ[lang]||SUBJ.en)[tpl]||'EC Markets';
+    var base='mailto:'+to+'?subject='+encodeURIComponent(subj),body=cleanText().replace(/\n/g,'\r\n');
+    var full=base+'&body='+encodeURIComponent(body);
+    if(full.length>1900){
+      if(window.hubCopy)window.hubCopy(cleanText());
+      $('copied').textContent='Message is long, so it was copied. Paste it into the email body.';
+      location.href=base;
+    }else{location.href=full;$('copied').textContent=to?'Opening your email app for '+to+'.':'Opening your email app.'}
+  };
   function clientMsg(){
     var n=$('cl-name').value.trim(),me=$('myname').value.trim(),link=$('cl-link').value.trim()||'https://www.ecmarkets.com';
     var PH={en:'[Select documents]',ar:'[اختر المستندات]',hi:'[दस्तावेज़ चुनें]',zh:'[请选择文件]'};
@@ -1622,6 +1689,7 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
       hi:'\n\nशुभकामनाओं सहित,\n'+(me||'EC Markets टीम')+'\nबिज़नेस डेवलपमेंट | EC Markets',
       zh:'\n\n此致\n'+(me||'EC Markets 团队')+'\n业务发展部 | EC Markets'
     };
+    var ct=contactLine();if(ct)Object.keys(SIG).forEach(function(k){SIG[k]+=ct});
     var RISK={
       en:'\n\nRisk warning: CFD trading is high risk and losses may exceed your deposit. This message is not investment advice.',
       ar:'\n\nتحذير المخاطر: تداول عقود الفروقات عالي المخاطر وقد تتجاوز الخسائر قيمة الإيداع. هذه الرسالة ليست نصيحة استثمارية.',
@@ -1723,7 +1791,7 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
     } else if(tab==='mib'){
       t=mibMsg(w);warnBox('m-warn',w);
     } else if(tab==='client'){
-      t=clientMsg();
+      t=clientMsg();warnBox('cl-warn',clientWarn());
     } else {
       var gu=lines('g-uids');badUids(gu).forEach(function(x){w.push('"'+x+'" does not look like a UID.')});
       t='Hi Support Team,\n\nKindly change the account group for the below client'+(gu.length>1?'s':'')+':\n\n'+
@@ -1746,6 +1814,7 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
     tab=t;tabs.forEach(function(b){b.setAttribute('aria-selected',b.dataset.t===t)});
     document.querySelectorAll('[data-form]').forEach(function(f){f.hidden=f.dataset.form!==t});
     document.querySelector('.app').classList.toggle('comm',t==='comm');
+    $('send-wa').hidden=$('send-mail').hidden=t!=='client';
     store.set('bdm-tab',t);render();
   }
   tabs.forEach(function(b){b.onclick=function(){setTab(b.dataset.t)}});
@@ -1753,6 +1822,10 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
   ['k-uids','k-name','k-note','l-ib','l-uids','g-uids','g-group'].forEach(function(id){$(id).addEventListener('input',render)});
   $('myname').value=store.get('bdm-name')||'';
   $('myname').addEventListener('input',function(){store.set('bdm-name',$('myname').value);render()});
+  $('myphone').value=store.get('bdm-phone')||'';$('myemail').value=store.get('bdm-email')||'';
+  $('myphone').addEventListener('input',function(){store.set('bdm-phone',$('myphone').value);render()});
+  $('myemail').addEventListener('input',function(){store.set('bdm-email',$('myemail').value);render()});
+  ['cl-wa','cl-email'].forEach(function(id){$(id).addEventListener('input',render)});
 
   // copy
   function recent(){var r=[];try{r=JSON.parse(store.get('bdm-recent')||'[]')}catch(e){}return r}
