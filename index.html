@@ -647,11 +647,12 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
     <div class="tools"><div class="wrap"><div class="tgrid">
       <div class="panel">
         <h2>Trading calculator</h2>
-        <p class="sub">Pip value, required margin and profit or loss for one trade. Prices are examples; type the live price.</p>
+        <p class="sub">Forex, gold and the main crypto pairs. Pip value, required margin and profit or loss for one trade. Prices are examples; type the live price.</p>
         <div class="r2">
           <label class="f" for="tc-sym">Instrument<select id="tc-sym">
             <option value="EURUSD">EUR/USD</option><option value="GBPUSD">GBP/USD</option><option value="AUDUSD">AUD/USD</option>
             <option value="USDJPY">USD/JPY</option><option value="USDCHF">USD/CHF</option><option value="USDCAD">USD/CAD</option><option value="XAUUSD">XAU/USD (Gold)</option>
+            <optgroup label="Crypto"><option value="BTCUSD">BTC/USD (Bitcoin)</option><option value="ETHUSD">ETH/USD (Ethereum)</option><option value="SOLUSD">SOL/USD (Solana)</option><option value="XRPUSD">XRP/USD (Ripple)</option><option value="LTCUSD">LTC/USD (Litecoin)</option></optgroup>
           </select></label>
           <label class="f" for="tc-dir">Direction<select id="tc-dir"><option value="1">Buy</option><option value="-1">Sell</option></select></label>
           <label class="f" for="tc-bal" style="grid-column:1/-1">Account balance ($)<input id="tc-bal" type="number" min="0" step="any" value="10000" inputmode="decimal"></label>
@@ -659,6 +660,7 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
           <label class="f" for="tc-lev">Leverage<select id="tc-lev"><option>50</option><option selected>100</option><option>200</option><option>400</option><option>500</option><option>1000</option></select></label>
           <label class="f" for="tc-open">Open price<input id="tc-open" type="number" step="any" inputmode="decimal"></label>
           <label class="f" for="tc-close">Close price<input id="tc-close" type="number" step="any" inputmode="decimal"></label>
+          <label class="f" for="tc-cs" id="tc-cswrap" hidden>Contract size (coins per lot)<input id="tc-cs" type="number" min="0" step="any" value="1" inputmode="decimal"></label>
         </div>
         <div class="out3" aria-live="polite">
           <div><div class="cbig" id="tc-pip">$0</div><span class="clbl" id="tc-piplbl">Value of 1 pip</span></div>
@@ -671,7 +673,7 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
           <div><div class="cbig" id="tc-lvl">—</div><span class="clbl">Margin level</span></div>
         </div>
         <p class="hint" id="tc-status"></p>
-        <p class="hint">Standard lot: 100,000 units for forex, 100 oz for gold. Results are estimates in USD before spreads, commission and swaps. Check contract specs on your platform.</p>
+        <p class="hint"><span id="tc-note">Standard lot: 100,000 units for forex, 100 oz for gold.</span> Results are estimates in USD before spreads, commission and swaps. Check contract specs on your platform.</p>
       </div>
 
       <div class="panel">
@@ -1491,18 +1493,22 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
 
   // ---------- client: trading calculator ----------
   var SYM={EURUSD:{p:1.085,c:1e5,pip:1e-4,usdBase:false},GBPUSD:{p:1.27,c:1e5,pip:1e-4,usdBase:false},AUDUSD:{p:0.66,c:1e5,pip:1e-4,usdBase:false},
-    USDJPY:{p:150,c:1e5,pip:0.01,usdBase:true},USDCHF:{p:0.88,c:1e5,pip:1e-4,usdBase:true},USDCAD:{p:1.36,c:1e5,pip:1e-4,usdBase:true},XAUUSD:{p:2400,c:100,pip:1,usdBase:false,gold:true}};
+    USDJPY:{p:150,c:1e5,pip:0.01,usdBase:true},USDCHF:{p:0.88,c:1e5,pip:1e-4,usdBase:true},USDCAD:{p:1.36,c:1e5,pip:1e-4,usdBase:true},XAUUSD:{p:2400,c:100,pip:1,usdBase:false,gold:true},
+    BTCUSD:{p:100000,c:1,pip:1,usdBase:false,coin:true,step:1000,dp:2},ETHUSD:{p:3500,c:1,pip:1,usdBase:false,coin:true,step:50,dp:2},SOLUSD:{p:150,c:1,pip:1,usdBase:false,coin:true,step:5,dp:2},
+    XRPUSD:{p:2.5,c:1,pip:0.01,usdBase:false,coin:true,step:0.1,dp:4},LTCUSD:{p:90,c:1,pip:1,usdBase:false,coin:true,step:3,dp:2}};
   function setSym(){
-    var s=SYM[$('tc-sym').value],dp=s.pip<0.001?4:s.pip<0.1?2:2;
+    var s=SYM[$('tc-sym').value],dp=s.dp!=null?s.dp:(s.pip<0.001?4:2);
     $('tc-open').value=s.p.toFixed(dp);
-    $('tc-close').value=(s.p+(s.gold?10:s.pip*50)).toFixed(dp);
-    $('tc-piplbl').textContent=s.gold?'Value of a $1 move':'Value of 1 pip';
+    $('tc-close').value=(s.p+(s.coin?s.step:s.gold?10:s.pip*50)).toFixed(dp);
+    $('tc-piplbl').textContent=s.coin?(s.pip<1?'Value of a $0.01 move':'Value of a $1 move'):s.gold?'Value of a $1 move':'Value of 1 pip';
+    $('tc-cswrap').hidden=!s.coin;$('tc-cs').value=s.c;
+    $('tc-note').textContent=s.coin?'Crypto contract sizes and maximum leverage differ by coin and are usually stricter than forex. Set the contract size shown in your platform\'s symbol specification.':'Standard lot: 100,000 units for forex, 100 oz for gold.';
     calcTrade();
   }
   function num(id){var x=parseFloat($(id).value);return isFinite(x)?x:0}
   function calcTrade(){
-    var s=SYM[$('tc-sym').value],lots=num('tc-lots'),lev=parseFloat($('tc-lev').value),o=num('tc-open'),c=num('tc-close'),dir=parseFloat($('tc-dir').value);
-    var units=lots*s.c,pipv,margin,pl;
+    var s=SYM[$('tc-sym').value],lots=num('tc-lots'),cs=s.coin?num('tc-cs'):s.c,lev=parseFloat($('tc-lev').value),o=num('tc-open'),c=num('tc-close'),dir=parseFloat($('tc-dir').value);
+    var units=lots*cs,pipv,margin,pl;
     if(s.usdBase){pipv=c>0?units*s.pip/c:0;margin=units/lev;pl=c>0?(c-o)*dir*units/c:0}
     else{pipv=units*s.pip;margin=units*o/lev;pl=(c-o)*dir*units}
     $('tc-pip').textContent=money(pipv,2);$('tc-margin').textContent=money(margin,2);
@@ -1519,7 +1525,7 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
     else st.textContent='With a '+money(bal,2)+' balance at 1:'+lev+' you could open up to '+(perLot>0?(Math.floor(bal/perLot*100)/100).toFixed(2):'0.00')+' lots. Using the full margin leaves no buffer, so size trades well below that.';
   }
   $('tc-sym').addEventListener('change',setSym);
-  ['tc-dir','tc-bal','tc-lots','tc-lev','tc-open','tc-close'].forEach(function(id){$(id).addEventListener('input',calcTrade)});
+  ['tc-dir','tc-bal','tc-lots','tc-lev','tc-open','tc-close','tc-cs'].forEach(function(id){$(id).addEventListener('input',calcTrade)});
   setSym();
 
   // ---------- client: checklist ----------
