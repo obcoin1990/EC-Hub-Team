@@ -66,7 +66,7 @@ main{margin-left:248px;min-height:100vh}
 .switch a svg{width:17px;height:17px}
 .switch a[aria-current="page"]{background:var(--red);color:#fff}
 .wrap{max-width:1160px;margin:0 auto;padding-inline:28px}
-.view[hidden]{display:none}
+.view[hidden],[hidden]{display:none!important}
 .view section.s{padding-block:56px}
 .view section.s:first-of-type{border-top:0}
 [id]{scroll-margin-top:150px}
@@ -121,6 +121,7 @@ a.btn{text-decoration:none}
 .out3 .cbig{overflow-wrap:anywhere}
 .out3 .hl .cbig{color:var(--red)}
 .out3 .hl .cbig.pos{color:var(--good)}
+.out3 .cbig{font-size:clamp(18px,1.9vw,26px);overflow-wrap:anywhere}
 .mr.head{margin-bottom:0;max-width:none}
 .prog{height:8px;background:var(--field);border-radius:99px;overflow:hidden;border:1px solid var(--line)}
 .prog i{display:block;height:100%;width:0;background:var(--red);border-radius:inherit;transition:width .3s}
@@ -495,10 +496,10 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
         </div>
       </div>
       <div class="strip">
-        <div><div class="big">$4.476<small>T</small></div><span class="lbl">Q4 2025 volume</span></div>
-        <div><div class="big">Top 3</div><span class="lbl">Global broker</span></div>
+        <div><div class="big">No.1</div><span class="lbl">Global broker · Q2 2026</span></div>
+        <div><div class="big">$2.1<small>T</small></div><span class="lbl">Avg monthly volume</span></div>
         <div><div class="big">7</div><span class="lbl">Regulators</span></div>
-        <div><div class="big">20<small>+</small></div><span class="lbl">Countries</span></div>
+        <div><div class="big">100<small>+</small></div><span class="lbl">Countries &amp; regions</span></div>
       </div>
       <div class="installcard" id="installcard">
         <svg class="i" style="width:30px;height:30px;color:var(--red)"><use href="#i-dl"/></svg>
@@ -527,11 +528,11 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
     <div class="phero"><div class="ring"></div><div class="ring b"></div><div class="wrap">
       <span class="eyebrow">For clients</span>
       <h2>Trade like a <em>champion.</em></h2>
-      <p class="lead">A broker regulated by seven authorities, trusted in 20+ countries, and Official Global Partner of Liverpool FC. Forex, gold, oil, indices, crypto and shares in one account.</p>
+      <p class="lead">Ranked No. 1 worldwide for retail trading volume in Q2 2026, regulated by seven authorities, trusted by traders in 100+ countries, and Official Global Partner of Liverpool FC. Forex, gold, oil, indices, crypto and shares in one account.</p>
       <div class="cta"><button class="btn primary" type="button" data-jump="c-open">How to open an account</button><a class="btn" href="#client-tools">Open the toolkit</a></div>
       <div class="ticker">
-        <div><div class="big">$4.476<small>T</small></div><span class="lbl">Q4 2025 volume</span></div>
-        <div><div class="big">Top 3</div><span class="lbl">Global broker</span></div>
+        <div><div class="big">No.1</div><span class="lbl">Global broker · Q2 2026</span></div>
+        <div><div class="big">$2.1<small>T</small></div><span class="lbl">Avg monthly volume</span></div>
         <div><div class="big">7</div><span class="lbl">Regulators</span></div>
         <div><div class="big">0.0</div><span class="lbl">Spreads from (pips)</span></div>
       </div>
@@ -540,7 +541,7 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
     <section class="s" id="c-trust"><div class="wrap">
       <div class="head"><span class="eyebrow">Safety first</span><h2>Regulated by <em>seven</em> authorities</h2><p>Every licence below is public. You can check each one with the regulator.</p></div>
       <div class="reg">
-        <div class="card"><div class="code">SCA</div><span class="lbl">UAE</span><span class="mono">20200000281</span></div>
+        <div class="card"><div class="code">CMA</div><span class="lbl">UAE (formerly SCA)</span><span class="mono">20200000281</span></div>
         <div class="card"><div class="code">FCA</div><span class="lbl">United Kingdom</span><span class="mono">FRN 571881</span></div>
         <div class="card"><div class="code">ASIC</div><span class="lbl">Australia</span><span class="mono">AFSL 414198</span></div>
         <div class="card"><div class="code">FSCA</div><span class="lbl">South Africa</span><span class="mono">51886</span></div>
@@ -562,6 +563,23 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
     </div></section>
 
     <section class="s"><div class="wrap">
+      <div class="head"><span class="eyebrow">Why EC Markets</span><h2>Your money kept apart. <em>Tighter prices.</em></h2></div>
+      <div class="split" style="align-items:start">
+        <div class="grid" style="gap:14px">
+          <div class="card"><span class="pill g">Segregated funds</span><h3>Client money is held separately</h3><p>Client funds are kept apart from company money at Standard Chartered, Berenberg and Barclays, and reconciled regularly.</p></div>
+          <div class="card"><span class="pill g">Service</span><h3>24/7 support in 7 languages</h3><p>Chinese, English, Thai, Vietnamese, Japanese, Spanish and Portuguese, with a website in 13 languages including Arabic.</p></div>
+        </div>
+        <div class="card">
+          <span class="pill">M.A.T. technology</span>
+          <h3>Why our spreads are tight</h3>
+          <p>Most brokers send your order to one liquidity provider. EC Markets' M.A.T. multi-liquidity aggregation compares prices from many providers in real time and combines the best buy and sell prices.</p>
+          <div class="tree"><div class="tnode"><b>Many liquidity providers</b>Live buy and sell quotes</div><div class="tarrow">↓</div><div class="tnode you"><b>M.A.T. aggregation</b>Picks the best buy and best sell price</div><div class="tarrow">↓</div><div class="tnode"><b>Your price</b>A tighter spread</div></div>
+          <p>Backed by 25 trading servers (19 MT4, 6 MT5) and millisecond execution.</p>
+        </div>
+      </div>
+    </div></section>
+
+    <section class="s"><div class="wrap">
       <div class="head"><span class="eyebrow">Markets</span><h2>One account. <em>Six</em> asset classes.</h2></div>
       <div class="grid g3">
         <div class="card"><span class="pill">Forex</span><h3>Major and cross pairs</h3><p>The world's largest market, with high liquidity around the clock on weekdays.</p></div>
@@ -574,11 +592,11 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
     </div></section>
 
     <section class="s acct"><div class="wrap">
-      <div class="head"><span class="eyebrow">Accounts</span><h2>Pick the pricing that <em>suits you</em></h2><p>All three accounts offer leverage up to 1:1000, depending on your entity and instrument.</p></div>
+      <div class="head"><span class="eyebrow">Accounts</span><h2>Pick the pricing that <em>suits you</em></h2><p>Leverage up to 1:1000 on forex and gold; crypto is fixed at 1:200 and indices at 1:50. Swap-free is available on 7 major forex pairs, gold and silver (not on PRO).</p></div>
       <div class="grid g3">
         <div class="card"><span class="pill g">All-in pricing</span><div class="acct-name">STD</div><p class="price">Spread from 1.0 pip</p><ul class="tick"><li>No commission</li><li>All costs inside the spread</li></ul></div>
         <div class="card hot"><span class="pill">Tightest pricing</span><div class="acct-name" style="color:var(--red)">ECN</div><p class="price">Spread from 0.0 pip</p><ul class="tick"><li>$3 commission</li><li>Built for active trading</li></ul></div>
-        <div class="card"><span class="pill g">Raw pricing</span><div class="acct-name">PRO</div><p class="price">Raw spread</p><ul class="tick"><li>No commission</li><li>For experienced traders</li></ul></div>
+        <div class="card"><span class="pill g">Raw pricing</span><div class="acct-name">PRO</div><p class="price">Raw spread</p><ul class="tick"><li>No commission</li><li>From USD 5,000 to activate</li></ul></div>
       </div>
     </div></section>
 
@@ -588,7 +606,7 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
         <div class="card"><span class="pill">MT4</span><h3>Easy for everyone</h3><p>One-click trading and Trading Central signals.</p></div>
         <div class="card"><span class="pill">MT5</span><h3>Built for pros</h3><p>21 timeframes, 80+ indicators and market depth.</p></div>
         <div class="card"><span class="pill">EC App</span><h3>Trade anywhere</h3><p>Real-time data and one-tap trading on iOS and Android.</p></div>
-        <div class="card"><span class="pill">Copy trading</span><h3>Copy or be copied</h3><p>Browse strategies and choose how much to allocate.</p></div>
+        <div class="card"><span class="pill">Copy trading</span><h3>Four ways to copy</h3><p>PAMM, Brokeree, CopyWealth and EC Autotrade. Browse strategies and choose how much to allocate.</p></div>
       </div>
     </div></section>
 
@@ -614,6 +632,10 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
     <section class="s"><div class="wrap">
       <div class="head"><span class="eyebrow">Recognition</span><h2>Award-winning <em>trading conditions</em></h2></div>
       <div class="award">
+        <div class="card"><span class="yr">2026</span><h3>UF Awards</h3><p>Best Global Broker 2026</p></div>
+        <div class="card"><span class="yr">2026</span><h3>Rankia Markets Experience</h3><p>Best Order Execution Broker</p></div>
+        <div class="card"><span class="yr">2026</span><h3>Money Expo Mexico</h3><p>Top Low Spread Broker</p></div>
+        <div class="card"><span class="yr">2026</span><h3>Wealth Expo Ecuador</h3><p>Best Forex ECN Broker</p></div>
         <div class="card"><span class="yr">2025</span><h3>FX Trust Score Awards</h3><p>Broker of the Year</p></div>
         <div class="card"><span class="yr">2025</span><h3>IFX Expo Latam</h3><p>Most Trusted Broker</p></div>
         <div class="card"><span class="yr">2025</span><h3>IFX Expo Asia</h3><p>Best Trading Conditions</p></div>
@@ -637,7 +659,7 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
     </div></section>
 
     <div class="footnote"><div class="wrap">
-      <p class="who">Support 24/5: <span class="mono">support@ecmarkets.com</span> · <span class="mono">+248 422 4099</span> · <span class="mono">www.ecmarkets.com</span></p>
+      <p class="who">Support 24/7: <span class="mono">support@ecmarkets.com</span> · <span class="mono">+248 422 4099</span> · <span class="mono">www.ecmarkets.com</span></p>
       <p>Risk warning: CFD trading is high risk and may not suit all investors. Losses may exceed deposits. You do not own the underlying assets. EC Markets does not provide investment advice. Products may not be available in all jurisdictions, including the United Kingdom.</p>
     </div></div>
   </div>
@@ -647,20 +669,21 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
     <div class="tools"><div class="wrap"><div class="tgrid">
       <div class="panel">
         <h2>Trading calculator</h2>
-        <p class="sub">Forex, gold and the main crypto pairs. Pip value, required margin and profit or loss for one trade. Prices are examples; type the live price.</p>
+        <p class="sub">Forex, gold and the main crypto pairs. Pip value, required margin and profit or loss for one trade. Type the live price.</p>
         <div class="r2">
           <label class="f" for="tc-sym">Instrument<select id="tc-sym">
-            <option value="EURUSD">EUR/USD</option><option value="GBPUSD">GBP/USD</option><option value="AUDUSD">AUD/USD</option>
-            <option value="USDJPY">USD/JPY</option><option value="USDCHF">USD/CHF</option><option value="USDCAD">USD/CAD</option><option value="XAUUSD">XAU/USD (Gold)</option>
+            <optgroup label="Forex"><option value="EURUSD">EUR/USD</option><option value="GBPUSD">GBP/USD</option><option value="AUDUSD">AUD/USD</option>
+            <option value="USDJPY">USD/JPY</option><option value="USDCHF">USD/CHF</option><option value="USDCAD">USD/CAD</option></optgroup>
+            <optgroup label="Metals &amp; energy"><option value="XAUUSD">XAU/USD (Gold)</option><option value="USOIL">WTI crude oil</option></optgroup>
             <optgroup label="Crypto"><option value="BTCUSD">BTC/USD (Bitcoin)</option><option value="ETHUSD">ETH/USD (Ethereum)</option><option value="SOLUSD">SOL/USD (Solana)</option><option value="XRPUSD">XRP/USD (Ripple)</option><option value="LTCUSD">LTC/USD (Litecoin)</option></optgroup>
           </select></label>
           <label class="f" for="tc-dir">Direction<select id="tc-dir"><option value="1">Buy</option><option value="-1">Sell</option></select></label>
           <label class="f" for="tc-bal" style="grid-column:1/-1">Account balance ($)<input id="tc-bal" type="number" min="0" step="any" value="10000" inputmode="decimal"></label>
           <label class="f" for="tc-lots">Lots<input id="tc-lots" type="number" min="0" step="0.01" value="1" inputmode="decimal"></label>
-          <label class="f" for="tc-lev">Leverage<select id="tc-lev"><option>50</option><option selected>100</option><option>200</option><option>400</option><option>500</option><option>1000</option></select></label>
+          <label class="f" for="tc-lev">Leverage<select id="tc-lev"><option value="1000" selected>1:1000</option><option value="500">1:500</option><option value="200">1:200</option><option value="30">1:30</option></select></label>
           <label class="f" for="tc-open">Open price<input id="tc-open" type="number" step="any" inputmode="decimal"></label>
           <label class="f" for="tc-close">Close price<input id="tc-close" type="number" step="any" inputmode="decimal"></label>
-          <label class="f" for="tc-cs" id="tc-cswrap" hidden>Contract size (coins per lot)<input id="tc-cs" type="number" min="0" step="any" value="1" inputmode="decimal"></label>
+          <label class="f" for="tc-cs" id="tc-cswrap" hidden><span id="tc-cslbl">Contract size (coins per lot)</span><input id="tc-cs" type="number" min="0" step="any" value="1" inputmode="decimal"></label>
         </div>
         <div class="out3" aria-live="polite">
           <div><div class="cbig" id="tc-pip">$0</div><span class="clbl" id="tc-piplbl">Value of 1 pip</span></div>
@@ -673,7 +696,8 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
           <div><div class="cbig" id="tc-lvl">—</div><span class="clbl">Margin level</span></div>
         </div>
         <p class="hint" id="tc-status"></p>
-        <p class="hint"><span id="tc-note">Standard lot: 100,000 units for forex, 100 oz for gold.</span> Results are estimates in USD before spreads, commission and swaps. Check contract specs on your platform.</p>
+        <p class="hint" id="tc-levused"></p>
+        <p class="hint"><span id="tc-note">Standard lot: 100,000 units for forex, 100 oz for gold. Check contract specs on your platform.</span> Results are estimates in USD before spreads, commission and swaps; prices shown are examples.</p>
       </div>
 
       <div class="panel">
@@ -684,8 +708,8 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
         <div class="checks" id="ck">
           <label><input type="checkbox"><span>Register an account<small>At ecmarkets.com or through your account manager's link</small></span></label>
           <label><input type="checkbox"><span>Verify your email address</span></label>
-          <label><input type="checkbox"><span>Upload your ID<small>Emirates ID or passport, front and back, clear colour photo</small></span></label>
-          <label><input type="checkbox"><span>Upload proof of address<small>Utility bill or bank statement showing your name and address</small></span></label>
+          <label><input type="checkbox"><span>Upload your ID<small>Emirates ID or passport, front and back, clear colour photo. Passports need 6+ months validity left.</small></span></label>
+          <label><input type="checkbox"><span>Upload proof of address<small>Utility or bank statement, max 12 months old, showing your name and address. Phone bills and screenshots are not accepted.</small></span></label>
           <label><input type="checkbox"><span>Account approved<small>You'll receive your MT login details by email</small></span></label>
           <label><input type="checkbox"><span>Install your platform<small>MT4, MT5 or the EC Markets app</small></span></label>
         </div>
@@ -714,7 +738,7 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
 
       <div class="panel full">
         <h2>Contact EC Markets</h2>
-        <p class="sub">Support is available 24 hours a day, 5 days a week. For withdrawals, use your client portal; support handles any questions.</p>
+        <p class="sub">Support is available 24 hours a day, 7 days a week, in 7 languages. For withdrawals, use your client portal; support handles any questions.</p>
         <div class="contact">
           <div><span><small>Email</small><b>support@ecmarkets.com</b></span><button class="mini" type="button" data-copy="support@ecmarkets.com">Copy</button></div>
           <div><span><small>Phone</small><b>+248 422 4099</b></span><button class="mini" type="button" data-copy="+248 422 4099">Copy</button></div>
@@ -729,10 +753,10 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
     <div class="phero"><div class="ring"></div><div class="ring b"></div><div class="wrap">
       <span class="eyebrow">For IBs &amp; partners</span>
       <h2>Grow with <em>EC Markets.</em></h2>
-      <p class="lead">Lifetime commission on every trade your clients place, paid within 2 hours, with an unlimited multi-level structure and a team that builds your deal with you.</p>
+      <p class="lead">Lifetime commission on every trade your clients place, credited after every closed trade, with an unlimited multi-level structure and a team that builds your deal with you.</p>
       <div class="cta"><button class="btn primary" type="button" data-jump="ib-join">How to join</button><a class="btn" href="#ib-tools">Estimate your earnings</a></div>
       <div class="ticker">
-        <div><div class="big">2<small> hrs</small></div><span class="lbl">Commission payout</span></div>
+        <div><div class="big">30<small> min</small></div><span class="lbl">Typical rebate credit</span></div>
         <div><div class="big">20K<small>+</small></div><span class="lbl">Active affiliates</span></div>
         <div><div class="big">55K</div><span class="lbl">Active clients</span></div>
         <div><div class="big">275K</div><span class="lbl">Trading accounts</span></div>
@@ -749,7 +773,7 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
         </div>
         <div class="card">
           <h3>Your structure</h3>
-          <p>Rebates are agreed per account group with your BDM and split down your network.</p>
+          <p>Rebates are agreed per account group with your BDM: STD accounts pay in pips, ECN accounts in USD per lot. Each level earns its own rate minus the level below. If you are on 3.0 and your sub-IB on 2.0, they earn 2.0 and you earn 1.0.</p>
           <div class="tree">
             <div class="tnode you"><b>You · MIB</b>Master IB</div>
             <div class="tarrow">↓</div>
@@ -767,7 +791,7 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
         <div class="card"><h3>Real-time reporting</h3><p>See your clients, volumes and earnings live.</p></div>
         <div class="card"><h3>Marketing support</h3><p>Tracking links, high-converting landing pages and dynamic ads.</p></div>
         <div class="card"><h3>Tailored deals</h3><p>Rebate plans built around your audience and volume.</p></div>
-        <div class="card"><h3>Dedicated support</h3><p>A BDM and a partner team available 24/5.</p></div>
+        <div class="card"><h3>Dedicated support</h3><p>A dedicated BDM, plus customer service 24/7 in 7 languages.</p></div>
         <div class="card"><h3>A broker clients trust</h3><p>Seven regulators, Lloyd's insurance cover and an LSE member firm.</p></div>
         <div class="card"><h3>Award-winning programme</h3><p>Best IB / Affiliate Programme (UF Awards 2025) and Best Partner Program (FX Trust Score 2025).</p></div>
       </div>
@@ -780,16 +804,16 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
         <div class="card"><h3>Talk to a BDM</h3><p>Agree your rebate plan and account groups.</p></div>
         <div class="card"><h3>Register as partner</h3><p>Open your IB account and get your tracking link.</p></div>
         <div class="card"><h3>Share your link</h3><p>Invite clients and sub-IBs with approved materials.</p></div>
-        <div class="card"><h3>Earn &amp; track</h3><p>Follow your earnings in real time. Paid within 2 hours.</p></div>
+        <div class="card"><h3>Earn &amp; track</h3><p>Follow every order live. Rebates arrive after each closed trade.</p></div>
       </div>
     </div></section>
 
     <section class="s"><div class="wrap">
       <div class="head"><span class="eyebrow">Questions</span><h2>Partner <em>FAQ</em></h2></div>
       <div class="faq grid" style="gap:12px;max-width:900px">
-        <details open><summary>How fast are commissions paid?</summary><p>Commissions are paid within 2 hours.</p></details>
+        <details open><summary>When are rebates credited?</summary><p>Automatically after each position closes, usually within 30 minutes and at the latest within 4 hours. You can check every order in the IB Portal under Commission Data → Details.</p></details>
         <details><summary>Is there a limit on sub-IB levels?</summary><p>No. The multi-level structure is unlimited, and you earn your agreed share on your sub-IBs' clients.</p></details>
-        <details><summary>How is my rebate set?</summary><p>Your BDM agrees a rebate per lot for each account group (for example STD or STD-PX) and asset class. You can then split it with your sub-IBs.</p></details>
+        <details><summary>How is my rebate set?</summary><p>Your BDM agrees a rebate for each account group (for example STD-PX or ECN-UX) and product. STD groups pay in pips, so the USD amount depends on each instrument's pip value; ECN groups pay a fixed USD amount per lot. A sub-IB's rebate can never be higher than yours.</p></details>
         <details><summary>What can I use to promote EC Markets?</summary><p>Use the approved materials and posts your BDM provides, and always include the risk warning. Do not promise profits or returns.</p></details>
       </div>
     </div></section>
@@ -893,19 +917,19 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
       <p class="lead">The company story, the licences, the accounts and pricing, the IB programme, your commission and the rules we sell by.</p>
       <div class="cta"><button class="btn primary" type="button" data-jump="pitch">Jump to the pitch</button><a class="btn" href="#bdm-tools">Open the toolkit</a></div>
       <div class="ticker">
-        <div><div class="big">$4.476<small>T</small></div><span class="lbl">Q4 2025 volume</span></div>
-        <div><div class="big">Top 3</div><span class="lbl">Global broker</span></div>
+        <div><div class="big">No.1</div><span class="lbl">Global broker · Q2 2026</span></div>
+        <div><div class="big">$2.1<small>T</small></div><span class="lbl">Avg monthly volume</span></div>
         <div><div class="big">7</div><span class="lbl">Regulators</span></div>
         <div><div class="big">5%</div><span class="lbl">Top commission tier</span></div>
       </div>
     </div></div>
 <!-- COMPANY -->
 <section class="s" id="company"><div class="wrap">
-  <div class="head"><span class="eyebrow">The company</span><h2>A top-3 global broker with <em>10+ years</em> in the markets</h2><p>According to the Finance Magnates Q4 2025 Intelligence Report, EC Markets recorded $4.476 trillion in trading volume, kept its Top 3 global ranking and closed 2025 with its strongest quarter so far.</p></div>
+  <div class="head"><span class="eyebrow">The company</span><h2>No. 1 global broker in Q2 2026, with <em>10+ years</em> in the markets</h2><p>Finance Magnates ranked EC Markets No. 1 worldwide for retail trading volume in Q2 2026, with USD 2.113 trillion average monthly volume, after Top 3 rankings through 2025. The company serves 10M+ traders with 1,000+ employees.</p></div>
   <div class="grid g4">
     <div class="card"><div class="big">10<small>+ yrs</small></div><span class="lbl">In the financial markets</span></div>
-    <div class="card"><div class="big">20<small>+</small></div><span class="lbl">Countries of operation</span></div>
-    <div class="card"><div class="big">9</div><span class="lbl">Offices worldwide</span><p>London (HQ), Dubai, Sydney, Limassol, Mexico City, Cape Town, Auckland, Seychelles, Mauritius</p></div>
+    <div class="card"><div class="big">100<small>+</small></div><span class="lbl">Countries &amp; regions</span></div>
+    <div class="card"><div class="big">12</div><span class="lbl">Offices worldwide</span><p>Including London (HQ), Dubai, Sydney, Limassol, Mexico City, Cape Town and Auckland. 1,000+ employees.</p></div>
     <div class="card"><div class="big">4</div><span class="lbl">Core values</span><p>Commitment, open communication, respect, excellence</p></div>
   </div>
   <div class="partners">
@@ -920,7 +944,7 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
 <section class="s" id="trust"><div class="wrap">
   <div class="head"><span class="eyebrow">Trust & safety</span><h2>Regulated by <em>seven</em> authorities</h2><p>The first objection is always "is my money safe?". Lead with the licence numbers. They are public and the client can check them.</p></div>
   <div class="reg">
-    <div class="card"><div class="code">SCA</div><span class="lbl">UAE</span><span class="mono">20200000281</span></div>
+    <div class="card"><div class="code">CMA</div><span class="lbl">UAE (formerly SCA)</span><span class="mono">20200000281</span></div>
     <div class="card"><div class="code">FCA</div><span class="lbl">United Kingdom</span><span class="mono">FRN 571881</span></div>
     <div class="card"><div class="code">ASIC</div><span class="lbl">Australia</span><span class="mono">AFSL 414198</span></div>
     <div class="card"><div class="code">FSCA</div><span class="lbl">South Africa</span><span class="mono">51886</span></div>
@@ -954,6 +978,10 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
 
   <div class="head" style="margin-top:72px"><span class="eyebrow">Recognition</span><h2>Awards you can <em>name-drop</em></h2><p>Match the award to the prospect. IBs hear "Best IB Programme" and "Best Partner Program". Traders hear "Best Trading Conditions" and "Best Spreads".</p></div>
   <div class="award">
+    <div class="card"><span class="yr">2026</span><h3>UF Awards</h3><p>Best Global Broker 2026</p></div>
+    <div class="card"><span class="yr">2026</span><h3>Rankia Markets Experience</h3><p>Best Order Execution Broker</p></div>
+    <div class="card"><span class="yr">2026</span><h3>Money Expo Mexico</h3><p>Top Low Spread Broker</p></div>
+    <div class="card"><span class="yr">2026</span><h3>Wealth Expo Ecuador</h3><p>Best Forex ECN Broker</p></div>
     <div class="card"><span class="yr">2025</span><h3>FX Trust Score Awards</h3><p>Broker of the Year & Best Partner Program</p></div>
     <div class="card"><span class="yr">2025 · Dubai</span><h3>UF Awards</h3><p>Best IB / Affiliate Programme</p></div>
     <div class="card"><span class="yr">2025 · Cyprus</span><h3>UF Awards</h3><p>Best CFD Broker</p></div>
@@ -971,7 +999,7 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
 
 <!-- PRODUCTS -->
 <section class="s" id="products"><div class="wrap">
-  <div class="head"><span class="eyebrow">What clients can trade</span><h2>One account. <em>Six</em> asset classes.</h2><p>Spreads from 0.0 pips, leverage up to 1:1000 and minimal slippage, with 24/5 dedicated support.</p></div>
+  <div class="head"><span class="eyebrow">What clients can trade</span><h2>One account. <em>Six</em> asset classes.</h2><p>Spreads from 0.0 pips, leverage up to 1:1000 and minimal slippage, and 24/7 support in 7 languages.</p></div>
   <div class="grid g3">
     <div class="card"><span class="pill">Forex</span><h3>The world's largest market</h3><p>High liquidity and 24-hour trading on majors and crosses.</p></div>
     <div class="card"><span class="pill">Metals</span><h3>Gold focus</h3><p>Margin-based trading for capital efficiency. Often used as an inflation hedge.</p></div>
@@ -988,7 +1016,7 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
   <div class="grid g3">
     <div class="card"><span class="pill g">Beginners</span><div class="acct-name">STD</div><p class="price">Spread from 1.0 pip</p><ul class="tick"><li>No commission</li><li>Leverage up to 1:1000</li><li>All costs inside the spread</li></ul></div>
     <div class="card hot"><span class="pill">Active traders</span><div class="acct-name" style="color:var(--red)">ECN</div><p class="price">Spread from 0.0 pip</p><ul class="tick"><li>$3 commission</li><li>Leverage up to 1:1000</li><li>Tightest pricing for high volume</li></ul></div>
-    <div class="card"><span class="pill g">Experienced</span><div class="acct-name">PRO</div><p class="price">Raw spread</p><ul class="tick"><li>No commission</li><li>Leverage up to 1:1000</li><li>Raw pricing, single cost line</li></ul></div>
+    <div class="card"><span class="pill g">Experienced</span><div class="acct-name">PRO</div><p class="price">Raw spread</p><ul class="tick"><li>No commission</li><li>Requires USD 5,000 to activate</li><li>No IB rebates, no swap-free</li></ul></div>
   </div>
 </div></section>
 
@@ -1034,7 +1062,7 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
 <section class="s" id="partners"><div class="wrap">
   <div class="head"><span class="eyebrow">Partner / IB programme</span><h2>Why IBs <em>switch</em> to EC Markets</h2><p>Partners join a network of more than 20,000 active affiliates and earn lifetime commission on every trade their clients place.</p></div>
   <div class="ticker" style="margin:0 0 16px">
-    <div><div class="big">2<small> hrs</small></div><span class="lbl">Commission payout</span></div>
+    <div><div class="big">30<small> min</small></div><span class="lbl">Typical rebate credit</span></div>
     <div><div class="big">20K<small>+</small></div><span class="lbl">Active affiliates</span></div>
     <div><div class="big">55K</div><span class="lbl">Active clients</span></div>
     <div><div class="big">275K</div><span class="lbl">Trading accounts</span></div>
@@ -1093,9 +1121,9 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
   <div class="head"><span class="eyebrow">The pitch</span><h2>Answers to the questions you <em>hear most</em></h2><p>Tap a question to open the answer.</p></div>
   <div class="faq grid" style="gap:12px;max-width:900px">
     <details open class="reveal"><summary>"Is this broker safe?"</summary><p>Seven regulators including FCA and ASIC, a London Stock Exchange member firm, and a Lloyd's insolvency policy up to $1M per eligible claimant at no cost to the client.</p></details>
-    <details class="reveal"><summary>"How big are you?"</summary><p>$4.476 trillion in trading volume in Q4 2025 and a Top 3 global broker ranking, per the Finance Magnates Intelligence Report. Active in 20+ countries.</p></details>
-    <details class="reveal"><summary>"What does it cost to trade?"</summary><p>STD from 1.0 pip with no commission. ECN from 0.0 pips with a $3 commission. PRO on raw spread with no commission. Leverage up to 1:1000 on all three.</p></details>
-    <details class="reveal"><summary>"How fast do I get paid?" (IBs)</summary><p>Commissions within 2 hours, lifetime earnings on referred clients, an unlimited multi-level structure and real-time reporting.</p></details>
+    <details class="reveal"><summary>"How big are you?"</summary><p>No. 1 worldwide for retail trading volume in Q2 2026 (Finance Magnates), with USD 2.113 trillion average monthly volume. 10M+ traders in 100+ countries, 12 offices, 25 international awards.</p></details>
+    <details class="reveal"><summary>"What does it cost to trade?"</summary><p>STD from 1.0 pip with no commission. ECN from 0.0 pips with a $3 commission. PRO on near-zero spread with no commission, from USD 5,000. Leverage up to 1:1000 on forex and gold; crypto is fixed at 1:200 and indices at 1:50.</p></details>
+    <details class="reveal"><summary>"How fast do I get paid?" (IBs)</summary><p>Rebates credited automatically after each closed trade (usually within 30 minutes, at most 4 hours), lifetime earnings on referred clients, an unlimited multi-level structure and real-time reporting.</p></details>
     <details class="reveal"><summary>"Who else trusts you?"</summary><p>Official Global Partner of Liverpool FC, Judd Trump as global ambassador, and 12+ industry awards including Broker of the Year 2025 (FX Trust Score).</p></details>
     <details class="reveal hot"><summary>"Will I make money?"</summary><p>Never promise. Say: "CFDs are high risk and you can lose more than your deposit. I can show you how the platform and accounts work, but I can't predict results or advise you on trades."</p></details>
   </div>
@@ -1157,6 +1185,102 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
   </div>
 </div></section>
 
+
+    <!-- ===== From the Global-Sales knowledge base ===== -->
+    <section class="s" id="rules-accounts"><div class="wrap">
+      <div class="head"><span class="eyebrow">Account rules · from the knowledge base</span><h2>Know the rules <em>before</em> the client asks</h2><p>The details clients ask about most, from the Global-Sales wiki (USD Account, Cent Account and Trading Account Group pages).</p></div>
+      <div class="grid g3">
+        <div class="card"><span class="pill">PRO</span><h3>USD 5,000 to activate</h3><p>Near-zero spread, no commission. PRO pays no IB rebates and can't be swap-free.</p></div>
+        <div class="card"><span class="pill">Cent</span><h3>Only through an IB</h3><p>Not public: opened on an IB's application. 1 USD = 100 USC. Forex, metals and energy only; no crypto, indices or PAMM. No demo.</p></div>
+        <div class="card"><span class="pill">Default</span><h3>Website clients start on STD</h3><p>Unassigned website sign-ups are given to a Sales rep after 24 hours, on the STD group unless changed.</p></div>
+        <div class="card"><span class="pill">Risk</span><h3>Stop out 30% · margin call 50%</h3><p>For Mauritius FSC clients. Mainland China, HK, Macau and Taiwan (Seychelles FSA): stop out 50%, margin call 100%.</p></div>
+        <div class="card"><span class="pill">Accounts</span><h3>10 of each type</h3><p>Extra USD accounts from USD 20,000 combined funds, then +1 per USD 5,000. Cent: from USD 10,000, then +1 per USD 1,000. Max 500 open + pending orders per account.</p></div>
+        <div class="card"><span class="pill">Archiving</span><h3>60 days inactive</h3><p>USD accounts with no trading, deposits or withdrawals for 60 days and equity under USD 100 are archived; the balance moves to the wallet. Archived accounts can't be restored.</p></div>
+      </div>
+      <h3 style="margin:40px 0 16px;font-size:22px">Leverage by product</h3>
+      <div class="tablewrap"><table>
+        <thead><tr><th>Account leverage</th><th>Forex</th><th>Gold / metals</th><th>Crude oil</th><th>Crypto</th><th>Indices</th><th>Stocks</th></tr></thead>
+        <tbody>
+          <tr class="base"><td>1:1000 (default)</td><td>1:1000</td><td>1:1000</td><td>1:400</td><td>1:200</td><td>1:50</td><td>1:20</td></tr>
+          <tr><td>1:500</td><td>1:500</td><td>1:500</td><td>1:200</td><td>1:200</td><td>1:50</td><td>1:10</td></tr>
+          <tr><td>1:200</td><td>1:200</td><td>1:200</td><td>1:80</td><td>1:200</td><td>1:50</td><td>1:4</td></tr>
+          <tr><td>1:30</td><td>1:30</td><td>1:30</td><td>1:12</td><td>1:200</td><td>1:50</td><td>1:0.6</td></tr>
+        </tbody>
+      </table></div>
+      <p class="note">Crypto and index leverage is fixed and doesn't change when the account leverage changes. Triple swap: Wednesday for forex and metals, Friday for oil, indices, stocks and crypto.</p>
+    </div></section>
+
+    <section class="s" id="rules-groups"><div class="wrap">
+      <div class="head"><span class="eyebrow">Groups &amp; rebate caps</span><h2>Every group, its markup and its <em>maximum rebate</em></h2><p>P = spread markup (STD), U = commission markup (ECN). V = 5, X = 10, XV = 15, XX = 20. Crypto has no markup in any group.</p></div>
+      <div class="grid">
+        <div class="tablewrap"><table>
+          <thead><tr><th>STD group</th><th>Markup</th><th>Max FX / oil / index</th><th>Max metals</th><th>Max crypto</th></tr></thead>
+          <tbody>
+            <tr><td>STD</td><td>+0</td><td>1.0</td><td>2.1</td><td>1.0</td></tr>
+            <tr><td>STD-PV</td><td>+0.5 pip</td><td>1.5</td><td>2.6</td><td>1.0</td></tr>
+            <tr><td>STD-PX</td><td>+1.0 pip</td><td>2.0</td><td>3.1</td><td>1.0</td></tr>
+            <tr><td>STD-PXV</td><td>+1.5 pip</td><td>2.5</td><td>3.6</td><td>1.0</td></tr>
+            <tr><td>STD-PXX</td><td>+2.0 pip</td><td class="hi">3.0</td><td class="hi">4.1</td><td>1.0</td></tr>
+          </tbody>
+        </table></div>
+        <div class="tablewrap"><table>
+          <thead><tr><th>ECN group</th><th>Commission</th><th>Max FX / metals / oil / index</th><th>Max crypto</th></tr></thead>
+          <tbody>
+            <tr><td>ECN</td><td>USD 3</td><td>3</td><td>10</td></tr>
+            <tr><td>ECN-UV</td><td>USD 8</td><td>8</td><td>10</td></tr>
+            <tr><td>ECN-UX</td><td>USD 13</td><td>13</td><td>10</td></tr>
+            <tr><td>ECN-UXV</td><td>USD 18</td><td>18</td><td>10</td></tr>
+            <tr><td>ECN-UXX</td><td>USD 23</td><td class="hi">23</td><td>10</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="grid g2" style="margin-top:16px">
+        <div class="card"><h3>Differential method</h3><p>Each IB earns its own rebate minus the rebate of the IB directly below it. Example on STD-PXX forex: MIB 3.0, SIB 2.0 → SIB earns 2.0 and MIB earns 1.0. A Sub IB can never be set higher than its Parent IB.</p></div>
+        <div class="card"><h3>Before opening or changing a group</h3><p>The client's Parent IB, and every IB above it, must already have the matching IB Rebate Group. Otherwise the request is returned, or rebates on that client are lost and can't be recovered.</p></div>
+      </div>
+    </div></section>
+
+    <section class="s" id="rules-sop"><div class="wrap">
+      <div class="head"><span class="eyebrow">Who sends what</span><h2>Requests, senders and <em>processing times</em></h2><p>Formal requests go by email to support@ecmarkets.com. Teams channels are for questions to Customer Service and Marketing.</p></div>
+      <div class="tablewrap"><table>
+        <thead><tr><th>Request</th><th>Who sends it</th><th>Email subject</th><th>Processing time</th></tr></thead>
+        <tbody>
+          <tr><td>New IB</td><td>Sales or Parent IB (client KYC done)</td><td>IB Application</td><td>2 hours on business days</td></tr>
+          <tr><td>Rebate change</td><td>Sales or Parent IB</td><td>Application to Modify IB Rebate</td><td>2 hours on business days</td></tr>
+          <tr><td>Group change</td><td>Sales Team Leader only, daily 09:00 GMT</td><td>Trading Account Group Change Request</td><td>1 business day</td></tr>
+          <tr><td>Extra accounts</td><td>Client personally</td><td>Request for Additional Trading Accounts</td><td>3 business days</td></tr>
+          <tr><td>Swap-free</td><td>Client personally</td><td>Request for a Swap-Free Account</td><td>Before the daily rollover</td></tr>
+          <tr><td>Cancel withdrawal</td><td>Client, from registered email</td><td>Withdrawal Cancellation Request</td><td>1 hour, not weekends</td></tr>
+          <tr><td>Missing rebate</td><td>After 4 hours, with the Order Number</td><td>To Customer Service</td><td>—</td></tr>
+        </tbody>
+      </table></div>
+      <p class="note">No IB applications or rebate changes are processed at weekends between 16:00 and 24:00 GMT. The IB Rebate Application Form: leave a whole row blank if the group shouldn't be enabled; enter 0 only when the group is enabled but a product has no rebate.</p>
+    </div></section>
+
+    <section class="s" id="rules-kyc"><div class="wrap">
+      <div class="head"><span class="eyebrow">KYC standards</span><h2>Documents that get <em>approved first time</em></h2></div>
+      <div class="grid g2">
+        <div class="card"><span class="pill g">Proof of identity</span>
+          <ul class="tick">
+            <li>Passport with 6+ months validity left; other IDs with 1+ month</li>
+            <li>Front and back, showing name, number, issue and expiry date, date of birth and issuer</li>
+            <li>National ID, driver's licence or government social security card</li>
+            <li>If an ID expires, a valid one is needed within one month</li>
+          </ul>
+        </div>
+        <div class="card"><span class="pill g">Proof of address</span>
+          <ul class="tick">
+            <li>Max 12 months old, full name and full residential address, document number visible</li>
+            <li>Utility bill (electricity, water, gas), bank or credit card statement, tax notice, lease or deed</li>
+          </ul>
+          <ul class="tick no" style="margin-top:6px"><li>Phone bills, courier receipts, insurance policies and screenshots</li></ul>
+        </div>
+      </div>
+      <div class="card" style="margin-top:16px"><span class="pill">Not accepted · Mauritius FSC entity (by nationality)</span>
+        <p>Afghanistan, Australia, Belarus, Central African Republic, Cuba, Darfur, DR Congo, Eritrea, Ethiopia, Guinea-Bissau, Haiti, Iran, Iraq, Lebanon, Libya, Mali, Mauritius, Montenegro, Myanmar, New Zealand, North Korea, Russia, Serbia, Seychelles, Somalia, South Sudan, Sudan, Syria, Tunisia, Ukraine, United Kingdom, United States, US Virgin Islands, Yemen, Zimbabwe.</p>
+      </div>
+    </div></section>
+
     <div class="footnote"><div class="wrap">
       <p class="who">Created by <b>Omar Benaissa</b> · Internal use only</p>
       <p>Risk disclosure: CFD trading is high risk and may not suit all investors. Losses may exceed deposits. EC Markets does not provide investment advice.</p>
@@ -1181,7 +1305,7 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
       <button role="tab" data-t="kyc" aria-selected="false"><b>KYC approval</b><span>One or more clients</span></button>
       <button role="tab" data-t="link" aria-selected="false"><b>Link client to IB</b><span>Client under an IB</span></button>
       <button role="tab" data-t="group" aria-selected="false"><b>Change account group</b><span>Move client to a group</span></button>
-      <button role="tab" data-t="client" aria-selected="false"><b>Client messages</b><span>9 messages · 4 languages</span></button>
+      <button role="tab" data-t="client" aria-selected="false"><b>Client messages</b><span>13 messages · 4 languages</span></button>
       <button role="tab" data-t="comm" aria-selected="false"><b>My commission</b><span>2026 tier calculator</span></button>
     </div>
 
@@ -1191,15 +1315,18 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
       <div data-form="rebate">
         <div style="display:grid;gap:16px">
           <h2>IB rebate setup</h2>
-          <p class="sub">Write the MIB UID and each SIB UID. Add or remove SIB levels as needed.</p>
+          <p class="sub">Write the MIB UID and each SIB UID. Add or remove SIB levels as needed. Support processes rebate changes within 2 hours on business days, and a Sub IB can never have a higher rebate than its Parent IB.</p>
+          <div class="row2">
           <label class="f" for="r-group">Account group
             <select id="r-group">
-              <option value="STDPXX">STDPXX</option>
-              <option value="STDPXV">STDPXV</option>
-              <option value="STDPX">STDPX</option>
-              <option value="STDPV">STDPV</option>
-              <option value="STD">STD</option>
+              <optgroup label="STD (pip-based rebate)"><option value="STDPXX">STD-PXX</option><option value="STDPXV">STD-PXV</option><option value="STDPX">STD-PX</option><option value="STDPV">STD-PV</option><option value="STD">STD</option></optgroup>
+              <optgroup label="ECN (USD per lot)"><option value="ECNUXX">ECN-UXX</option><option value="ECNUXV">ECN-UXV</option><option value="ECNUX">ECN-UX</option><option value="ECNUV">ECN-UV</option><option value="ECN">ECN</option></optgroup>
             </select>
+          </label>
+          <label class="f" for="r-unit">Rebate format (STD groups)<select id="r-unit" class="unitsel"><option value="pts">Points, e.g. 30/30/41</option><option value="pips">Pips, e.g. 3.0/3.0/4.1</option></select></label>
+          </div>
+          <label class="f" for="r-struct">How the SIBs sit
+            <select id="r-struct"><option value="flat">All SIBs directly under the MIB</option><option value="chain">A chain: SIB2 under SIB1, SIB3 under SIB2</option></select>
           </label>
           <div id="levels" style="display:grid;gap:10px"></div>
           <div class="btns">
@@ -1207,8 +1334,9 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
             <button class="btn" id="resetrb" type="button">Reset rebates to default</button>
           </div>
           <div class="warns" id="r-warn"></div>
+          <div class="ref" id="r-earn"></div>
           <div class="ref">
-            <p class="hint" style="margin-bottom:8px">Max MIB rebate by group (spread × 10). Order: FX / Index / Metal / Energy / Crypto.</p>
+            <p class="hint" style="margin-bottom:8px">Maximum MIB rebate by group. STD in points (10 points = 1 pip), ECN in USD per lot. Order: FX / Index / Metal / Energy / Crypto.</p>
             <table id="reftable"><thead><tr><th>Group</th><th>FX</th><th>Index</th><th>Metal</th><th>Energy</th><th>Crypto</th></tr></thead><tbody></tbody></table>
           </div>
         </div>
@@ -1217,14 +1345,23 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
       <div data-form="mib" hidden>
         <div style="display:grid;gap:16px">
           <h2>MIB link setup</h2>
-          <p class="sub">Write the client ID and tick the groups the IB needs. Rebates start at the maximum for each group; lower any number for a custom deal.</p>
+          <p class="sub">Write the client ID and tick the groups the IB needs. Rebates start at the maximum for each group; lower any number for a custom deal. The client must have completed KYC first.</p>
+          <div class="row2">
           <label class="f" for="m-id">Client ID<input id="m-id" type="text" placeholder="NP31725388"></label>
+          <label class="f" for="m-unit">Rebate format (STD groups)<select id="m-unit" class="unitsel"><option value="pts">Points, e.g. 30/30/41</option><option value="pips">Pips, e.g. 3.0/3.0/4.1</option></select></label>
+          </div>
           <div class="mtx">
             <div class="mh">Standard accounts <span>FX / Index / Metal / Energy / Crypto</span></div>
             <div class="mr head"><span></span><span>FX</span><span>Index</span><span>Metal</span><span>Energy</span><span>Crypto</span></div>
             <div id="m-std"></div>
           </div>
+          <div class="mtx" id="m-ecnbox" hidden>
+            <div class="mh">ECN accounts <span>USD per lot · FX / Index / Metal / Energy / Crypto</span></div>
+            <div class="mr head"><span></span><span>FX</span><span>Index</span><span>Metal</span><span>Energy</span><span>Crypto</span></div>
+            <div id="m-ecnrows"></div>
+          </div>
           <div class="switches">
+            <label for="m-ecn"><input id="m-ecn" type="checkbox"> Include ECN accounts</label>
             <label for="m-cent"><input id="m-cent" type="checkbox" checked> Include Cent accounts</label>
             <label for="m-mirror"><input id="m-mirror" type="checkbox" checked> Cent same as Standard</label>
           </div>
@@ -1232,6 +1369,7 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
             <div class="mh">Cent accounts <span>FX / Index / Metal / Energy</span></div>
             <div class="mr head"><span></span><span>FX</span><span>Index</span><span>Metal</span><span>Energy</span><span>Crypto</span></div>
             <div id="m-centrows"></div>
+            <div id="m-centecnwrap" hidden><div class="mh">Cent ECN accounts <span>USD per lot</span></div><div id="m-centecn"></div></div>
           </div>
           <div class="btns"><button class="btn" id="m-reset" type="button">Reset to maximum</button></div>
           <div class="warns" id="m-warn"></div>
@@ -1262,10 +1400,10 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
       <div data-form="group" hidden>
         <div style="display:grid;gap:16px">
           <h2>Change account group</h2>
-          <p class="sub">One client UID per line and the new group.</p>
+          <p class="sub">One client UID per line and the new group. Only Sales Team Leaders send group changes to support (one combined email daily at 09:00 GMT), so send this to your Team Leader. STD can't become ECN, and Cent can't become USD. Check every Parent IB above the client has the new group, or their rebates are lost.</p>
           <label class="f" for="g-uids">Client UID(s)<textarea id="g-uids" placeholder="IN28290268"></textarea></label>
           <label class="f" for="g-group">New account group
-            <select id="g-group"><option>STD</option><option>STDPV</option><option>STDPX</option><option>STDPXV</option><option selected>STDPXX</option></select>
+            <select id="g-group"><optgroup label="STD"><option>STD</option><option>STD-PV</option><option>STD-PX</option><option>STD-PXV</option><option selected>STD-PXX</option></optgroup><optgroup label="ECN"><option>ECN</option><option>ECN-UV</option><option>ECN-UX</option><option>ECN-UXV</option><option>ECN-UXX</option></optgroup><optgroup label="Cent"><option>C-STD</option><option>C-STD-PV</option><option>C-STD-PX</option><option>C-STD-PXV</option><option>C-STD-PXX</option><option>C-ECN</option><option>C-ECN-UV</option><option>C-ECN-UX</option><option>C-ECN-UXV</option><option>C-ECN-UXX</option></optgroup></select>
           </label>
           <div class="warns" id="g-warn"></div>
         </div>
@@ -1283,8 +1421,12 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
             <button type="button" data-tpl="follow" aria-pressed="false"><b>5</b> Follow-up, no reply</button>
             <button type="button" data-tpl="ib" aria-pressed="false"><b>6</b> IB introduction: how partners earn</button>
             <button type="button" data-tpl="withdraw" aria-pressed="false"><b>7</b> Withdrawal question</button>
-            <button type="button" data-tpl="pamm" aria-pressed="false"><b>8</b> PAMM: investing with a money manager</button>
-            <button type="button" data-tpl="pammmgr" aria-pressed="false"><b>9</b> PAMM: become a money manager</button>
+            <button type="button" data-tpl="swap" aria-pressed="false"><b>8</b> Swap-free account request</button>
+            <button type="button" data-tpl="extra" aria-pressed="false"><b>9</b> Extra trading accounts</button>
+            <button type="button" data-tpl="wcancel" aria-pressed="false"><b>10</b> Cancel a withdrawal</button>
+            <button type="button" data-tpl="rebate" aria-pressed="false"><b>11</b> IB: missing rebate</button>
+            <button type="button" data-tpl="pamm" aria-pressed="false"><b>12</b> PAMM: investing with a money manager</button>
+            <button type="button" data-tpl="pammmgr" aria-pressed="false"><b>13</b> PAMM: become a money manager</button>
           </div>
           <div class="f">Language
             <div class="seg inline" id="langs" role="group" aria-label="Language">
@@ -1353,6 +1495,7 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
         <button class="btn primary" id="copy" type="button">Copy message</button>
         <button class="btn wa" id="send-wa" type="button" hidden>Send on WhatsApp</button>
         <button class="btn" id="send-mail" type="button" hidden>Send by email</button>
+        <a class="btn" id="mailbtn" href="#" target="_blank" rel="noopener">Email support</a>
         <button class="btn" id="clear" type="button">Clear form</button>
       </div>
       <div class="copied" id="copied"></div>
@@ -1493,25 +1636,25 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
 
   // ---------- client: trading calculator ----------
   var SYM={EURUSD:{p:1.085,c:1e5,pip:1e-4,usdBase:false},GBPUSD:{p:1.27,c:1e5,pip:1e-4,usdBase:false},AUDUSD:{p:0.66,c:1e5,pip:1e-4,usdBase:false},
-    USDJPY:{p:150,c:1e5,pip:0.01,usdBase:true},USDCHF:{p:0.88,c:1e5,pip:1e-4,usdBase:true},USDCAD:{p:1.36,c:1e5,pip:1e-4,usdBase:true},XAUUSD:{p:2400,c:100,pip:1,usdBase:false,gold:true},
+    USDJPY:{p:150,c:1e5,pip:0.01,usdBase:true},USDCHF:{p:0.88,c:1e5,pip:1e-4,usdBase:true},USDCAD:{p:1.36,c:1e5,pip:1e-4,usdBase:true},XAUUSD:{p:2400,c:100,pip:1,usdBase:false,gold:true},USOIL:{p:70,c:1000,pip:0.01,usdBase:false,oil:true,step:1,dp:2},
     BTCUSD:{p:100000,c:1,pip:1,usdBase:false,coin:true,step:1000,dp:2},ETHUSD:{p:3500,c:1,pip:1,usdBase:false,coin:true,step:50,dp:2},SOLUSD:{p:150,c:1,pip:1,usdBase:false,coin:true,step:5,dp:2},
     XRPUSD:{p:2.5,c:1,pip:0.01,usdBase:false,coin:true,step:0.1,dp:4},LTCUSD:{p:90,c:1,pip:1,usdBase:false,coin:true,step:3,dp:2}};
   function setSym(){
     var s=SYM[$('tc-sym').value],dp=s.dp!=null?s.dp:(s.pip<0.001?4:2);
     $('tc-open').value=s.p.toFixed(dp);
-    $('tc-close').value=(s.p+(s.coin?s.step:s.gold?10:s.pip*50)).toFixed(dp);
-    $('tc-piplbl').textContent=s.coin?(s.pip<1?'Value of a $0.01 move':'Value of a $1 move'):s.gold?'Value of a $1 move':'Value of 1 pip';
-    $('tc-cswrap').hidden=!s.coin;$('tc-cs').value=s.c;
-    $('tc-note').textContent=s.coin?'Crypto contract sizes and maximum leverage differ by coin and are usually stricter than forex. Set the contract size shown in your platform\'s symbol specification.':'Standard lot: 100,000 units for forex, 100 oz for gold.';
+    $('tc-close').value=(s.p+(s.coin||s.oil?s.step:s.gold?10:s.pip*50)).toFixed(dp);
+    $('tc-piplbl').textContent=s.oil?'Value of a $0.01 move':s.coin?(s.pip<1?'Value of a $0.01 move':'Value of a $1 move'):s.gold?'Value of a $1 move':'Value of 1 pip';
+    $('tc-cswrap').hidden=!(s.coin||s.oil);$('tc-cs').value=s.c;$('tc-cslbl').textContent=s.oil?'Contract size (barrels per lot)':'Contract size (coins per lot)';
+    $('tc-note').textContent=s.oil?'Oil uses 40% of your account leverage (1:400 on a 1:1000 account). Check the contract size in your platform\'s symbol specification.':s.coin?'Crypto leverage is fixed at 1:200 whatever your account leverage. Contract sizes differ by coin: set the one shown in your platform\'s symbol specification.':'Standard lot: 100,000 units for forex, 100 oz for gold. Check contract specs on your platform.';
     calcTrade();
   }
   function num(id){var x=parseFloat($(id).value);return isFinite(x)?x:0}
   function calcTrade(){
-    var s=SYM[$('tc-sym').value],lots=num('tc-lots'),cs=s.coin?num('tc-cs'):s.c,lev=parseFloat($('tc-lev').value),o=num('tc-open'),c=num('tc-close'),dir=parseFloat($('tc-dir').value);
+    var s=SYM[$('tc-sym').value],lots=num('tc-lots'),cs=(s.coin||s.oil)?num('tc-cs'):s.c,acc=parseFloat($('tc-lev').value),lev=s.coin?200:s.oil?acc*0.4:acc,o=num('tc-open'),c=num('tc-close'),dir=parseFloat($('tc-dir').value);
     var units=lots*cs,pipv,margin,pl;
     if(s.usdBase){pipv=c>0?units*s.pip/c:0;margin=units/lev;pl=c>0?(c-o)*dir*units/c:0}
     else{pipv=units*s.pip;margin=units*o/lev;pl=(c-o)*dir*units}
-    $('tc-pip').textContent=money(pipv,2);$('tc-margin').textContent=money(margin,2);
+    $('tc-pip').textContent=money(pipv,2);$('tc-margin').textContent=money(margin,2);$('tc-levused').textContent='Leverage used: 1:'+(Math.round(lev*10)/10)+(s.coin?' (crypto is fixed)':s.oil?' (40% of account leverage)':'')+'. Stop out at 30% margin level, margin call at 50% (Mauritius FSC clients).';
     var el=$('tc-pl');el.textContent=(pl>0?'+':'')+money(pl,2);el.className='cbig '+(pl>0?'pos':pl<0?'neg':'');
     // balance, equity and margin health
     var bal=num('tc-bal'),eq=bal+pl,free=eq-margin,lvl=margin>0?eq/margin*100:null;
@@ -1634,7 +1777,7 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
   var RISK='\n\nRisk warning: CFD trading is high risk and losses may exceed your deposit.';
   var POSTS=[
     ['Regulated broker','Choosing a regulated broker matters. EC Markets is regulated by 7 authorities, including the FCA (UK) and ASIC (Australia), with trading on MT4, MT5 and its own app.\n\nOpen your account here: {L}'],
-    ['All markets, one account','Forex, gold, oil, indices, crypto and shares, all from one account with 24/5 support.\n\nRegister with EC Markets: {L}'],
+    ['All markets, one account','Forex, gold, oil, indices, crypto and shares, all from one account with 24/7 support.\n\nRegister with EC Markets: {L}'],
     ['Copy trading','Want to see how other traders trade? With EC Markets copy trading you can browse strategies and choose how much to allocate. Past performance is not a guide to future results.\n\nStart here: {L}']
   ];
   $('sk-link').value=store.get('hub-sk')||'';
@@ -1663,7 +1806,12 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
   var store={get:function(k){try{return localStorage.getItem(k)}catch(e){return null}},set:function(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
 
   // Max MIB rebate per group = spread mark-up x 10. Order FX/Index/Metal/Energy/Crypto
-  var MAX={STD:[10,10,21,10,10],STDPV:[15,15,26,15,10],STDPX:[20,20,31,20,10],STDPXV:[25,25,36,25,10],STDPXX:[30,30,41,30,10]};
+  var MAX={STD:[10,10,21,10,10],STDPV:[15,15,26,15,10],STDPX:[20,20,31,20,10],STDPXV:[25,25,36,25,10],STDPXX:[30,30,41,30,10],
+    ECN:[3,3,3,3,10],ECNUV:[8,8,8,8,10],ECNUX:[13,13,13,13,10],ECNUXV:[18,18,18,18,10],ECNUXX:[23,23,23,23,10]};
+  function isECN(g){return /^ECN/.test(g)}
+  function gname(g,cent){var b=isECN(g)?'ECN':'STD',x=g.slice(3);return (cent?'Cent ':'')+b+(x?'-'+x:'')}
+  var unit=(function(){try{return localStorage.getItem('bdm-unit')==='pips'?'pips':'pts'}catch(e){return 'pts'}})();
+  function fmtR(v,g){if(v===''||v==null)return '0';if(isECN(g)||unit!=='pips')return String(v);var n=parseFloat(v);return isFinite(n)?(n/10).toFixed(1):String(v)}
   var ASSETS=['FX','Index','Metal','Energy','Crypto'];
   var UIDRE=/^[A-Z]{2}\d{6,}$/;
   var tab='rebate';
@@ -1718,9 +1866,12 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
   };
   $('resetrb').onclick=function(){build(true,false)};
   $('r-group').onchange=function(){build(true,false)};
+  $('r-struct').onchange=function(){render()};
 
   // reference table
-  $('reftable').querySelector('tbody').innerHTML=Object.keys(MAX).reverse().map(function(g){return '<tr data-g="'+g+'"><td>'+g+'</td>'+MAX[g].map(function(v){return '<td>'+v+'</td>'}).join('')+'</tr>'}).join('');
+  function drawRef(){$('reftable').querySelector('tbody').innerHTML=['STDPXX','STDPXV','STDPX','STDPV','STD','ECNUXX','ECNUXV','ECNUX','ECNUV','ECN'].map(function(g){return '<tr data-g="'+g+'"><td>'+gname(g)+'</td>'+MAX[g].map(function(v){return '<td>'+fmtR(v,g)+(isECN(g)?'$':'')+'</td>'}).join('')+'</tr>'}).join('')}
+  drawRef();
+  ['r-unit','m-unit'].forEach(function(id){$(id).value=unit;$(id).addEventListener('change',function(){unit=$(id).value;['r-unit','m-unit'].forEach(function(o){$(o).value=unit});try{localStorage.setItem('bdm-unit',unit)}catch(e){}drawRef();render()})});
 
   // ----- helpers -----
   function lines(id){return $(id).value.split(/[\n,;]+/).map(function(s){return s.trim().toUpperCase()}).filter(Boolean)}
@@ -1752,12 +1903,11 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
   $('c-clear').onclick=function(){['c1','c2','c3'].forEach(function(id){$(id).value=''});calcComm()};
   calcComm();
 
-  // ----- MIB link setup -----
-  var MG=['STD','STDPV','STDPX','STDPXV','STDPXX'];
-  function gname(g,cent){return (cent?'Cent ':'')+(g==='STD'?'STD':'STD-'+g.slice(3))}
-  function mibRows(box,cent){
-    box.innerHTML=MG.map(function(g){
-      var on=g!=='STDPXV';
+  // ----- MIB link setup (STD + ECN, USD + Cent) -----
+  var MG=['STD','STDPV','STDPX','STDPXV','STDPXX'],EG=['ECN','ECNUV','ECNUX','ECNUXV','ECNUXX'];
+  function mibRows(box,cent,groups){
+    box.innerHTML=groups.map(function(g){
+      var on=!/XV$/.test(g);
       return '<div class="mr'+(on?'':' off')+'" data-g="'+g+'"><label class="g"><input type="checkbox"'+(on?' checked':'')+' aria-label="Include '+gname(g,cent)+'">'+gname(g,cent)+'</label>'+
         MAX[g].map(function(v,j){return cent&&j===4?'<span class="na">—</span>':'<input type="number" min="0" step="1" inputmode="decimal" value="'+v+'" aria-label="'+gname(g,cent)+' '+ASSETS[j]+'">'}).join('')+'</div>';
     }).join('');
@@ -1767,22 +1917,27 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
       return {g:r.dataset.g,on:r.querySelector('.g input').checked,el:r,vals:[].slice.call(r.querySelectorAll('input[type=number]')).map(function(x){return x.value})};
     });
   }
+  var MPAIRS=[['m-std','m-centrows'],['m-ecnrows','m-centecn']];
   function mibSync(){
-    var mirror=$('m-mirror').checked,std=mibRead('m-std');
-    $('m-centbox').hidden=!$('m-cent').checked;
-    $('m-mirror').parentNode.style.display=$('m-cent').checked?'':'none';
-    mibRead('m-centrows').forEach(function(r,i){
-      var nums=r.el.querySelectorAll('input[type=number]');
-      if(mirror){r.el.querySelector('.g input').checked=std[i].on;[].forEach.call(nums,function(x,j){x.value=std[i].vals[j]})}
-      [].forEach.call(nums,function(x){x.disabled=mirror});
-      r.el.querySelector('.g input').disabled=mirror;
+    var mirror=$('m-mirror').checked,ecn=$('m-ecn').checked,cent=$('m-cent').checked;
+    $('m-ecnbox').hidden=!ecn;$('m-centecnwrap').hidden=!ecn;
+    $('m-centbox').hidden=!cent;
+    $('m-mirror').parentNode.style.display=cent?'':'none';
+    MPAIRS.forEach(function(p){
+      var src=mibRead(p[0]);
+      mibRead(p[1]).forEach(function(r,i){
+        var nums=r.el.querySelectorAll('input[type=number]');
+        if(mirror){r.el.querySelector('.g input').checked=src[i].on;[].forEach.call(nums,function(x,j){x.value=src[i].vals[j]})}
+        [].forEach.call(nums,function(x){x.disabled=mirror});
+        r.el.querySelector('.g input').disabled=mirror;
+      });
     });
-    ['m-std','m-centrows'].forEach(function(id){mibRead(id).forEach(function(r){r.el.classList.toggle('off',!r.on)})});
+    ['m-std','m-centrows','m-ecnrows','m-centecn'].forEach(function(id){mibRead(id).forEach(function(r){r.el.classList.toggle('off',!r.on)})});
   }
-  function mibReset(){mibRows($('m-std'),false);mibRows($('m-centrows'),true);mibSync()}
+  function mibReset(){mibRows($('m-std'),false,MG);mibRows($('m-centrows'),true,MG);mibRows($('m-ecnrows'),false,EG);mibRows($('m-centecn'),true,EG);mibSync()}
   mibReset();
-  ['m-std','m-centrows'].forEach(function(id){$(id).addEventListener('input',function(){mibSync();render()});$(id).addEventListener('change',function(){mibSync();render()})});
-  ['m-cent','m-mirror'].forEach(function(id){$(id).addEventListener('change',function(){mibSync();render()})});
+  ['m-std','m-centrows','m-ecnrows','m-centecn'].forEach(function(id){$(id).addEventListener('input',function(){mibSync();render()});$(id).addEventListener('change',function(){mibSync();render()})});
+  ['m-cent','m-mirror','m-ecn'].forEach(function(id){$(id).addEventListener('change',function(){mibSync();render()})});
   $('m-id').addEventListener('input',function(e){e.target.value=e.target.value.toUpperCase().replace(/\s/g,'');render()});
   $('m-reset').onclick=function(){mibReset();render()};
   function mibMsg(w){
@@ -1795,15 +1950,21 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
           var num=parseFloat(v);
           if(isFinite(num)&&num>MAX[r.g][j]){r.el.querySelectorAll('input[type=number]')[j].classList.add('over');w.push(gname(r.g,cent)+' '+ASSETS[j]+' ('+num+') is above the maximum ('+MAX[r.g][j]+').')}
         });
-        return gname(r.g,cent)+': '+vals.map(function(v){return v===''?'0':v}).join('/');
+        return gname(r.g,cent)+': '+vals.map(function(v){return fmtR(v,r.g)}).join('/');
       }).join('\n');
     }
     document.querySelectorAll('#forms .mr input.over').forEach(function(x){x.classList.remove('over')});
-    var std=block(mibRead('m-std'),false),cent=$('m-cent').checked?block(mibRead('m-centrows'),true):'';
-    if(!std&&!cent)w.push('Tick at least one account group.');
+    var ecn=$('m-ecn').checked,cent=$('m-cent').checked,pu=unit==='pips'?' (pips)':'';
+    var std=block(mibRead('m-std'),false),
+        e=ecn?block(mibRead('m-ecnrows'),false):'',
+        cs=cent?block(mibRead('m-centrows'),true):'',
+        ce=cent&&ecn?block(mibRead('m-centecn'),true):'';
+    if(!std&&!e&&!cs&&!ce)w.push('Tick at least one account group.');
     var t='Hi Support Team,\n\nKindly create the MIB link for the client below.\n\nIB Setup Request\n\nClient ID - '+(id||ph('[Client ID]'));
-    if(std)t+='\n\nStandard accounts\nFX / Index / Metal / Energy / Crypto\n\n'+std;
-    if(cent)t+='\n\nCent accounts\nFX / Index / Metal / Energy\n\n'+cent;
+    if(std)t+='\n\nStandard accounts'+pu+'\nFX / Index / Metal / Energy / Crypto\n\n'+std;
+    if(e)t+='\n\nECN accounts (USD per lot)\nFX / Index / Metal / Energy / Crypto\n\n'+e;
+    if(cs)t+='\n\nCent accounts'+pu+'\nFX / Index / Metal / Energy\n\n'+cs;
+    if(ce)t+='\n\nCent ECN accounts (USD per lot)\nFX / Index / Metal / Energy\n\n'+ce;
     return t+sign();
   }
 
@@ -1824,11 +1985,11 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
     if(me&&!EMAILRE.test(me))w.push('Your email "'+me+'" does not look right.');
     return w;
   }
-  var SUBJ={
-    en:{intro:'EC Markets: thank you for your time today',open:'How to open your EC Markets account',kyc:'Documents needed to verify your EC Markets account',welcome:'Welcome to EC Markets: your account is verified',follow:'Following up: EC Markets',ib:'EC Markets Partner (IB) Programme',withdraw:'Your EC Markets withdrawal question',pamm:'EC Markets PAMM: how investing with a money manager works',pammmgr:'Become an EC Markets PAMM money manager'},
-    ar:{intro:'EC Markets: شكراً على وقتك اليوم',open:'كيف تفتح حسابك لدى EC Markets',kyc:'المستندات المطلوبة لتوثيق حسابك لدى EC Markets',welcome:'أهلاً بك في EC Markets: تم توثيق حسابك',follow:'متابعة: EC Markets',ib:'برنامج شركاء EC Markets (IB)',withdraw:'بخصوص استفسار السحب لدى EC Markets',pamm:'EC Markets PAMM: كيف يعمل الاستثمار عبر مدير أموال',pammmgr:'كن مدير أموال PAMM لدى EC Markets'},
-    hi:{intro:'EC Markets: आज समय देने के लिए धन्यवाद',open:'EC Markets में अकाउंट कैसे खोलें',kyc:'आपका EC Markets अकाउंट वेरिफ़ाई करने के लिए ज़रूरी दस्तावेज़',welcome:'EC Markets में स्वागत है: आपका अकाउंट वेरिफ़ाई हो गया है',follow:'फ़ॉलो-अप: EC Markets',ib:'EC Markets पार्टनर (IB) प्रोग्राम',withdraw:'आपका EC Markets निकासी संबंधी सवाल',pamm:'EC Markets PAMM: मनी मैनेजर के ज़रिए निवेश कैसे काम करता है',pammmgr:'EC Markets के PAMM मनी मैनेजर बनें'},
-    zh:{intro:'EC Markets：感谢您今天抽空沟通',open:'如何开设 EC Markets 账户',kyc:'验证您的 EC Markets 账户所需文件',welcome:'欢迎加入 EC Markets：您的账户已通过验证',follow:'跟进：EC Markets',ib:'EC Markets 合作伙伴（IB）计划',withdraw:'关于您的 EC Markets 出金问题',pamm:'EC Markets PAMM：资金经理投资如何运作',pammmgr:'成为 EC Markets PAMM 资金经理'}
+  var CSUBJ={
+    en:{intro:'EC Markets: thank you for your time today',open:'How to open your EC Markets account',kyc:'Documents needed to verify your EC Markets account',welcome:'Welcome to EC Markets: your account is verified',follow:'Following up: EC Markets',ib:'EC Markets Partner (IB) Programme',withdraw:'Your EC Markets withdrawal question',pamm:'EC Markets PAMM: how investing with a money manager works',pammmgr:'Become an EC Markets PAMM money manager',swap:'Swap-free account request',extra:'Request for additional trading accounts',wcancel:'Cancelling your EC Markets withdrawal',rebate:'About your EC Markets rebate'},
+    ar:{intro:'EC Markets: شكراً على وقتك اليوم',open:'كيف تفتح حسابك لدى EC Markets',kyc:'المستندات المطلوبة لتوثيق حسابك لدى EC Markets',welcome:'أهلاً بك في EC Markets: تم توثيق حسابك',follow:'متابعة: EC Markets',ib:'برنامج شركاء EC Markets (IB)',withdraw:'بخصوص استفسار السحب لدى EC Markets',pamm:'EC Markets PAMM: كيف يعمل الاستثمار عبر مدير أموال',pammmgr:'كن مدير أموال PAMM لدى EC Markets',swap:'طلب حساب خالٍ من الفوائد (Swap-Free)',extra:'طلب حسابات تداول إضافية',wcancel:'إلغاء طلب السحب لدى EC Markets',rebate:'بخصوص عمولتك لدى EC Markets'},
+    hi:{intro:'EC Markets: आज समय देने के लिए धन्यवाद',open:'EC Markets में अकाउंट कैसे खोलें',kyc:'आपका EC Markets अकाउंट वेरिफ़ाई करने के लिए ज़रूरी दस्तावेज़',welcome:'EC Markets में स्वागत है: आपका अकाउंट वेरिफ़ाई हो गया है',follow:'फ़ॉलो-अप: EC Markets',ib:'EC Markets पार्टनर (IB) प्रोग्राम',withdraw:'आपका EC Markets निकासी संबंधी सवाल',pamm:'EC Markets PAMM: मनी मैनेजर के ज़रिए निवेश कैसे काम करता है',pammmgr:'EC Markets के PAMM मनी मैनेजर बनें',swap:'स्वैप-फ्री अकाउंट का अनुरोध',extra:'अतिरिक्त ट्रेडिंग अकाउंट का अनुरोध',wcancel:'आपकी EC Markets निकासी रद्द करना',rebate:'आपके EC Markets रिबेट के बारे में'},
+    zh:{intro:'EC Markets：感谢您今天抽空沟通',open:'如何开设 EC Markets 账户',kyc:'验证您的 EC Markets 账户所需文件',welcome:'欢迎加入 EC Markets：您的账户已通过验证',follow:'跟进：EC Markets',ib:'EC Markets 合作伙伴（IB）计划',withdraw:'关于您的 EC Markets 出金问题',pamm:'EC Markets PAMM：资金经理投资如何运作',pammmgr:'成为 EC Markets PAMM 资金经理',swap:'免隔夜利息账户申请',extra:'申请更多交易账户',wcancel:'取消您的 EC Markets 出金',rebate:'关于您的 EC Markets 返佣'}
   };
   function cleanText(){return text.replace(/⁣/g,'')}
   function sendReady(){
@@ -1846,7 +2007,7 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
     if(!sendReady())return;
     var to=$('cl-email').value.trim();
     if(to&&!EMAILRE.test(to)){$('copied').textContent='Check the client email address.';$('copied').style.color='var(--warn)';return}
-    var subj=(SUBJ[lang]||SUBJ.en)[tpl]||'EC Markets';
+    var subj=(CSUBJ[lang]||CSUBJ.en)[tpl]||'EC Markets';
     var base='mailto:'+to+'?subject='+encodeURIComponent(subj),body=cleanText().replace(/\n/g,'\r\n');
     var full=base+'&body='+encodeURIComponent(body);
     if(full.length>1900){
@@ -1881,50 +2042,84 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
     };
     var B={
       en:{
-        intro:WHO.en+' Thank you for your time on our call today.\n\nAs discussed, here is a short overview:\n• Regulated by 7 authorities, including the UAE Capital Market Authority (formerly SCA), the FCA (UK) and ASIC (Australia)\n• Official Global Partner of Liverpool FC\n• Trade forex, gold, oil, indices, crypto and shares on MT4, MT5 and the EC Markets app\n• 24/5 support\n\nYou can learn more here: '+link+'\n\nFeel free to message me here with any questions.',
+        intro:WHO.en+' Thank you for your time on our call today.\n\nAs discussed, here is a short overview:\n• Regulated by 7 authorities, including the UAE Capital Market Authority (formerly SCA), the FCA (UK) and ASIC (Australia)\n• Official Global Partner of Liverpool FC\n• Trade forex, gold, oil, indices, crypto and shares on MT4, MT5 and the EC Markets app\n• 24/7 support in 7 languages\n\nYou can learn more here: '+link+'\n\nFeel free to message me here with any questions.',
         open:'Opening your EC Markets account only takes a few minutes:\n\n1. Register here: '+link+'\n2. Verify your email address\n3. Upload your ID and proof of address\n4. Once approved, choose your account type and download MT4, MT5 or the EC Markets app\n\nIf you get stuck at any step, message me and I will guide you.\n\nImportant: never share your password or verification codes with anyone, including me.',
-        kyc:'Your EC Markets registration is almost complete. To verify your account, please upload the following in your client portal:\n\n'+docs+'\n\nTips: send clear colour photos with all four corners visible. Proof of address should be dated within the last 3 months and show your full name and address.\n\nOnce uploaded, let me know and I will follow up on your approval.',
-        welcome:'Good news: your EC Markets account has been verified. Welcome aboard!\n\nNext steps:\n• Log in to your client portal: '+link+'\n• Download MetaTrader 4, MetaTrader 5 or the EC Markets app (App Store / Google Play)\n• Your MT login details have been sent to your registered email\n\nOur support team is available 24/5 at support@ecmarkets.com, and I am here for any questions about the platform.',
+        kyc:'Your EC Markets registration is almost complete. To verify your account, please upload the following in your client portal:\n\n'+docs+'\n\nTips: send clear colour photos with all four corners visible. Passports must be valid for at least 6 more months; phone bills and screenshots are not accepted. Proof of address should be dated within the last 12 months and show your full name and address.\n\nOnce uploaded, let me know and I will follow up on your approval.',
+        welcome:'Good news: your EC Markets account has been verified. Welcome aboard!\n\nNext steps:\n• Log in to your client portal: '+link+'\n• Download MetaTrader 4, MetaTrader 5 or the EC Markets app (App Store / Google Play)\n• Your MT login details have been sent to your registered email\n\nOur support team is available 24/7 at support@ecmarkets.com, and I am here for any questions about the platform.',
         follow:'Just following up on our last conversation. Do you have any questions about EC Markets or about opening your account?\n\nI am happy to arrange a short call at a time that suits you.',
-        ib:WHO.en+' I would like to introduce our Partner (IB) Programme, winner of Best IB / Affiliate Programme at the UF Awards 2025.\n\nHow you earn as an EC Markets partner:\n• Commission on every trade your referred clients place, for life\n• Commissions paid within 2 hours\n• Unlimited multi-level structure: you also earn from the sub-IBs you bring in\n• Zero-minute rule: rebates count with no minimum trade duration\n• Tailored deals and rebate plans built around your network\n\nWhat you get:\n• Real-time reporting on your clients and earnings\n• Marketing support: tracking links, landing pages and ads\n• 24/5 dedicated partner support\n• A broker regulated by 7 authorities and Official Global Partner of Liverpool FC\n\nJoin a network of 20,000+ active affiliates. Register as a partner here: '+link+'\n\nI would be happy to arrange a short call to build a rebate plan that fits your network.\n\nYour earnings depend on your clients\' trading activity and are not guaranteed.',
-        withdraw:'Thank you for your message about your withdrawal.\n\nWithdrawals are requested by you directly from your client portal: '+link+'\n\nFor any question about the status or processing of a withdrawal, our support team handles this directly and is available 24/5:\n• Email: support@ecmarkets.com\n• Phone: +248 422 4099\n\nFor your security, never share your password or verification codes with anyone, including me.\n\nI am here if you need anything else.',
+        ib:WHO.en+' I would like to introduce our Partner (IB) Programme, winner of Best IB / Affiliate Programme at the UF Awards 2025.\n\nHow you earn as an EC Markets partner:\n• Commission on every trade your referred clients place, for life\n• Rebates credited after each closed trade, usually within 30 minutes\n• Unlimited multi-level structure: you also earn from the sub-IBs you bring in\n• Zero-minute rule: rebates count with no minimum trade duration\n• Tailored deals and rebate plans built around your network\n\nWhat you get:\n• Real-time reporting on your clients and earnings\n• Marketing support: tracking links, landing pages and ads\n• 24/5 dedicated partner support\n• A broker regulated by 7 authorities and Official Global Partner of Liverpool FC\n\nJoin a network of 20,000+ active affiliates. Register as a partner here: '+link+'\n\nI would be happy to arrange a short call to build a rebate plan that fits your network.\n\nYour earnings depend on your clients\' trading activity and are not guaranteed.',
+        withdraw:'Thank you for your message about your withdrawal.\n\nWithdrawals are requested by you directly from your client portal: '+link+'\n\nGood to know:\n• The amount you deposited goes back by the same method you used to deposit (anti-money-laundering rule). After that, there is no restriction on the method.\n• Most methods arrive the next business day; an international bank wire can take up to 5 business days.\n• You can cancel a withdrawal yourself in Client Portal → Transaction History until it is approved.\n\nFor any question about the status or processing of a withdrawal, our support team handles this directly and is available 24/7:\n• Email: support@ecmarkets.com\n• Phone: +248 422 4099\n\nFor your security, never share your password or verification codes with anyone, including me.\n\nI am here if you need anything else.',
         pamm:'Here is a quick overview of PAMM (money manager) investing with EC Markets:\n\n• You invest in a money manager\'s strategy instead of trading yourself\n• Add an investment account in your client portal. The amount must meet the manager\'s minimum (the default minimum is 100)\n• Trades are allocated by your share of the pool, and profit is shared with the manager at the end of each cycle (weekly, monthly or quarterly, settled at 23:59 UTC+2)\n• You can deposit, transfer, pause or unbind from your account page. Pausing closes your share of open positions\n• Investor accounts cannot trade on their own\n\nMore details: '+link+'\n\nInvesting through a money manager carries risk, and you may lose some or all of your investment. Past performance is not a guide to future results.',
         pammmgr:'Here is how to become a PAMM money manager with EC Markets:\n\n• Apply for a separate PAMM account. It needs approval, and an existing account with trading history cannot be converted\n• Choose STD or ECN on MT5 (default leverage 1:500)\n• Set your minimum investment, your profit-sharing ratio (0 to 100%) and your cycle: weekly, monthly or quarterly\n• No capital of your own is required; the funds come from your investors\n• Profit sharing is settled at 23:59 UTC+2 on the last day of each cycle\n\nStart here: '+link+'\n\nI can walk you through the setup on a call. Managing other people\'s money carries risk, and results are not guaranteed.'
       },
       ar:{
-        intro:WHO.ar+' شكراً على وقتك في مكالمتنا اليوم.\n\nكما تحدثنا، إليك نبذة مختصرة:\n• شركة مرخّصة من 7 جهات رقابية، منها هيئة سوق رأس المال في الإمارات (هيئة الأوراق المالية والسلع سابقاً)، وFCA في بريطانيا، وASIC في أستراليا\n• الشريك العالمي الرسمي لنادي ليفربول\n• تداول العملات والذهب والنفط والمؤشرات والعملات الرقمية والأسهم عبر MT4 وMT5 وتطبيق EC Markets\n• دعم متواصل 24/5\n\nلمزيد من المعلومات: '+link+'\n\nلا تتردد في مراسلتي هنا لأي استفسار.',
+        intro:WHO.ar+' شكراً على وقتك في مكالمتنا اليوم.\n\nكما تحدثنا، إليك نبذة مختصرة:\n• شركة مرخّصة من 7 جهات رقابية، منها هيئة سوق رأس المال في الإمارات (هيئة الأوراق المالية والسلع سابقاً)، وFCA في بريطانيا، وASIC في أستراليا\n• الشريك العالمي الرسمي لنادي ليفربول\n• تداول العملات والذهب والنفط والمؤشرات والعملات الرقمية والأسهم عبر MT4 وMT5 وتطبيق EC Markets\n• دعم متواصل 24/7\n\nلمزيد من المعلومات: '+link+'\n\nلا تتردد في مراسلتي هنا لأي استفسار.',
         open:'فتح حسابك لدى EC Markets يستغرق دقائق فقط:\n\n1. سجّل من هنا: '+link+'\n2. فعّل بريدك الإلكتروني\n3. ارفع صورة الهوية وإثبات العنوان\n4. بعد الموافقة، اختر نوع الحساب وحمّل MT4 أو MT5 أو تطبيق EC Markets\n\nإذا واجهت أي صعوبة، راسلني وسأساعدك خطوة بخطوة.\n\nمهم: لا تشارك كلمة المرور أو رموز التحقق مع أي شخص، بما في ذلك أنا.',
-        kyc:'تسجيلك لدى EC Markets على وشك الاكتمال. لتوثيق حسابك، يرجى رفع المستندات التالية في بوابة العميل:\n\n'+docs+'\n\nنصائح: أرسل صوراً ملوّنة وواضحة تظهر فيها الزوايا الأربع. ويجب أن يكون إثبات العنوان بتاريخ لا يتجاوز 3 أشهر ويظهر فيه اسمك الكامل وعنوانك.\n\nبعد الرفع، أخبرني وسأتابع الموافقة على حسابك.',
-        welcome:'خبر سار: تم توثيق حسابك لدى EC Markets. أهلاً وسهلاً بك!\n\nالخطوات التالية:\n• سجّل الدخول إلى بوابة العميل: '+link+'\n• حمّل MetaTrader 4 أو MetaTrader 5 أو تطبيق EC Markets من App Store أو Google Play\n• تم إرسال بيانات دخول MT إلى بريدك الإلكتروني المسجّل\n\nفريق الدعم متاح 24/5 على support@ecmarkets.com، وأنا في خدمتك لأي استفسار عن المنصة.',
+        kyc:'تسجيلك لدى EC Markets على وشك الاكتمال. لتوثيق حسابك، يرجى رفع المستندات التالية في بوابة العميل:\n\n'+docs+'\n\nنصائح: أرسل صوراً ملوّنة وواضحة تظهر فيها الزوايا الأربع. يجب أن يكون جواز السفر صالحاً لمدة 6 أشهر على الأقل، ولا تُقبل فواتير الهاتف أو لقطات الشاشة. ويجب أن يكون إثبات العنوان بتاريخ لا يتجاوز 12 شهراً ويظهر فيه اسمك الكامل وعنوانك.\n\nبعد الرفع، أخبرني وسأتابع الموافقة على حسابك.',
+        welcome:'خبر سار: تم توثيق حسابك لدى EC Markets. أهلاً وسهلاً بك!\n\nالخطوات التالية:\n• سجّل الدخول إلى بوابة العميل: '+link+'\n• حمّل MetaTrader 4 أو MetaTrader 5 أو تطبيق EC Markets من App Store أو Google Play\n• تم إرسال بيانات دخول MT إلى بريدك الإلكتروني المسجّل\n\nفريق الدعم متاح 24/7 على support@ecmarkets.com، وأنا في خدمتك لأي استفسار عن المنصة.',
         follow:'أتابع معك بخصوص حديثنا الأخير. هل لديك أي استفسار عن EC Markets أو عن فتح حسابك؟\n\nيسعدني ترتيب مكالمة قصيرة في الوقت الذي يناسبك.',
-        ib:WHO.ar+' يسعدني أن أعرّفك على برنامج الشركاء (IB) لدينا، الحائز على جائزة أفضل برنامج IB / شراكة في UF Awards 2025.\n\nكيف تربح كشريك لدى EC Markets:\n• عمولة على كل صفقة ينفذها العملاء الذين تحيلهم، مدى الحياة\n• صرف العمولات خلال ساعتين\n• هيكل متعدد المستويات بلا حدود: تربح أيضاً من الوسطاء الفرعيين الذين تضمّهم\n• قاعدة الصفر دقيقة: تُحتسب العمولات دون حد أدنى لمدة الصفقة\n• عروض وخطط عمولات مصممة حسب شبكتك\n\nما تحصل عليه:\n• تقارير فورية عن عملائك وأرباحك\n• دعم تسويقي: روابط تتبع وصفحات هبوط وإعلانات\n• دعم مخصص للشركاء 24/5\n• وسيط مرخّص من 7 جهات رقابية والشريك العالمي الرسمي لنادي ليفربول\n\nانضم إلى شبكة تضم أكثر من 20,000 شريك نشط. سجّل كشريك من هنا: '+link+'\n\nيسعدني ترتيب مكالمة قصيرة لبناء خطة عمولات تناسب شبكتك.\n\nتعتمد أرباحك على نشاط تداول عملائك وهي غير مضمونة.',
-        withdraw:'شكراً على رسالتك بخصوص السحب.\n\nيتم طلب السحب من قبلك مباشرة عبر بوابة العميل: '+link+'\n\nلأي استفسار عن حالة السحب أو معالجته، يتولى فريق الدعم ذلك مباشرة وهو متاح 24/5:\n• البريد الإلكتروني: support@ecmarkets.com\n• الهاتف: +248 422 4099\n\nلحمايتك، لا تشارك كلمة المرور أو رموز التحقق مع أي شخص، بما في ذلك أنا.\n\nأنا في خدمتك لأي شيء آخر.',
+        ib:WHO.ar+' يسعدني أن أعرّفك على برنامج الشركاء (IB) لدينا، الحائز على جائزة أفضل برنامج IB / شراكة في UF Awards 2025.\n\nكيف تربح كشريك لدى EC Markets:\n• عمولة على كل صفقة ينفذها العملاء الذين تحيلهم، مدى الحياة\n• تُضاف العمولات بعد إغلاق كل صفقة، عادةً خلال 30 دقيقة\n• هيكل متعدد المستويات بلا حدود: تربح أيضاً من الوسطاء الفرعيين الذين تضمّهم\n• قاعدة الصفر دقيقة: تُحتسب العمولات دون حد أدنى لمدة الصفقة\n• عروض وخطط عمولات مصممة حسب شبكتك\n\nما تحصل عليه:\n• تقارير فورية عن عملائك وأرباحك\n• دعم تسويقي: روابط تتبع وصفحات هبوط وإعلانات\n• دعم مخصص للشركاء 24/5\n• وسيط مرخّص من 7 جهات رقابية والشريك العالمي الرسمي لنادي ليفربول\n\nانضم إلى شبكة تضم أكثر من 20,000 شريك نشط. سجّل كشريك من هنا: '+link+'\n\nيسعدني ترتيب مكالمة قصيرة لبناء خطة عمولات تناسب شبكتك.\n\nتعتمد أرباحك على نشاط تداول عملائك وهي غير مضمونة.',
+        withdraw:'شكراً على رسالتك بخصوص السحب.\n\nيتم طلب السحب من قبلك مباشرة عبر بوابة العميل: '+link+'\n\nمعلومات مهمة:\n• يُعاد المبلغ الذي أودعته بنفس طريقة الإيداع (قاعدة مكافحة غسل الأموال). بعد ذلك لا يوجد قيد على طريقة السحب.\n• تصل معظم الطرق في يوم العمل التالي، وقد تستغرق الحوالة البنكية الدولية حتى 5 أيام عمل.\n• يمكنك إلغاء طلب السحب بنفسك من بوابة العميل ← سجل المعاملات قبل الموافقة عليه.\n\nلأي استفسار عن حالة السحب أو معالجته، يتولى فريق الدعم ذلك مباشرة وهو متاح 24/7:\n• البريد الإلكتروني: support@ecmarkets.com\n• الهاتف: +248 422 4099\n\nلحمايتك، لا تشارك كلمة المرور أو رموز التحقق مع أي شخص، بما في ذلك أنا.\n\nأنا في خدمتك لأي شيء آخر.',
         pamm:'نظرة سريعة على الاستثمار عبر مدير أموال (PAMM) لدى EC Markets:\n\n• تستثمر في استراتيجية مدير أموال بدلاً من التداول بنفسك\n• أضف حساب استثمار من بوابة العميل، على أن يبلغ المبلغ الحد الأدنى الذي يحدده المدير (الحد الأدنى الافتراضي 100)\n• تُوزَّع الصفقات حسب حصتك في المجموعة، ويُقتسم الربح مع المدير في نهاية كل دورة (أسبوعية أو شهرية أو ربع سنوية، وتتم التسوية عند 23:59 بتوقيت UTC+2)\n• يمكنك الإيداع أو التحويل أو الإيقاف المؤقت أو فك الارتباط من صفحة حسابك. الإيقاف المؤقت يغلق حصتك من الصفقات المفتوحة\n• لا يمكن لحسابات المستثمرين التداول بشكل مستقل\n\nلمزيد من التفاصيل: '+link+'\n\nالاستثمار عبر مدير أموال ينطوي على مخاطر، وقد تخسر جزءاً من استثمارك أو كله. الأداء السابق ليس مؤشراً على النتائج المستقبلية.',
         pammmgr:'كيف تصبح مدير أموال PAMM لدى EC Markets:\n\n• قدّم طلباً لحساب PAMM منفصل. يتطلب موافقة، ولا يمكن تحويل حساب قائم له سجل تداول\n• اختر STD أو ECN على MT5 (الرافعة الافتراضية 1:500)\n• حدّد الحد الأدنى للاستثمار ونسبة مشاركة الأرباح (من 0 إلى 100%) والدورة: أسبوعية أو شهرية أو ربع سنوية\n• لا تحتاج إلى رأس مال خاص بك، فالأموال تأتي من المستثمرين\n• تتم تسوية مشاركة الأرباح عند 23:59 بتوقيت UTC+2 في اليوم الأخير من كل دورة\n\nابدأ من هنا: '+link+'\n\nيسعدني شرح خطوات الإعداد في مكالمة. إدارة أموال الآخرين تنطوي على مخاطر، والنتائج غير مضمونة.'
       },
       hi:{
-        intro:WHO.hi+' आज कॉल पर समय देने के लिए धन्यवाद।\n\nजैसा कि हमने बात की, यहाँ एक संक्षिप्त जानकारी है:\n• 7 नियामक संस्थाओं द्वारा विनियमित, जिनमें UAE कैपिटल मार्केट अथॉरिटी (पूर्व में SCA), FCA (UK) और ASIC (ऑस्ट्रेलिया) शामिल हैं\n• लिवरपूल FC के आधिकारिक ग्लोबल पार्टनर\n• MT4, MT5 और EC Markets ऐप पर फ़ॉरेक्स, गोल्ड, ऑयल, इंडेक्स, क्रिप्टो और शेयर ट्रेड करें\n• 24/5 सपोर्ट\n\nअधिक जानकारी के लिए: '+link+'\n\nकोई भी सवाल हो तो मुझे यहाँ मैसेज करें।',
+        intro:WHO.hi+' आज कॉल पर समय देने के लिए धन्यवाद।\n\nजैसा कि हमने बात की, यहाँ एक संक्षिप्त जानकारी है:\n• 7 नियामक संस्थाओं द्वारा विनियमित, जिनमें UAE कैपिटल मार्केट अथॉरिटी (पूर्व में SCA), FCA (UK) और ASIC (ऑस्ट्रेलिया) शामिल हैं\n• लिवरपूल FC के आधिकारिक ग्लोबल पार्टनर\n• MT4, MT5 और EC Markets ऐप पर फ़ॉरेक्स, गोल्ड, ऑयल, इंडेक्स, क्रिप्टो और शेयर ट्रेड करें\n• 24/7 सपोर्ट\n\nअधिक जानकारी के लिए: '+link+'\n\nकोई भी सवाल हो तो मुझे यहाँ मैसेज करें।',
         open:'EC Markets में अकाउंट खोलने में बस कुछ मिनट लगते हैं:\n\n1. यहाँ रजिस्टर करें: '+link+'\n2. अपना ईमेल वेरिफ़ाई करें\n3. अपना ID और पते का प्रमाण अपलोड करें\n4. अप्रूवल के बाद, अकाउंट टाइप चुनें और MT4, MT5 या EC Markets ऐप डाउनलोड करें\n\nकिसी भी स्टेप पर दिक्कत हो तो मुझे मैसेज करें, मैं हर स्टेप में मदद के लिए यहाँ हूँ।\n\nज़रूरी: अपना पासवर्ड या वेरिफ़िकेशन कोड किसी के साथ साझा न करें, मेरे साथ भी नहीं।',
-        kyc:'EC Markets में आपका रजिस्ट्रेशन लगभग पूरा हो गया है। अपना अकाउंट वेरिफ़ाई करने के लिए, कृपया क्लाइंट पोर्टल में ये दस्तावेज़ अपलोड करें:\n\n'+docs+'\n\nसुझाव: साफ़ रंगीन फ़ोटो भेजें जिनमें चारों कोने दिखें। पते का प्रमाण पिछले 3 महीनों के भीतर का होना चाहिए और उसमें आपका पूरा नाम और पता दिखना चाहिए।\n\nअपलोड करने के बाद मुझे बताएँ, ताकि मैं आपके अप्रूवल पर फ़ॉलो-अप कर सकूँ।',
-        welcome:'अच्छी ख़बर: EC Markets में आपका अकाउंट वेरिफ़ाई हो गया है। आपका स्वागत है!\n\nअगले स्टेप:\n• अपने क्लाइंट पोर्टल में लॉग इन करें: '+link+'\n• MetaTrader 4, MetaTrader 5 या EC Markets ऐप डाउनलोड करें (App Store / Google Play)\n• आपके MT लॉगिन विवरण आपके रजिस्टर्ड ईमेल पर भेज दिए गए हैं\n\nहमारी सपोर्ट टीम 24/5 support@ecmarkets.com पर उपलब्ध है, और प्लेटफ़ॉर्म से जुड़े किसी भी सवाल के लिए मैं भी यहाँ हूँ।',
+        kyc:'EC Markets में आपका रजिस्ट्रेशन लगभग पूरा हो गया है। अपना अकाउंट वेरिफ़ाई करने के लिए, कृपया क्लाइंट पोर्टल में ये दस्तावेज़ अपलोड करें:\n\n'+docs+'\n\nसुझाव: साफ़ रंगीन फ़ोटो भेजें जिनमें चारों कोने दिखें। पासपोर्ट कम से कम 6 महीने और वैध होना चाहिए; फ़ोन बिल और स्क्रीनशॉट स्वीकार नहीं हैं। पते का प्रमाण पिछले 12 महीनों के भीतर का होना चाहिए और उसमें आपका पूरा नाम और पता दिखना चाहिए।\n\nअपलोड करने के बाद मुझे बताएँ, ताकि मैं आपके अप्रूवल पर फ़ॉलो-अप कर सकूँ।',
+        welcome:'अच्छी ख़बर: EC Markets में आपका अकाउंट वेरिफ़ाई हो गया है। आपका स्वागत है!\n\nअगले स्टेप:\n• अपने क्लाइंट पोर्टल में लॉग इन करें: '+link+'\n• MetaTrader 4, MetaTrader 5 या EC Markets ऐप डाउनलोड करें (App Store / Google Play)\n• आपके MT लॉगिन विवरण आपके रजिस्टर्ड ईमेल पर भेज दिए गए हैं\n\nहमारी सपोर्ट टीम 24/7 support@ecmarkets.com पर उपलब्ध है, और प्लेटफ़ॉर्म से जुड़े किसी भी सवाल के लिए मैं भी यहाँ हूँ।',
         follow:'हमारी पिछली बातचीत के बारे में एक छोटा सा फ़ॉलो-अप। क्या आपके मन में EC Markets या अकाउंट खोलने के बारे में कोई सवाल है?\n\nआपकी सुविधा के समय पर एक छोटी कॉल रखने में मुझे ख़ुशी होगी।',
-        ib:WHO.hi+' आपके लिए हमारे पार्टनर (IB) प्रोग्राम की जानकारी, जिसे UF Awards 2025 में बेस्ट IB / एफ़िलिएट प्रोग्राम चुना गया।\n\nEC Markets पार्टनर के रूप में आप कैसे कमाते हैं:\n• आपके द्वारा लाए गए क्लाइंट्स के हर ट्रेड पर आजीवन कमीशन\n• कमीशन का भुगतान 2 घंटे के भीतर\n• अनलिमिटेड मल्टी-लेवल स्ट्रक्चर: आपके द्वारा जोड़े गए सब-IB से भी कमाई\n• ज़ीरो-मिनट नियम: ट्रेड की न्यूनतम अवधि के बिना रिबेट\n• आपके नेटवर्क के अनुसार तैयार डील और रिबेट प्लान\n\nआपको क्या मिलता है:\n• आपके क्लाइंट्स और कमाई की रियल-टाइम रिपोर्टिंग\n• मार्केटिंग सपोर्ट: ट्रैकिंग लिंक, लैंडिंग पेज और विज्ञापन\n• 24/5 समर्पित पार्टनर सपोर्ट\n• 7 नियामकों द्वारा विनियमित ब्रोकर और लिवरपूल FC का आधिकारिक ग्लोबल पार्टनर\n\n20,000+ सक्रिय एफ़िलिएट्स के नेटवर्क से जुड़ें। पार्टनर के रूप में यहाँ रजिस्टर करें: '+link+'\n\nआपके नेटवर्क के अनुसार रिबेट प्लान बनाने के लिए एक छोटी कॉल रखने में मुझे ख़ुशी होगी।\n\nआपकी कमाई आपके क्लाइंट्स की ट्रेडिंग गतिविधि पर निर्भर करती है और इसकी कोई गारंटी नहीं है।',
-        withdraw:'निकासी (विदड्रॉल) के बारे में आपके संदेश के लिए धन्यवाद।\n\nनिकासी का अनुरोध आप स्वयं अपने क्लाइंट पोर्टल से करते हैं: '+link+'\n\nनिकासी की स्थिति या प्रोसेसिंग से जुड़े किसी भी सवाल के लिए हमारी सपोर्ट टीम सीधे मदद करती है और 24/5 उपलब्ध है:\n• ईमेल: support@ecmarkets.com\n• फ़ोन: +248 422 4099\n\nआपकी सुरक्षा के लिए, अपना पासवर्ड या वेरिफ़िकेशन कोड किसी के साथ साझा न करें, मेरे साथ भी नहीं।\n\nकिसी और चीज़ की ज़रूरत हो तो मैं यहाँ हूँ।',
+        ib:WHO.hi+' आपके लिए हमारे पार्टनर (IB) प्रोग्राम की जानकारी, जिसे UF Awards 2025 में बेस्ट IB / एफ़िलिएट प्रोग्राम चुना गया।\n\nEC Markets पार्टनर के रूप में आप कैसे कमाते हैं:\n• आपके द्वारा लाए गए क्लाइंट्स के हर ट्रेड पर आजीवन कमीशन\n• हर बंद ट्रेड के बाद कमीशन, आमतौर पर 30 मिनट के भीतर\n• अनलिमिटेड मल्टी-लेवल स्ट्रक्चर: आपके द्वारा जोड़े गए सब-IB से भी कमाई\n• ज़ीरो-मिनट नियम: ट्रेड की न्यूनतम अवधि के बिना रिबेट\n• आपके नेटवर्क के अनुसार तैयार डील और रिबेट प्लान\n\nआपको क्या मिलता है:\n• आपके क्लाइंट्स और कमाई की रियल-टाइम रिपोर्टिंग\n• मार्केटिंग सपोर्ट: ट्रैकिंग लिंक, लैंडिंग पेज और विज्ञापन\n• 24/5 समर्पित पार्टनर सपोर्ट\n• 7 नियामकों द्वारा विनियमित ब्रोकर और लिवरपूल FC का आधिकारिक ग्लोबल पार्टनर\n\n20,000+ सक्रिय एफ़िलिएट्स के नेटवर्क से जुड़ें। पार्टनर के रूप में यहाँ रजिस्टर करें: '+link+'\n\nआपके नेटवर्क के अनुसार रिबेट प्लान बनाने के लिए एक छोटी कॉल रखने में मुझे ख़ुशी होगी।\n\nआपकी कमाई आपके क्लाइंट्स की ट्रेडिंग गतिविधि पर निर्भर करती है और इसकी कोई गारंटी नहीं है।',
+        withdraw:'निकासी (विदड्रॉल) के बारे में आपके संदेश के लिए धन्यवाद।\n\nनिकासी का अनुरोध आप स्वयं अपने क्लाइंट पोर्टल से करते हैं: '+link+'\n\nध्यान दें:\n• जमा की गई राशि उसी तरीके से वापस जाती है जिससे जमा की गई थी (एंटी-मनी लॉन्ड्रिंग नियम)। उसके बाद तरीके पर कोई रोक नहीं है।\n• ज़्यादातर तरीकों से पैसा अगले कार्य दिवस पर आता है; अंतरराष्ट्रीय बैंक वायर में 5 कार्य दिवस तक लग सकते हैं।\n• अप्रूवल से पहले आप क्लाइंट पोर्टल → Transaction History में खुद निकासी रद्द कर सकते हैं।\n\nनिकासी की स्थिति या प्रोसेसिंग से जुड़े किसी भी सवाल के लिए हमारी सपोर्ट टीम सीधे मदद करती है और 24/7 उपलब्ध है:\n• ईमेल: support@ecmarkets.com\n• फ़ोन: +248 422 4099\n\nआपकी सुरक्षा के लिए, अपना पासवर्ड या वेरिफ़िकेशन कोड किसी के साथ साझा न करें, मेरे साथ भी नहीं।\n\nकिसी और चीज़ की ज़रूरत हो तो मैं यहाँ हूँ।',
         pamm:'EC Markets के साथ PAMM (मनी मैनेजर) निवेश की संक्षिप्त जानकारी:\n\n• आप खुद ट्रेड करने की बजाय किसी मनी मैनेजर की स्ट्रैटेजी में निवेश करते हैं\n• क्लाइंट पोर्टल में इन्वेस्टमेंट अकाउंट जोड़ें। राशि मैनेजर की न्यूनतम सीमा के बराबर या उससे अधिक होनी चाहिए (डिफ़ॉल्ट न्यूनतम 100 है)\n• ट्रेड आपके हिस्से के अनुपात में बँटते हैं, और हर साइकिल (साप्ताहिक, मासिक या त्रैमासिक) के अंत में मुनाफ़ा मैनेजर के साथ बाँटा जाता है, जिसका निपटान UTC+2 के 23:59 बजे होता है\n• आप अपने अकाउंट पेज से डिपॉज़िट, ट्रांसफ़र, पॉज़ या अनबाइंड कर सकते हैं। पॉज़ करने पर खुली पोज़िशन में आपका हिस्सा बंद हो जाता है\n• इन्वेस्टर अकाउंट खुद ट्रेड नहीं कर सकते\n\nअधिक जानकारी: '+link+'\n\nमनी मैनेजर के ज़रिए निवेश में जोखिम है, और आप अपना कुछ या पूरा निवेश खो सकते हैं। पिछला प्रदर्शन भविष्य के नतीजों की गारंटी नहीं है।',
         pammmgr:'EC Markets में PAMM मनी मैनेजर कैसे बनें:\n\n• अलग PAMM अकाउंट के लिए आवेदन करें। इसके लिए अप्रूवल चाहिए, और ट्रेडिंग इतिहास वाला मौजूदा अकाउंट बदला नहीं जा सकता\n• MT5 पर STD या ECN चुनें (डिफ़ॉल्ट लीवरेज 1:500)\n• न्यूनतम निवेश, प्रॉफ़िट-शेयरिंग अनुपात (0 से 100%) और साइकिल तय करें: साप्ताहिक, मासिक या त्रैमासिक\n• आपको अपनी पूँजी लगाने की ज़रूरत नहीं, फ़ंड आपके इन्वेस्टर्स से आता है\n• प्रॉफ़िट शेयरिंग का निपटान हर साइकिल के आख़िरी दिन UTC+2 के 23:59 बजे होता है\n\nयहाँ से शुरू करें: '+link+'\n\nकॉल पर सेटअप समझाने में मुझे ख़ुशी होगी। दूसरों के पैसे का प्रबंधन जोखिम भरा है, और नतीजों की कोई गारंटी नहीं है।'
       },
       zh:{
-        intro:WHO.zh+'感谢您今天抽空与我通话。\n\n如我们所谈，以下是简要介绍：\n• 受7家监管机构监管，包括阿联酋资本市场管理局（原SCA）、英国FCA和澳大利亚ASIC\n• 利物浦足球俱乐部官方全球合作伙伴\n• 通过MT4、MT5及EC Markets应用交易外汇、黄金、原油、指数、加密货币和股票\n• 24/5 客户支持\n\n了解更多：'+link+'\n\n如有任何问题，欢迎随时在此联系我。',
+        intro:WHO.zh+'感谢您今天抽空与我通话。\n\n如我们所谈，以下是简要介绍：\n• 受7家监管机构监管，包括阿联酋资本市场管理局（原SCA）、英国FCA和澳大利亚ASIC\n• 利物浦足球俱乐部官方全球合作伙伴\n• 通过MT4、MT5及EC Markets应用交易外汇、黄金、原油、指数、加密货币和股票\n• 24/7 客户支持\n\n了解更多：'+link+'\n\n如有任何问题，欢迎随时在此联系我。',
         open:'开设 EC Markets 账户只需几分钟：\n\n1. 点击此处注册：'+link+'\n2. 验证您的邮箱\n3. 上传身份证件和地址证明\n4. 审核通过后，选择账户类型并下载 MT4、MT5 或 EC Markets 应用\n\n如在任何步骤遇到问题，请联系我，我会一步步协助您。\n\n重要提示：切勿向任何人透露您的密码或验证码，包括我。',
-        kyc:'您在 EC Markets 的注册即将完成。为验证您的账户，请在客户门户上传以下文件：\n\n'+docs+'\n\n提示：请上传清晰的彩色照片，四个角完整可见。地址证明须为近3个月内的文件，并显示您的全名和地址。\n\n上传后请告知我，我会跟进您的审核。',
-        welcome:'好消息：您的 EC Markets 账户已通过验证，欢迎加入！\n\n下一步：\n• 登录客户门户：'+link+'\n• 下载 MetaTrader 4、MetaTrader 5 或 EC Markets 应用（App Store / Google Play）\n• 您的 MT 登录信息已发送至您的注册邮箱\n\n我们的客服团队24/5在线：support@ecmarkets.com。如对平台有任何疑问，我也随时为您服务。',
+        kyc:'您在 EC Markets 的注册即将完成。为验证您的账户，请在客户门户上传以下文件：\n\n'+docs+'\n\n提示：请上传清晰的彩色照片，四个角完整可见。护照有效期须至少还有6个月；不接受电话账单和截图。地址证明须为近12个月内的文件，并显示您的全名和地址。\n\n上传后请告知我，我会跟进您的审核。',
+        welcome:'好消息：您的 EC Markets 账户已通过验证，欢迎加入！\n\n下一步：\n• 登录客户门户：'+link+'\n• 下载 MetaTrader 4、MetaTrader 5 或 EC Markets 应用（App Store / Google Play）\n• 您的 MT 登录信息已发送至您的注册邮箱\n\n我们的客服团队24/7在线：support@ecmarkets.com。如对平台有任何疑问，我也随时为您服务。',
         follow:'跟进一下我们上次的沟通。您对 EC Markets 或开户还有什么疑问吗？\n\n我很乐意在您方便的时间安排一次简短通话。',
-        ib:WHO.zh+'在此向您介绍我们的合作伙伴（IB）计划，该计划荣获 UF Awards 2025 最佳IB/联盟计划奖。\n\n成为 EC Markets 合作伙伴，您的收益方式：\n• 您推荐的客户每笔交易均可为您带来终身佣金\n• 佣金2小时内发放\n• 无限多级结构：您发展的下级IB也能为您带来收益\n• 零分钟规则：返佣不设最短持仓时间\n• 根据您的网络定制合作方案和返佣计划\n\n您将获得：\n• 客户及收益实时报告\n• 营销支持：追踪链接、落地页和广告\n• 24/5 专属合作伙伴支持\n• 受7家机构监管、利物浦足球俱乐部官方全球合作伙伴的经纪商\n\n加入超过20,000名活跃合作伙伴的网络。点击此处注册成为合作伙伴：'+link+'\n\n我很乐意安排一次简短通话，为您制定适合您网络的返佣计划。\n\n您的收益取决于客户的交易活动，不作任何保证。',
-        withdraw:'感谢您关于出金的来信。\n\n出金需由您本人在客户门户中提交申请：'+link+'\n\n如对出金状态或处理有任何疑问，我们的客服团队将直接为您处理，24/5在线：\n• 邮箱：support@ecmarkets.com\n• 电话：+248 422 4099\n\n为保障您的安全，切勿向任何人透露您的密码或验证码，包括我。\n\n如有其他需要，我随时为您服务。',
+        ib:WHO.zh+'在此向您介绍我们的合作伙伴（IB）计划，该计划荣获 UF Awards 2025 最佳IB/联盟计划奖。\n\n成为 EC Markets 合作伙伴，您的收益方式：\n• 您推荐的客户每笔交易均可为您带来终身佣金\n• 每笔平仓后发放佣金，通常30分钟内到账\n• 无限多级结构：您发展的下级IB也能为您带来收益\n• 零分钟规则：返佣不设最短持仓时间\n• 根据您的网络定制合作方案和返佣计划\n\n您将获得：\n• 客户及收益实时报告\n• 营销支持：追踪链接、落地页和广告\n• 24/5 专属合作伙伴支持\n• 受7家机构监管、利物浦足球俱乐部官方全球合作伙伴的经纪商\n\n加入超过20,000名活跃合作伙伴的网络。点击此处注册成为合作伙伴：'+link+'\n\n我很乐意安排一次简短通话，为您制定适合您网络的返佣计划。\n\n您的收益取决于客户的交易活动，不作任何保证。',
+        withdraw:'感谢您关于出金的来信。\n\n出金需由您本人在客户门户中提交申请：'+link+'\n\n温馨提示：\n• 入金本金须按原入金方式退回（反洗钱规定），本金退回后出金方式不受限制。\n• 大多数方式下一个工作日到账，国际电汇最长需5个工作日。\n• 出金获批前，您可在客户门户 → 交易记录 中自行取消。\n\n如对出金状态或处理有任何疑问，我们的客服团队将直接为您处理，24/7在线：\n• 邮箱：support@ecmarkets.com\n• 电话：+248 422 4099\n\n为保障您的安全，切勿向任何人透露您的密码或验证码，包括我。\n\n如有其他需要，我随时为您服务。',
         pamm:'以下是通过 EC Markets 进行 PAMM（资金经理）投资的简要介绍：\n\n• 您投资于资金经理的策略，而无需自己交易\n• 在客户门户添加投资账户，金额须不低于经理设定的最低投资额（默认最低为100）\n• 交易按您在资金池中的占比分配，每个周期（每周、每月或每季度）结束时与经理分享盈利，于 UTC+2 23:59 结算\n• 您可以在账户页面入金、转账、暂停或解绑。暂停会平掉您对应份额的未平仓头寸\n• 投资者账户不能自行交易\n\n了解更多：'+link+'\n\n通过资金经理投资存在风险，您可能损失部分或全部投资。过往表现不代表未来结果。',
         pammmgr:'如何成为 EC Markets 的 PAMM 资金经理：\n\n• 单独申请 PAMM 账户，需经审批；已有交易记录的账户无法转换\n• 在 MT5 上选择 STD 或 ECN（默认杠杆 1:500）\n• 设置最低投资额、分润比例（0 至 100%）和周期：每周、每月或每季度\n• 无需自有资金，资金来自您的投资者\n• 分润于每个周期最后一天 UTC+2 23:59 结算\n\n从这里开始：'+link+'\n\n我很乐意通过通话带您完成设置。管理他人资金存在风险，不保证任何结果。'
       }
     };
+    // ---- requests the client must send personally (email body stays in English for support) ----
+    var EM={
+      swap:'Subject: Request for a Swap-Free Account\n\nName: '+n+'\nUID (or registered email):\nTrading Account Number:\nReason for Request:\nCommitment Not to Engage in Abusive Trading: I undertake to comply strictly with the account opening agreement and will not use the Swap-Free Account for Abusive Trading. EC Markets reserves the right to take action on any orders involving Abusive Trading.',
+      extra:'Subject: Request for Additional Trading Accounts\n\nName: '+n+'\nUID (or Email):\nAccount Category (USD Account / Cent Account):\nTrading Platform (MT4 / MT5):\nNumber of Additional Trading Accounts Requested:\nReason for Request:',
+      wcancel:'Subject: Withdrawal Cancellation Request\n\nName: '+n+'\nUID or Email:\nLast 4 digits of your ID number:\nOrder Number:\nWithdrawal Amount:\nApplication Time:'
+    };
+    var NEW={
+      en:{
+        swap:['To switch your account to swap-free, please send this email yourself from your registered email address to support@ecmarkets.com (support only accepts it from you):','Good to know:\n• Swap-free covers EURUSD, GBPUSD, AUDUSD, NZDUSD, USDCAD, USDCHF, USDJPY, XAUUSD and XAGUSD. Other instruments still have overnight interest.\n• The trading account must already have a balance above 0. PRO and PAMM accounts are not eligible.\n• Once approved, it cannot be cancelled.'],
+        extra:['To request more trading accounts, please send this email yourself to support@ecmarkets.com:','Good to know:\n• USD accounts: the first extra account is available once your combined funds reach USD 20,000, then one more for every additional USD 5,000.\n• Cent accounts: from USD 10,000, then one more for every additional USD 1,000.\n• Requests are reviewed within 3 business days.'],
+        wcancel:['You can cancel a withdrawal yourself until it is approved: Client Portal → Transaction History → Cancel.\n\nIf that does not work, please send this email from your registered email address to support@ecmarkets.com:','Good to know:\n• Requests are handled within 1 hour on business days (not at weekends).\n• If the withdrawal has already reached the payment provider, cancellation cannot be guaranteed.'],
+        rebate:'About your rebate: rebates are credited automatically after each position closes, usually within 30 minutes and at the latest within 4 hours.\n\nYou can check every order in the IB Portal → Commission Data → Details. For MT5, search by the Order Number.\n\nIf a rebate is still missing after 4 hours, please send me:\n• Client UID or registered email\n• Trading account number\n• Order number\n\nI will ask our support team to check it for you.'
+      },
+      ar:{
+        swap:['لتحويل حسابك إلى حساب خالٍ من الفوائد (Swap-Free)، يرجى إرسال هذا البريد بنفسك من بريدك الإلكتروني المسجّل إلى support@ecmarkets.com (لا يقبله فريق الدعم إلا منك):','معلومات مهمة:\n• يشمل الإعفاء EURUSD وGBPUSD وAUDUSD وNZDUSD وUSDCAD وUSDCHF وUSDJPY وXAUUSD وXAGUSD، وتبقى الفوائد على باقي الأدوات.\n• يجب أن يكون رصيد حساب التداول أكبر من صفر. حسابات PRO وPAMM غير مؤهلة.\n• لا يمكن إلغاء الإعفاء بعد الموافقة عليه.'],
+        extra:['لطلب حسابات تداول إضافية، يرجى إرسال هذا البريد بنفسك إلى support@ecmarkets.com:','معلومات مهمة:\n• حسابات الدولار: أول حساب إضافي متاح عندما يصل مجموع أموالك إلى 20,000 دولار، ثم حساب إضافي لكل 5,000 دولار إضافية.\n• حسابات السنت: من 10,000 دولار، ثم حساب إضافي لكل 1,000 دولار إضافية.\n• تتم مراجعة الطلبات خلال 3 أيام عمل.'],
+        wcancel:['يمكنك إلغاء طلب السحب بنفسك قبل الموافقة عليه: بوابة العميل ← سجل المعاملات ← إلغاء.\n\nإذا لم ينجح ذلك، يرجى إرسال هذا البريد من بريدك الإلكتروني المسجّل إلى support@ecmarkets.com:','معلومات مهمة:\n• تتم معالجة الطلبات خلال ساعة واحدة في أيام العمل (وليس في عطلة نهاية الأسبوع).\n• إذا وصل السحب إلى مزوّد الدفع، فلا يمكن ضمان الإلغاء.'],
+        rebate:'بخصوص عمولتك: تُضاف العمولات تلقائياً بعد إغلاق كل صفقة، عادةً خلال 30 دقيقة وبحد أقصى 4 ساعات.\n\nيمكنك مراجعة كل صفقة في بوابة الوسيط (IB Portal) ← Commission Data ← Details. في MT5 ابحث برقم الأمر (Order Number).\n\nإذا لم تصل العمولة بعد 4 ساعات، أرسل لي:\n• رقم UID للعميل أو بريده المسجّل\n• رقم حساب التداول\n• رقم الأمر\n\nوسأطلب من فريق الدعم مراجعتها.'
+      },
+      hi:{
+        swap:['अपने अकाउंट को स्वैप-फ्री करने के लिए, कृपया यह ईमेल अपने रजिस्टर्ड ईमेल से खुद support@ecmarkets.com पर भेजें (सपोर्ट इसे केवल आपसे स्वीकार करता है):','ध्यान दें:\n• स्वैप-फ्री EURUSD, GBPUSD, AUDUSD, NZDUSD, USDCAD, USDCHF, USDJPY, XAUUSD और XAGUSD पर लागू है। अन्य इंस्ट्रूमेंट्स पर ओवरनाइट ब्याज लगता रहेगा।\n• ट्रेडिंग अकाउंट में बैलेंस 0 से अधिक होना चाहिए। PRO और PAMM अकाउंट पात्र नहीं हैं।\n• अप्रूवल के बाद इसे रद्द नहीं किया जा सकता।'],
+        extra:['अतिरिक्त ट्रेडिंग अकाउंट के लिए, कृपया यह ईमेल खुद support@ecmarkets.com पर भेजें:','ध्यान दें:\n• USD अकाउंट: कुल फंड USD 20,000 होने पर पहला अतिरिक्त अकाउंट, फिर हर अतिरिक्त USD 5,000 पर एक और।\n• सेंट अकाउंट: USD 10,000 से, फिर हर अतिरिक्त USD 1,000 पर एक और।\n• अनुरोधों की समीक्षा 3 कार्य दिवसों में होती है।'],
+        wcancel:['अप्रूवल से पहले आप खुद निकासी रद्द कर सकते हैं: क्लाइंट पोर्टल → Transaction History → Cancel।\n\nअगर यह काम न करे, तो कृपया यह ईमेल अपने रजिस्टर्ड ईमेल से support@ecmarkets.com पर भेजें:','ध्यान दें:\n• कार्य दिवसों में अनुरोध 1 घंटे के भीतर संभाले जाते हैं (सप्ताहांत पर नहीं)।\n• अगर निकासी पेमेंट प्रोवाइडर तक पहुँच चुकी है, तो रद्द होने की गारंटी नहीं है।'],
+        rebate:'आपके रिबेट के बारे में: हर पोज़ीशन बंद होने के बाद रिबेट अपने आप जुड़ता है, आमतौर पर 30 मिनट में और अधिकतम 4 घंटे में।\n\nआप IB Portal → Commission Data → Details में हर ऑर्डर देख सकते हैं। MT5 के लिए Order Number से खोजें।\n\nअगर 4 घंटे बाद भी रिबेट नहीं आया, तो मुझे भेजें:\n• क्लाइंट UID या रजिस्टर्ड ईमेल\n• ट्रेडिंग अकाउंट नंबर\n• ऑर्डर नंबर\n\nसपोर्ट टीम से इसकी जाँच करवाई जाएगी।'
+      },
+      zh:{
+        swap:['如需将账户设为免隔夜利息（Swap-Free），请您本人使用注册邮箱将以下邮件发送至 support@ecmarkets.com（客服仅受理本人申请）：','温馨提示：\n• 免息品种包括 EURUSD、GBPUSD、AUDUSD、NZDUSD、USDCAD、USDCHF、USDJPY、XAUUSD 和 XAGUSD，其他品种仍收取隔夜利息。\n• 交易账户余额须大于0。PRO 和 PAMM 账户不可申请。\n• 获批后不可取消。'],
+        extra:['如需申请更多交易账户，请您本人将以下邮件发送至 support@ecmarkets.com：','温馨提示：\n• 美元账户：名下资金合计达到 20,000 美元可申请第一个额外账户，此后每增加 5,000 美元可再申请一个。\n• 美分账户：自 10,000 美元起，此后每增加 1,000 美元可再申请一个。\n• 申请将在3个工作日内审核。'],
+        wcancel:['出金获批前，您可自行取消：客户门户 → 交易记录 → 取消。\n\n如无法自行取消，请使用注册邮箱将以下邮件发送至 support@ecmarkets.com：','温馨提示：\n• 工作日1小时内处理（周末不处理）。\n• 如出金已进入支付渠道处理，无法保证取消成功。'],
+        rebate:'关于您的返佣：每笔订单平仓后系统自动发放返佣，通常30分钟内到账，最迟不超过4小时。\n\n您可在 IB 后台 → Commission Data → Details 查看每笔订单。MT5 请使用 Order Number 查询。\n\n如超过4小时仍未到账，请发送以下信息给我：\n• 客户 UID 或注册邮箱\n• 交易账号\n• 订单号\n\n我会请客服团队为您核查。'
+      }
+    };
+    ['swap','extra','wcancel'].forEach(function(k){B[lang][k]=NEW[lang][k][0]+'\n\n'+EM[k]+'\n\n'+NEW[lang][k][1]});
+    B[lang].rebate=NEW[lang].rebate;
     return HI[lang]+'\n\n'+B[lang][tpl]+SIG[lang]+RISK[lang];
   }
   function press(groupId,attr,val){document.querySelectorAll('#'+groupId+' button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset[attr]===val)})}
@@ -1948,16 +2143,24 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
         var name=i?'SIB'+i:'MIB';
         if(l.uid&&!UIDRE.test(l.uid))w.push(name+' UID "'+l.uid+'" does not look like a UID (e.g. IN28028494).');
         l.vals.forEach(function(v,j){
-          var num=parseFloat(v),cap=i===0?MAX[g][j]:parseFloat(L[i-1].vals[j]);
+          var chain=$('r-struct').value==='chain',pi=chain?i-1:0,num=parseFloat(v),cap=i===0?MAX[g][j]:parseFloat(L[pi].vals[j]);
           if(isFinite(num)&&isFinite(cap)&&num>cap){
             levels.children[i].querySelectorAll('.rb input')[j].classList.add('over');
-            w.push(name+' '+ASSETS[j]+' ('+num+') is higher than '+(i===0?'the '+g+' maximum':(i===1?'MIB':'SIB'+(i-1)))+' ('+cap+').');
+            w.push(name+' '+ASSETS[j]+' ('+num+') is higher than '+(i===0?'the '+gname(g)+' maximum':(pi===0?'MIB':'SIB'+pi))+' ('+cap+').');
           }
         });
       });
       var ids=L.map(function(l,i){return (i?'SIB'+i:'MIB')+':- '+(l.uid||ph('['+(i?'SIB'+i:'MIB')+' UID]'))}).join('\n\n');
-      var rb=L.map(function(l,i){return (i?'SIB'+i:'MIB')+' :- '+l.vals.map(function(v){return v===''?'0':v}).join('/')}).join('\n\n');
-      t='Hi Support Team,\n\nKindly update rebate settings according to this:\n\n'+ids+'\n\n'+g+'\n\nFX / Index / Metal / Energy / Crypto\n\n'+rb+sign();
+      var rb=L.map(function(l,i){return (i?'SIB'+i:'MIB')+' :- '+l.vals.map(function(v){return fmtR(v,g)}).join('/')}).join('\n\n');
+      var unitLbl=isECN(g)?' (USD per lot)':(unit==='pips'?' (pips)':'');
+      t='Hi Support Team,\n\nKindly update rebate settings according to this:\n\n'+ids+'\n\n'+gname(g)+'\n\nFX / Index / Metal / Energy / Crypto'+unitLbl+'\n\n'+rb+sign();
+      // differential method: each level earns its own rate minus the level below it
+      var num=function(v){var x=parseFloat(v);return isFinite(x)?x:0};
+      var chainS=$('r-struct').value==='chain',rowsE=[],cell=function(e){return '<td'+(e<0?' style="color:var(--warn)"':'')+'>'+fmtR(String(Math.round(e*100)/100),g)+'</td>'};
+      if(chainS){L.forEach(function(l,i){var nx=L[i+1];rowsE.push('<tr><td>'+(i?'SIB'+i:'MIB')+'</td>'+l.vals.map(function(v,j){return cell(num(v)-(nx?num(nx.vals[j]):0))}).join('')+'</tr>')})}
+      else{rowsE.push('<tr><td>MIB · own clients</td>'+L[0].vals.map(function(v){return cell(num(v))}).join('')+'</tr>');
+        L.slice(1).forEach(function(l,k){rowsE.push('<tr><td>SIB'+(k+1)+'</td>'+l.vals.map(function(v){return cell(num(v))}).join('')+'</tr><tr><td>MIB · on SIB'+(k+1)+' clients</td>'+l.vals.map(function(v,j){return cell(num(L[0].vals[j])-num(v))}).join('')+'</tr>')})}
+      $('r-earn').innerHTML='<p class="hint" style="margin-bottom:8px">What each IB actually earns per lot (differential method: own rebate minus the rebate of the IB below)</p><table><thead><tr><th>Who</th>'+ASSETS.map(function(a){return '<th>'+a+'</th>'}).join('')+'</tr></thead><tbody>'+rowsE.join('')+'</tbody></table>';
       warnBox('r-warn',w);
     } else if(tab==='kyc'){
       var u=lines('k-uids');badUids(u).forEach(function(x){w.push('"'+x+'" does not look like a UID.')});
@@ -1991,6 +2194,9 @@ div.f{display:grid;gap:6px;font-size:11.5px;letter-spacing:.1em;text-transform:u
     var esc=t.replace(/&/g,'&amp;').replace(/</g,'&lt;');
     $('msg').innerHTML=esc.replace(/⁣([^⁣]*)⁣/g,'<span class="ph">$1</span>');
     $('copied').textContent='';
+    var SUBJ={rebate:'Application to Modify IB Rebate',mib:'IB Application',kyc:'KYC Approval Request',link:'Request to Link Client to IB',group:'Trading Account Group Change Request'};
+    var mb=$('mailbtn');mb.hidden=!SUBJ[tab];
+    if(SUBJ[tab])mb.href='mailto:support@ecmarkets.com?subject='+encodeURIComponent(SUBJ[tab])+'&body='+encodeURIComponent(t.replace(/\u2063/g,''));
   }
 
   // tabs
